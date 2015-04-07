@@ -1,7 +1,9 @@
-﻿<Window x:Class="Spark.MainWindow"
+﻿<Window x:Class="Spark.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="{Binding DisplayName}" 
+        Width="480" Height="320"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         
     </Grid>
