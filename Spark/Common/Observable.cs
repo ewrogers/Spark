@@ -36,6 +36,8 @@ namespace Spark.Common
         }
         #endregion
 
+        protected Observable() { }
+
         protected virtual bool SetProperty<T>(ref T backingStore, T newValue, [CallerMemberName] string propertyName = "", Action onChanged = null, Action<T> onChanging = null)
         {
             // Check if the new value is the same as the existing value

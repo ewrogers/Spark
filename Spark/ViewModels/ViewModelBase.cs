@@ -29,7 +29,7 @@ namespace Spark.ViewModels
         }
         #endregion
 
-        public ViewModelBase(string displayName)
+        protected ViewModelBase(string displayName)
         {
             this.DisplayName = displayName;
         }
