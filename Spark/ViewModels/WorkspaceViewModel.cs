@@ -34,7 +34,7 @@ namespace Spark.ViewModels
         {
             var handler = this.RequestClose;
 
-            if (handler!=null)
+            if (handler != null)
             {
                 handler(this, EventArgs.Empty);
             }
