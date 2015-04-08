@@ -37,11 +37,11 @@ namespace Spark.ViewModels
         #region IDisposable Methods
         public void Dispose()
         {
-            OnDispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void OnDispose(bool isDisposing)
+        protected virtual void Dispose(bool isDisposing)
         {
             if (isDisposed)
                 return;
@@ -50,8 +50,6 @@ namespace Spark.ViewModels
             {
                 // Dispose of managed resources here
             }
-
-            // Dispose of unmanaged resources here
 
             isDisposed = true;
         }
