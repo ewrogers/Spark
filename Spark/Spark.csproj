@@ -66,7 +66,11 @@
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="Win32\NativeMethods.cs" />
     <Compile Include="Win32\Win32ProcessAccess.cs" />
+    <Compile Include="Win32\Win32ProcessCreationFlags.cs" />
+    <Compile Include="Win32\Win32ProcessInformation.cs" />
     <Compile Include="Win32\Win32ProcessSafeHandle.cs" />
+    <Compile Include="Win32\Win32StartupInfo.cs" />
+    <Compile Include="Win32\Win32ThreadSafeHandle.cs" />
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
