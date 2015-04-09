@@ -15,23 +15,24 @@ namespace Spark.Interop
         bool resumeOnDispose;
         Win32ProcessSafeHandle processHandle;
         Win32ThreadSafeHandle threadHandle;
-        int processId;
-        int threadId;
 
         #region Properties
-        public int ProcessId { get { return processId; } }
+        public int ProcessId { get; private set; }
 
-        public int ThreadId { get { return threadId; } }
+        public int ThreadId { get; private set; }
 
         public bool IsSuspended { get; private set; }
         #endregion
 
         private SuspendedProcess(Win32ProcessInformation processInformation, bool resumeOnDispose)
         {
+            this.IsSuspended = true;    // Suspended by default
+
             this.processHandle = processInformation.ProcessHandle;
             this.threadHandle = processInformation.ThreadHandle;
-            this.processId = processInformation.ProcessId;
-            this.threadId = processInformation.ThreadId;
+
+            this.ProcessId = processInformation.ProcessId;
+            this.ThreadId = processInformation.ThreadId;
 
             this.resumeOnDispose = resumeOnDispose;
         }
