@@ -96,6 +96,11 @@ namespace Spark.Interop
                 throw new IOException("Unable to open process");
         }
 
+        ~ProcessMemoryStream()
+        {
+            Dispose(false);
+        }
+
         #region Stream Methods
         public override void Close()
         {
