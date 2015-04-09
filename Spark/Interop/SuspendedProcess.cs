@@ -92,7 +92,7 @@ namespace Spark.Interop
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(true);
+            GC.SuppressFinalize(this);
         }
 
         void Dispose(bool isDisposing)
