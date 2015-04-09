@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Spark.ViewModels
 {
-    public sealed class MainWindowViewModel : WorkspaceViewModel
+    public sealed class MainViewModel : WorkspaceViewModel
     {
-        public MainWindowViewModel(string displayName)
+        public MainViewModel(string displayName)
             : base(displayName) { }
     }
 }

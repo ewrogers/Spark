@@ -62,7 +62,7 @@
     <Compile Include="Interop\ProcessAccess.cs" />
     <Compile Include="Interop\ProcessMemoryStream.cs" />
     <Compile Include="Interop\SuspendedProcess.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="Win32\NativeMethods.cs" />

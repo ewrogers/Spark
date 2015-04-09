@@ -21,7 +21,7 @@ namespace Spark
 
             // Initialize the main window and view model
             var window = new MainWindow();
-            var viewModel = new MainWindowViewModel(App.ApplicationName);
+            var viewModel = new MainViewModel(App.ApplicationName);
 
             // Bind the request close event to closing the window
             viewModel.RequestClose += delegate
