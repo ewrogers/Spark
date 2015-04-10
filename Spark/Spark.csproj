@@ -62,6 +62,9 @@
     <Compile Include="Interop\ProcessAccess.cs" />
     <Compile Include="Interop\ProcessMemoryStream.cs" />
     <Compile Include="Interop\SuspendedProcess.cs" />
+    <Compile Include="Themes\Templates\SparkWindow.xaml.cs">
+      <DependentUpon>SparkWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />

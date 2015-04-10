@@ -1,4 +1,6 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary x:Class="Spark.Themes.Templates.SparkWindow"
+                    x:ClassModifier="internal"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Dependencies-->
@@ -28,11 +30,17 @@
             <TextBlock Text="{TemplateBinding Title}"
                        Style="{StaticResource SparkWindowTitleStyle}"/>
 
+            
+            <!-- Drag to Move Support -->
+            <Thumb Grid.ColumnSpan="2" Opacity="0"
+                   DragDelta="TitleBarDragDelta"/>
+            
             <!-- Control Box Buttons-->
             <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="8,0">
 
                 <!-- Minimize Button -->
                 <Button Name="minimizeButton"
+                        Click="minimizeButtonClicked"
                         Style="{StaticResource SparkMinimizeButtonStyle}">
                     <Path Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
                           StrokeThickness="2"
@@ -41,6 +49,7 @@
 
                 <!-- Maximize Button -->
                 <Button Name="maximizeButton"
+                        Click="maximizeButtonClicked"
                         Style="{StaticResource SparkMaximizeButtonStyle}">
                     <Path Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
                           StrokeThickness="2"
@@ -49,6 +58,7 @@
 
                 <!-- Close Button -->
                 <Button Name="closeButton"
+                        Click="closeButtonClicked"
                         Style="{StaticResource SparkCloseButtonStyle}">
                     <Path Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
                           StrokeThickness="2"
