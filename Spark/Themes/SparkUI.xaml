@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- This is the main UI resource dictionary, it includes all UI control templates. -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Templates\SparkText.xaml"/>
+        <ResourceDictionary Source="Templates\SparkControlBox.xaml"/>
+        <ResourceDictionary Source="Templates\SparkWindow.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+</ResourceDictionary>

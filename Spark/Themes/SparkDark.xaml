@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Spark Dark Theme Colors -->
+    <Color x:Key="SparkWindowTitleBackgroundColor">#1050A0</Color>
+    <Color x:Key="SparkWindowTitleForegroundColor">#FFFFFF</Color>
+    <Color x:Key="SparkWindowBackgroundColor">#181818</Color>
+    <Color x:Key="SparkWindowForegroundColor">#FFFFFF</Color>
+    <Color x:Key="SparkWindowShadowColor">#000000</Color>
+    <Color x:Key="SparkControlBoxForegroundColor">#FFFFFF</Color>
+    <Color x:Key="SparkTextForegroundColor">#FFFFFF</Color>
+    
+    <!-- Spark Dark Theme Brushes -->
+    <SolidColorBrush x:Key="SparkWindowTitleBackground" Color="{DynamicResource SparkWindowTitleBackgroundColor}"/>
+    <SolidColorBrush x:Key="SparkWindowTitleForeground" Color="{DynamicResource SparkWindowTitleForegroundColor}"/>
+    <SolidColorBrush x:Key="SparkWindowBackground" Color="{DynamicResource SparkWindowBackgroundColor}"/>
+    <SolidColorBrush x:Key="SparkWindowForeground" Color="{DynamicResource SparkWindowForegroundColor}"/>
+    <SolidColorBrush x:Key="SparkControlBoxForeground" Color="{DynamicResource SparkControlBoxForegroundColor}"/>
+    <SolidColorBrush x:Key="SparkTextForeground" Color="{DynamicResource SparkTextForegroundColor}"/>
+    
+</ResourceDictionary>
+    
