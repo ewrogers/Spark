@@ -8,6 +8,7 @@
     <Color x:Key="SparkWindowForegroundColor">#FFFFFF</Color>
     <Color x:Key="SparkWindowShadowColor">#000000</Color>
     <Color x:Key="SparkControlBoxForegroundColor">#FFFFFF</Color>
+    <Color x:Key="SparkSeparatorBackgroundColor">#282828</Color>
     <Color x:Key="SparkTextForegroundColor">#FFFFFF</Color>
     
 </ResourceDictionary>

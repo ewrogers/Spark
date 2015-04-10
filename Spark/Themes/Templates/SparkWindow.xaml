@@ -100,7 +100,6 @@
         <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="Template" Value="{StaticResource SparkWindowTemplate}"/>
-        <Setter Property="FontFamily" Value="Segoe UI Light"/>
         <Setter Property="Background" Value="{DynamicResource SparkWindowBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource SparkWindowForeground}"/>
     </Style>

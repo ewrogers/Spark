@@ -4,9 +4,10 @@
     <!-- Base Text Style -->
     <Style x:Key="SparkTextBlockStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="FontFamily" Value="Segoe WP"/>
-        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="Foreground" Value="{DynamicResource SparkTextForeground}"/>
+        <Setter Property="Margin" Value="8,4"/>
     </Style>
 
     <!-- Window Title Text Style -->

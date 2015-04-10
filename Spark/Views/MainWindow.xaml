@@ -9,6 +9,27 @@
     <Grid>
         <StackPanel>
             
+            <!-- Client Executable Path -->
+            <TextBlock Style="{StaticResource SparkTextBlockStyle}"
+                       Text="Client Executable Path:"/>
+            
+            <TextBox Text="C:\Program Files (x86)\KRU\Dark Ages\Darkages.exe"/>
+            
+            <Separator Style="{StaticResource SparkSeparatorStyle}"/>
+            
+            <!-- TODO: Client Version -->
+            
+            <!-- TODO: Server Hostname -->
+            
+            <!-- TODO: Server Port -->
+            
+            <!-- TODO: Skip Intro Checkbox -->
+            
+            <!-- TODO: Allow Multiple Instances Checkbox -->
+            
+            <!-- TODO: No Walls Checkbox -->
+            
+            <!-- TODO: Launch Client Button -->
             
         </StackPanel>
     </Grid>
