@@ -1,16 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
     <!-- Dependencies-->
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="SparkText.xaml"/>
         <ResourceDictionary Source="SparkControlBox.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    
+
     <!-- Window Template -->
     <ControlTemplate x:Key="SparkWindowTemplate" TargetType="{x:Type Window}">
         <Grid Background="{TemplateBinding Background}" Margin="16">
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -19,56 +19,56 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
+
             <!-- Title Bar Background -->
             <Border Grid.ColumnSpan="2"
                     Background="{DynamicResource SparkWindowTitleBackground}"/>
-            
+
             <!-- Title Text -->
             <TextBlock Text="{TemplateBinding Title}"
                        Style="{StaticResource SparkWindowTitleStyle}"/>
-            
+
             <!-- Control Box Buttons-->
             <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="8,0">
-                
+
                 <!-- Minimize Button -->
                 <Button Name="minimizeButton"
-                    Style="{StaticResource SparkMinimizeButtonStyle}">
+                        Style="{StaticResource SparkMinimizeButtonStyle}">
                     <Path Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
-                      StrokeThickness="2"
-                      Data="M 0,12 h 12"/>
+                          StrokeThickness="2"
+                          Data="M 0,12 h 12"/>
                 </Button>
 
                 <!-- Maximize Button -->
                 <Button Name="maximizeButton"
-                    Style="{StaticResource SparkMaximizeButtonStyle}">
+                        Style="{StaticResource SparkMaximizeButtonStyle}">
                     <Path Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
-                      StrokeThickness="2"
-                      Data="M 0,2 h 12 v 12 h -12 z m 0,2 h 12"/>
+                          StrokeThickness="2"
+                          Data="M 0,2 h 12 v 12 h -12 z m 0,2 h 12"/>
                 </Button>
 
                 <!-- Close Button -->
                 <Button Name="closeButton"
-                    Style="{StaticResource SparkCloseButtonStyle}">
+                        Style="{StaticResource SparkCloseButtonStyle}">
                     <Path Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
-                      StrokeThickness="2"
-                      Data="M 0,2 l 12,12 m 0,-12 l -12,12"/>
+                          StrokeThickness="2"
+                          Data="M 0,2 l 12,12 m 0,-12 l -12,12"/>
                 </Button>
-                
+
             </StackPanel>
 
             <!-- Window Content-->
             <AdornerDecorator Grid.Row="1" Grid.ColumnSpan="2">
                 <ContentPresenter/>
             </AdornerDecorator>
-            
+
             <!-- Window Shadow Effect -->
             <Grid.Effect>
                 <DropShadowEffect Color="{DynamicResource SparkWindowShadowColor}" 
                                   ShadowDepth="0" BlurRadius="16"
                                   Opacity="0.8"/>
             </Grid.Effect>
-            
+
         </Grid>
         <ControlTemplate.Triggers>
             <!-- Hide Maximized Button -->
@@ -82,7 +82,7 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    
+
     <!-- Window Style -->
     <Style x:Key="SparkWindowStyle" TargetType="{x:Type Window}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -94,6 +94,6 @@
         <Setter Property="Background" Value="{DynamicResource SparkWindowBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource SparkWindowForeground}"/>
     </Style>
-    
+
 </ResourceDictionary>
     
