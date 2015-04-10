@@ -30,7 +30,7 @@ namespace Spark.Themes.Templates
             var window = button.TemplatedParent as Window;
 
             if (window != null)
-                window.WindowState = WindowState.Minimized; ;           
+                window.WindowState = WindowState.Minimized;     
         }
 
         void maximizeButtonClicked(object sender, RoutedEventArgs e)
