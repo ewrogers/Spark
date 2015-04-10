@@ -4,6 +4,7 @@
         Title="{Binding DisplayName}" 
         Style="{StaticResource SparkWindowStyle}"
         Width="480" Height="640"
+        ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel>

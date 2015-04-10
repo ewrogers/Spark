@@ -32,7 +32,7 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="8,0">
                 
                 <!-- Minimize Button -->
-                <Button Grid.Column="1"
+                <Button Name="minimizeButton"
                     Style="{StaticResource SparkMinimizeButtonStyle}">
                     <Path Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
                       StrokeThickness="2"
@@ -40,7 +40,7 @@
                 </Button>
 
                 <!-- Maximize Button -->
-                <Button Grid.Column="2"
+                <Button Name="maximizeButton"
                     Style="{StaticResource SparkMaximizeButtonStyle}">
                     <Path Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
                       StrokeThickness="2"
@@ -48,7 +48,7 @@
                 </Button>
 
                 <!-- Close Button -->
-                <Button Grid.Column="3"
+                <Button Name="closeButton"
                     Style="{StaticResource SparkCloseButtonStyle}">
                     <Path Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
                       StrokeThickness="2"
@@ -70,6 +70,17 @@
             </Grid.Effect>
             
         </Grid>
+        <ControlTemplate.Triggers>
+            <!-- Hide Maximized Button -->
+            <Trigger Property="ResizeMode" Value="CanMinimize">
+                <Setter TargetName="maximizeButton" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+            <!-- Hide Minimized and Maximized Buttons -->
+            <Trigger Property="ResizeMode" Value="NoResize">
+                <Setter TargetName="minimizeButton" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="maximizeButton" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
     
     <!-- Window Style -->
