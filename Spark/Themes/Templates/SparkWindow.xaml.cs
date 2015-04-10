@@ -13,17 +13,13 @@ namespace Spark.Themes.Templates
         void TitleBarDragDelta(object sender, DragDeltaEventArgs e)
         {
             var thumb = sender as Thumb;
-
-            if (thumb == null)
-                return;
-
             var window = thumb.TemplatedParent as Window;
 
-            if (window == null)
-                return;
-
-            window.Left += e.HorizontalChange;
-            window.Top += e.VerticalChange;
+            if (window != null)
+            {
+                window.Left += e.HorizontalChange;
+                window.Top += e.VerticalChange;
+            }
         }
         #endregion
 
@@ -31,49 +27,33 @@ namespace Spark.Themes.Templates
         void minimizeButtonClicked(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-
-            if (button == null)
-                return;
-
             var window = button.TemplatedParent as Window;
 
-            if (window == null)
-                return;
-
-            window.WindowState = WindowState.Minimized;               
+            if (window != null)
+                window.WindowState = WindowState.Minimized; ;           
         }
 
         void maximizeButtonClicked(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-
-            if (button == null)
-                return;
-
             var window = button.TemplatedParent as Window;
 
-            if (window == null)
-            return;
-
-            if (window.WindowState != WindowState.Maximized)
-                window.WindowState = WindowState.Maximized;
-            else
-                window.WindowState = WindowState.Normal;
+            if (window != null)
+            {
+                if (window.WindowState != WindowState.Maximized)
+                    window.WindowState = WindowState.Maximized;
+                else
+                    window.WindowState = WindowState.Normal;
+            }
         }
 
         void closeButtonClicked(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-
-            if (button == null)
-                return;
-
             var window = button.TemplatedParent as Window;
 
-            if (window == null)
-                return;
-
-            window.Close();
+            if (window != null)
+                window.Close();
         }
         #endregion
     }
