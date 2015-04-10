@@ -10,13 +10,5 @@
     <Color x:Key="SparkControlBoxForegroundColor">#FFFFFF</Color>
     <Color x:Key="SparkTextForegroundColor">#FFFFFF</Color>
     
-    <!-- Spark Dark Theme Brushes -->
-    <SolidColorBrush x:Key="SparkWindowTitleBackground" Color="{DynamicResource SparkWindowTitleBackgroundColor}"/>
-    <SolidColorBrush x:Key="SparkWindowTitleForeground" Color="{DynamicResource SparkWindowTitleForegroundColor}"/>
-    <SolidColorBrush x:Key="SparkWindowBackground" Color="{DynamicResource SparkWindowBackgroundColor}"/>
-    <SolidColorBrush x:Key="SparkWindowForeground" Color="{DynamicResource SparkWindowForegroundColor}"/>
-    <SolidColorBrush x:Key="SparkControlBoxForeground" Color="{DynamicResource SparkControlBoxForegroundColor}"/>
-    <SolidColorBrush x:Key="SparkTextForeground" Color="{DynamicResource SparkTextForegroundColor}"/>
-    
 </ResourceDictionary>
     
