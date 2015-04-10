@@ -13,7 +13,7 @@
     <Style x:Key="SparkWindowTitleStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource SparkTextBlockStyle}">
         <Setter Property="FontSize" Value="32"/>
         <Setter Property="Foreground" Value="{DynamicResource SparkWindowTitleForeground}"/>
-        <Setter Property="Margin" Value="8,0,8,4"/>
+        <Setter Property="Margin" Value="12,0,8,4"/>
     </Style>
 
 </ResourceDictionary>

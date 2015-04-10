@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <!-- Spark Dark Theme Colors -->
-    <Color x:Key="SparkWindowTitleBackgroundColor">#1050A0</Color>
+    <Color x:Key="SparkWindowTitleBackgroundColor">#1060B0</Color>
     <Color x:Key="SparkWindowTitleForegroundColor">#FFFFFF</Color>
     <Color x:Key="SparkWindowBackgroundColor">#181818</Color>
     <Color x:Key="SparkWindowForegroundColor">#FFFFFF</Color>
