@@ -10,6 +10,10 @@
     <Color x:Key="SparkControlBoxForegroundColor">#FFFFFF</Color>
     <Color x:Key="SparkSeparatorBackgroundColor">#282828</Color>
     <Color x:Key="SparkTextForegroundColor">#FFFFFF</Color>
+    <Color x:Key="SparkTextBoxBackgroundColor">#202020</Color>
+    <Color x:Key="SparkTextBoxForegroundColor">#FFFFFF</Color>
+    <Color x:Key="SparkTextBoxBorderColor">#404040</Color>
+    <Color x:Key="SparkTextBoxSelectionColor">#1060B0</Color>
     
 </ResourceDictionary>
     

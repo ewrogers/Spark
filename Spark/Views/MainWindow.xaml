@@ -13,7 +13,8 @@
             <TextBlock Style="{StaticResource SparkTextBlockStyle}"
                        Text="Client Executable Path:"/>
             
-            <TextBox Text="C:\Program Files (x86)\KRU\Dark Ages\Darkages.exe"/>
+            <TextBox Style="{StaticResource SparkTextBoxStyle}" 
+                     Text="C:\Program Files (x86)\KRU\Dark Ages\Darkages.exe"/>
             
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
             
