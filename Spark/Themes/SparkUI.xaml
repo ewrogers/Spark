@@ -47,9 +47,20 @@
     <SolidColorBrush x:Key="SparkCheckBoxHoverBorderBrush" Color="{DynamicResource SparkCheckBoxHoverBorderColor}"/>
     <SolidColorBrush x:Key="SparkCheckBoxCheckedBackground" Color="{DynamicResource SparkCheckBoxCheckedBackgroundColor}"/>
     <SolidColorBrush x:Key="SparkCheckBoxCheckBrush" Color="{DynamicResource SparkCheckBoxCheckColor}"/>
-    
+
+    <!-- Button -->
+    <SolidColorBrush x:Key="SparkButtonBackground" Color="{DynamicResource SparkButtonBackgroundColor}"/>
+    <SolidColorBrush x:Key="SparkButtonForeground" Color="{DynamicResource SparkButtonForegroundColor}"/>
+    <SolidColorBrush x:Key="SparkButtonBorderBrush" Color="{DynamicResource SparkButtonBorderColor}"/>
+    <SolidColorBrush x:Key="SparkButtonHoverBorderBrush" Color="{DynamicResource SparkButtonHoverBorderColor}"/>
+    <SolidColorBrush x:Key="SparkButtonPressedBackground" Color="{DynamicResource SparkButtonPressedBackgroundColor}"/>
+    <SolidColorBrush x:Key="SparkButtonPressedForeground" Color="{DynamicResource SparkButtonPressedForegroundColor}"/>
+    <SolidColorBrush x:Key="SparkButtonDisabledBackground" Color="{DynamicResource SparkButtonDisabledBackgroundColor}"/>
+    <SolidColorBrush x:Key="SparkButtonDisabledForeground" Color="{DynamicResource SparkButtonDisabledForegroundColor}"/>
+
     <!-- This is the main UI resource dictionary, it includes all UI control templates. -->
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Templates\SparkButton.xaml"/>
         <ResourceDictionary Source="Templates\SparkCheckBox.xaml"/>
         <ResourceDictionary Source="Templates\SparkComboBox.xaml"/>
         <ResourceDictionary Source="Templates\SparkComboBoxItem.xaml"/>

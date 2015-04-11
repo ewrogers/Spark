@@ -13,7 +13,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <StackPanel>
+        <StackPanel Margin="0,4,0,0">
             
             <!-- Client Executable Path -->
             <TextBlock Style="{StaticResource SparkTextBlockStyle}"
@@ -26,7 +26,7 @@
             <TextBlock Style="{StaticResource SparkTextBlockStyle}"
                        Text="Client Version:"/>
             
-            <ComboBox Style="{StaticResource SparkComboBoxStyle}" MaxDropDownHeight="160">
+            <ComboBox Style="{StaticResource SparkComboBoxStyle}" MaxDropDownHeight="160" SelectedIndex="0">
                 <ComboBoxItem>Auto-Detect</ComboBoxItem>
                 <ComboBoxItem>7.39</ComboBoxItem>
                 <ComboBoxItem>7.38</ComboBoxItem>
@@ -77,12 +77,22 @@
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
         </StackPanel>
 
-        <!-- Launch Client Button -->
-        <Button Grid.Row="1" 
-                Height="64"
-                Content="_Launch Client"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Bottom"
-                Margin="4,8"/>
+        <!-- Buttons -->
+        <StackPanel Grid.Row="1"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,0,4">
+
+            <!-- Test Connection Button -->
+            <Button Style="{StaticResource SparkButtonStyle}"
+                    Content="_Test Connection"
+                    Height="60"/>
+            
+            <!-- Launch Client Button -->
+            <Button Style="{StaticResource SparkButtonStyle}"
+                    Content="_Launch Client"
+                    IsEnabled="False"
+                    Height="60"/>
+            
+        </StackPanel>
     </Grid>
 </Window>
