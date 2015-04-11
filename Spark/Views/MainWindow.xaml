@@ -22,11 +22,17 @@
             <TextBlock Style="{StaticResource SparkTextBlockStyle}"
                        Text="Client Version:"/>
             
-            <ComboBox Style="{StaticResource SparkComboBoxStyle}">
+            <ComboBox Style="{StaticResource SparkComboBoxStyle}" MaxDropDownHeight="160">
                 <ComboBoxItem>Auto-Detect</ComboBoxItem>
                 <ComboBoxItem>7.39</ComboBoxItem>
                 <ComboBoxItem>7.38</ComboBoxItem>
                 <ComboBoxItem>7.37</ComboBoxItem>
+                <ComboBoxItem>7.36</ComboBoxItem>
+                <ComboBoxItem>7.35</ComboBoxItem>
+                <ComboBoxItem>7.34</ComboBoxItem>
+                <ComboBoxItem>7.32</ComboBoxItem>
+                <ComboBoxItem>7.31</ComboBoxItem>
+                <ComboBoxItem>7.30</ComboBoxItem>
             </ComboBox>
             
             <!-- TODO: Server Hostname -->

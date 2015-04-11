@@ -17,6 +17,11 @@
     <Color x:Key="SparkComboBoxBackgroundColor">#202020</Color>
     <Color x:Key="SparkComboBoxForegroundColor">#FFFFFF</Color>
     <Color x:Key="SparkComboBoxBorderColor">#404040</Color>
-    
+    <Color x:Key="SparkComboBoxToggleBackgroundColor">#1060B0</Color>
+    <Color x:Key="SparkComboBoxToggleForegroundColor">#FFFFFF</Color>
+    <Color x:Key="SparkComboBoxItemForegroundColor">#FFFFFF</Color>
+    <Color x:Key="SparkComboBoxItemHoverBackgroundColor">#1060B0</Color>
+    <Color x:Key="SparkComboBoxItemHoverForegroundColor">#FFFFFF</Color>
+
 </ResourceDictionary>
     
