@@ -15,6 +15,14 @@
                       VerticalAlignment="Center"/>
             </Border>
         </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter TargetName="Arrow" Property="Opacity" Value="0.5"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Arrow" Property="Opacity" Value="1.0"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
     
     

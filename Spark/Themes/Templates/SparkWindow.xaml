@@ -81,11 +81,11 @@
 
         </Grid>
         <ControlTemplate.Triggers>
-            <!-- Hide Maximized Button -->
+            <!-- Hide Maximize Button -->
             <Trigger Property="ResizeMode" Value="CanMinimize">
                 <Setter TargetName="maximizeButton" Property="Visibility" Value="Collapsed"/>
             </Trigger>
-            <!-- Hide Minimized and Maximized Buttons -->
+            <!-- Hide Minimize and Maximize Buttons -->
             <Trigger Property="ResizeMode" Value="NoResize">
                 <Setter TargetName="minimizeButton" Property="Visibility" Value="Collapsed"/>
                 <Setter TargetName="maximizeButton" Property="Visibility" Value="Collapsed"/>
