@@ -24,12 +24,14 @@
     <SolidColorBrush x:Key="SparkTextBoxBackground" Color="{DynamicResource SparkTextBoxBackgroundColor}"/>
     <SolidColorBrush x:Key="SparkTextBoxForeground" Color="{DynamicResource SparkTextBoxForegroundColor}"/>
     <SolidColorBrush x:Key="SparkTextBoxBorderBrush" Color="{DynamicResource SparkTextBoxBorderColor}"/>
+    <SolidColorBrush x:Key="SparkTextBoxHoverBorderBrush" Color="{DynamicResource SparkTextBoxHoverBorderColor}"/>
     <SolidColorBrush x:Key="SparkTextBoxSelectionBrush" Color="{DynamicResource SparkTextBoxSelectionColor}"/>
     
     <!-- Combo Box -->
     <SolidColorBrush x:Key="SparkComboBoxBackground" Color="{DynamicResource SparkComboBoxBackgroundColor}"/>
     <SolidColorBrush x:Key="SparkComboBoxForeground" Color="{DynamicResource SparkComboBoxForegroundColor}"/>
     <SolidColorBrush x:Key="SparkComboBoxBorderBrush" Color="{DynamicResource SparkComboBoxBorderColor}"/>
+    <SolidColorBrush x:Key="SparkComboBoxHoverBorderBrush" Color="{DynamicResource SparkComboBoxHoverBorderColor}"/>
     
     <!-- Combo Box Item -->
     <SolidColorBrush x:Key="SparkComboBoxToggleBackground" Color="{DynamicResource SparkComboBoxToggleBackgroundColor}"/>
