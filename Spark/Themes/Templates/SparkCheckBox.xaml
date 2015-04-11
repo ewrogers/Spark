@@ -12,6 +12,7 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
+                        <!-- Check Mark -->
                         <Grid>
                             <Path Name="CheckMark"
                                   SnapsToDevicePixels="False"
@@ -24,6 +25,7 @@
                         </Grid>
                     </Border>
                 </BulletDecorator.Bullet>
+                <!-- Content -->
                 <ContentPresenter Margin="8,0,0,0"
                                   HorizontalAlignment="Left"
                                   VerticalAlignment="Center"
@@ -32,6 +34,7 @@
             </BulletDecorator>
         </Grid>
         <ControlTemplate.Triggers>
+            <!-- Hover State (Not Pressed) -->
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsMouseOver" Value="True"/>
@@ -39,20 +42,28 @@
                 </MultiTrigger.Conditions>
                 <Setter Property="BorderBrush" Value="{DynamicResource SparkControlHoverBorderBrush}"/>
             </MultiTrigger>
+            <!-- Normal State-->
             <Trigger Property="IsMouseOver" Value="False">
                 <Setter TargetName="CheckMark" Property="Opacity" Value="0.5"/>
             </Trigger>
+            <!-- Hover State -->
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter TargetName="CheckMark" Property="Opacity" Value="1.0"/>
             </Trigger>
+            <!-- Checked State -->
             <Trigger Property="IsChecked" Value="True">
                 <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
                 <Setter Property="Background" Value="{DynamicResource SparkControlPressedBackground}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource SparkControlPressedBackground}"/>
             </Trigger>
+            <!-- Disabled State -->
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{DynamicResource SparkControlDisabledBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource SparkControlDisabledForeground}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource SparkControlBorderBrush}"/>
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    
     
     <!-- Check Box Style -->
     <Style x:Key="SparkCheckBoxStyle" TargetType="{x:Type CheckBox}">

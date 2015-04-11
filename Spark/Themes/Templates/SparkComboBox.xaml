@@ -63,14 +63,22 @@
         </Grid>
 
         <ControlTemplate.Triggers>
+            <!-- Empty State -->
             <Trigger Property="HasItems" Value="False">
                 <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
             </Trigger>
+            <!-- Grouping State -->
             <Trigger Property="IsGrouping" Value="True">
                 <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
             </Trigger>
+            <!-- Hover State -->
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource SparkControlHoverBorderBrush}"/>
+            </Trigger>
+            <!-- Disabled State -->
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{DynamicResource SparkControlDisabledBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource SparkControlDisabledForeground}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

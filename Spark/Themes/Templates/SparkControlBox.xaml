@@ -10,12 +10,15 @@
             </Border>
         </Grid>
         <ControlTemplate.Triggers>
+            <!-- Normal State -->
             <Trigger Property="IsMouseOver" Value="False">
                 <Setter Property="Opacity" Value="0.5"/>
             </Trigger>
+            <!-- Hover State -->
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Opacity" Value="1.0"/>
             </Trigger>
+            <!-- Pressed State -->
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Opacity" Value="1.0"/>
             </Trigger>

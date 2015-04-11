@@ -12,8 +12,14 @@
             </Border>
         </Grid>
         <ControlTemplate.Triggers>
+            <!-- Hover State -->
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderBrush" Value="{DynamicResource SparkControlHoverBorderBrush}"/>
+            </Trigger>
+            <!-- Disabled State -->
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{DynamicResource SparkControlDisabledBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource SparkControlDisabledForeground}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

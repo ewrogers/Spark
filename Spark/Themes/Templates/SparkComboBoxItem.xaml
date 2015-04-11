@@ -14,6 +14,7 @@
             </Border>
         </Grid>
         <ControlTemplate.Triggers>
+            <!-- Hover State -->
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource SparkControlHoverBackground}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SparkControlHoverForeground}"/>

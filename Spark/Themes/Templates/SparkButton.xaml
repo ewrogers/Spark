@@ -14,6 +14,7 @@
             </Border>
         </Grid>
         <ControlTemplate.Triggers>
+            <!-- Hover State (Not Pressed) -->
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsMouseOver" Value="True"/>
@@ -21,11 +22,13 @@
                 </MultiTrigger.Conditions>
                 <Setter Property="BorderBrush" Value="{DynamicResource SparkControlHoverBorderBrush}"/>
             </MultiTrigger>
+            <!-- Pressed State -->
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="{DynamicResource SparkControlPressedBackground}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SparkControlPressedForeground}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource SparkControlPressedBackground}"/>
             </Trigger>
+            <!-- Disabled State -->
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="{DynamicResource SparkControlDisabledBackground}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SparkControlDisabledForeground}"/>
