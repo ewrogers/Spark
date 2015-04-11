@@ -27,7 +27,7 @@
 
                 <!-- Client Path Text Box -->
                 <TextBox Style="{StaticResource SparkTextBoxStyle}" 
-                         Text="{Binding ClientExecutablePath}"
+                         Text="{Binding UserSettings.ClientExecutablePath}"
                          Margin="0,0,4,0"/>
                 
                 <!-- Locate Client Path Button -->
@@ -45,18 +45,9 @@
             <TextBlock Style="{StaticResource SparkTextBlockStyle}"
                        Text="Client Version:"/>
             
-            <ComboBox Style="{StaticResource SparkComboBoxStyle}" MaxDropDownHeight="160" SelectedValue="{Binding ClientVersion}">
-                <ComboBoxItem>Auto-Detect</ComboBoxItem>
-                <ComboBoxItem>7.39</ComboBoxItem>
-                <ComboBoxItem>7.38</ComboBoxItem>
-                <ComboBoxItem>7.37</ComboBoxItem>
-                <ComboBoxItem>7.36</ComboBoxItem>
-                <ComboBoxItem>7.35</ComboBoxItem>
-                <ComboBoxItem>7.34</ComboBoxItem>
-                <ComboBoxItem>7.32</ComboBoxItem>
-                <ComboBoxItem>7.31</ComboBoxItem>
-                <ComboBoxItem>7.30</ComboBoxItem>
-            </ComboBox>
+            <ComboBox Style="{StaticResource SparkComboBoxStyle}"
+                      SelectedValue="{Binding UserSettings.ClientVersion}"
+                      MaxDropDownHeight="160" />
 
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
 
@@ -65,7 +56,7 @@
                        Text="Server Hostname:"/>
 
             <TextBox Style="{StaticResource SparkTextBoxStyle}" 
-                     Text="{Binding ServerHostname}"/>
+                     Text="{Binding UserSettings.ServerHostname}"/>
 
             <!-- Server Port -->
 
@@ -74,7 +65,7 @@
                        Text="Server Port:"/>
 
             <TextBox Style="{StaticResource SparkTextBoxStyle}" 
-                     Text="{Binding ServerPort}"/>
+                     Text="{Binding UserSettings.ServerPort}"/>
             
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
 
@@ -90,17 +81,17 @@
                     <!-- Redirect Client -->
                     <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
                       Content="Redirect Client"
-                      IsChecked="{Binding ShouldRedirectClient}"/>
+                      IsChecked="{Binding UserSettings.ShouldRedirectClient}"/>
 
                     <!-- Skip Intro Checkbox -->
                     <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
                       Content="Skip Intro _Video"
-                      IsChecked="{Binding ShouldSkipIntro}"/>
+                      IsChecked="{Binding UserSettings.ShouldSkipIntro}"/>
 
                     <!-- Allow Multiple Instances Checkbox -->
                     <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
                       Content="Allow Multiple Instances"
-                      IsChecked="{Binding ShouldAllowMultipleInstances}"/>
+                      IsChecked="{Binding UserSettings.ShouldAllowMultipleInstances}"/>
 
                 </StackPanel>
 
@@ -110,7 +101,7 @@
                     <!-- No Walls Checkbox -->
                     <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
                       Content="Hide _Walls"
-                      IsChecked="{Binding ShouldHideWalls}"/>
+                      IsChecked="{Binding UserSettings.ShouldHideWalls}"/>
                     
                 </StackPanel>
             </Grid>

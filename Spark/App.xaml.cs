@@ -6,6 +6,7 @@ using System.Deployment.Application;
 using System.Reflection;
 using System.Windows;
 
+using Spark.Models;
 using Spark.ViewModels;
 using Spark.Views;
 
@@ -19,9 +20,12 @@ namespace Spark
         {
             base.OnStartup(e);
 
+            // Create default settings
+            var currentSettings = UserSettings.CreateDefaults();
+
             // Initialize the main window and view model
             var window = new MainWindow();
-            var viewModel = new MainViewModel(App.ApplicationName);
+            var viewModel = new MainViewModel(currentSettings);
 
             // Bind the request close event to closing the window
             viewModel.RequestClose += delegate
