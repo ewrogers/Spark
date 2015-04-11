@@ -26,7 +26,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox Style="{StaticResource SparkTextBoxStyle}" 
-                         Text="C:\Program Files (x86)\KRU\Dark Ages\Darkages.exe"
+                         Text="{Binding ClientExecutablePath}"
                          Margin="0,0,4,0"/>
                 
                 <Button Grid.Column="1" 
@@ -43,7 +43,7 @@
             <TextBlock Style="{StaticResource SparkTextBlockStyle}"
                        Text="Client Version:"/>
             
-            <ComboBox Style="{StaticResource SparkComboBoxStyle}" MaxDropDownHeight="160" SelectedIndex="0">
+            <ComboBox Style="{StaticResource SparkComboBoxStyle}" MaxDropDownHeight="160" SelectedValue="{Binding ClientVersion}">
                 <ComboBoxItem>Auto-Detect</ComboBoxItem>
                 <ComboBoxItem>7.39</ComboBoxItem>
                 <ComboBoxItem>7.38</ComboBoxItem>
@@ -63,7 +63,7 @@
                        Text="Server Hostname:"/>
 
             <TextBox Style="{StaticResource SparkTextBoxStyle}" 
-                     Text="da0.kru.com"/>
+                     Text="{Binding ServerHostname}"/>
 
             <!-- Server Port -->
 
@@ -72,24 +72,24 @@
                        Text="Server Port:"/>
 
             <TextBox Style="{StaticResource SparkTextBoxStyle}" 
-                     Text="2610"/>
+                     Text="{Binding ServerPort}"/>
             
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
 
             <!-- Skip Intro Checkbox -->
             <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
                       Content="Skip Intro _Video"
-                      IsChecked="True"/>
+                      IsChecked="{Binding ShouldSkipIntro}"/>
             
             <!-- Allow Multiple Instances Checkbox -->
             <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
                       Content="Allow _Multiple Instances"
-                      IsChecked="True"/>
+                      IsChecked="{Binding ShouldAllowMultipleInstances}"/>
             
             <!-- No Walls Checkbox -->
             <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
-                      Content="No _Walls"
-                      IsChecked="False"/>
+                      Content="Hide _Walls"
+                      IsChecked="{Binding ShouldHideWalls}"/>
 
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
         </StackPanel>
