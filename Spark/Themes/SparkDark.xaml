@@ -22,6 +22,12 @@
     <Color x:Key="SparkComboBoxItemForegroundColor">#FFFFFF</Color>
     <Color x:Key="SparkComboBoxItemHoverBackgroundColor">#1060B0</Color>
     <Color x:Key="SparkComboBoxItemHoverForegroundColor">#FFFFFF</Color>
-
+    <Color x:Key="SparkCheckBoxBackgroundColor">#202020</Color>
+    <Color x:Key="SparkCheckBoxForegroundColor">#FFFFFF</Color>
+    <Color x:Key="SparkCheckBoxBorderColor">#404040</Color>
+    <Color x:Key="SparkCheckBoxHoverBorderColor">#606060</Color>
+    <Color x:Key="SparkCheckBoxCheckedBackgroundColor">#1060B0</Color>
+    <Color x:Key="SparkCheckBoxCheckColor">#FFFFFF</Color>
+    
 </ResourceDictionary>
     

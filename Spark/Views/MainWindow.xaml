@@ -7,6 +7,12 @@
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
     <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
         <StackPanel>
             
             <!-- Client Executable Path -->
@@ -15,8 +21,6 @@
             
             <TextBox Style="{StaticResource SparkTextBoxStyle}" 
                      Text="C:\Program Files (x86)\KRU\Dark Ages\Darkages.exe"/>
-            
-            <Separator Style="{StaticResource SparkSeparatorStyle}"/>
             
             <!-- Client Version -->
             <TextBlock Style="{StaticResource SparkTextBlockStyle}"
@@ -34,19 +38,51 @@
                 <ComboBoxItem>7.31</ComboBoxItem>
                 <ComboBoxItem>7.30</ComboBoxItem>
             </ComboBox>
+
+            <Separator Style="{StaticResource SparkSeparatorStyle}"/>
+
+            <!-- Server Hostname -->
+            <TextBlock Style="{StaticResource SparkTextBlockStyle}"
+                       Text="Server Hostname:"/>
+
+            <TextBox Style="{StaticResource SparkTextBoxStyle}" 
+                     Text="da0.kru.com"/>
+
+            <!-- Server Port -->
+
+            <!-- Client Executable Path -->
+            <TextBlock Style="{StaticResource SparkTextBlockStyle}"
+                       Text="Server Port:"/>
+
+            <TextBox Style="{StaticResource SparkTextBoxStyle}" 
+                     Text="2610"/>
             
-            <!-- TODO: Server Hostname -->
+            <Separator Style="{StaticResource SparkSeparatorStyle}"/>
+
+            <!-- Skip Intro Checkbox -->
+            <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
+                      Content="Skip Intro _Video"
+                      IsChecked="True"/>
             
-            <!-- TODO: Server Port -->
+            <!-- Allow Multiple Instances Checkbox -->
+            <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
+                      Content="Allow _Multiple Instances"
+                      IsChecked="True"/>
             
-            <!-- TODO: Skip Intro Checkbox -->
-            
-            <!-- TODO: Allow Multiple Instances Checkbox -->
-            
-            <!-- TODO: No Walls Checkbox -->
-            
-            <!-- TODO: Launch Client Button -->
-            
+            <!-- No Walls Checkbox -->
+            <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
+                      Content="No _Walls"
+                      IsChecked="False"/>
+
+            <Separator Style="{StaticResource SparkSeparatorStyle}"/>
         </StackPanel>
+
+        <!-- Launch Client Button -->
+        <Button Grid.Row="1" 
+                Height="64"
+                Content="_Launch Client"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom"
+                Margin="4,8"/>
     </Grid>
 </Window>
