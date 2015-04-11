@@ -16,6 +16,7 @@ namespace Spark.ViewModels
         string clientVersion;
         string serverHostname;
         string serverPort;
+        bool shouldRedirectClient;
         bool shouldSkipIntro;
         bool shouldAllowMultipleInstances;
         bool shouldHideWalls;
@@ -47,6 +48,12 @@ namespace Spark.ViewModels
         {
             get { return serverPort; }
             set { SetProperty(ref serverPort, value); }
+        }
+
+        public bool ShouldRedirectClient
+        {
+            get { return shouldRedirectClient; }
+            set { SetProperty(ref shouldRedirectClient, value); }
         }
 
         public bool ShouldSkipIntro
@@ -86,7 +93,8 @@ namespace Spark.ViewModels
             {
                 // Lazy-initialized
                 if (testConnectionCommand == null)
-                    testConnectionCommand = new DelegateCommand(parameter => OnTestConnection());
+                    testConnectionCommand = new DelegateCommand(x => OnTestConnection(),
+                        onCanExecute: x => !string.IsNullOrWhiteSpace(this.ServerHostname) && !string.IsNullOrWhiteSpace(this.ServerPort));
 
                 return testConnectionCommand;
             }
@@ -99,8 +107,8 @@ namespace Spark.ViewModels
                 // Lazy-initialized
                 if (launchClientCommand == null)
                 {
-                    launchClientCommand = new DelegateCommand(parameter => OnLaunchClient(),
-                        onCanExecute: parameter => File.Exists(this.ClientExecutablePath));
+                    launchClientCommand = new DelegateCommand(x => OnLaunchClient(), 
+                        onCanExecute: x => File.Exists(this.ClientExecutablePath) && !string.IsNullOrWhiteSpace(this.ClientVersion));
                 }
 
                 return launchClientCommand;
@@ -111,7 +119,7 @@ namespace Spark.ViewModels
         public MainViewModel(string displayName)
             : base(displayName) { }
 
-        #region Command Methods
+        #region Execute Methods
         void OnLocateClientPath()
         {
             Debug.WriteLine("OnLocateClientPath");
@@ -126,8 +134,8 @@ namespace Spark.ViewModels
         {
             Debug.WriteLine("OnLaunchClient");
 
-            Debug.WriteLine("ClientExecutablePath = {0}, ClientVersion = {1}, ServerHostname = {2}, ServerPort = {3}, ShouldSkipIntro = {4}, ShouldAllowMultipleInstances = {5}, ShouldHideWalls = {6}",
-                this.ClientExecutablePath, this.ClientVersion, this.ServerHostname, this.ServerPort, this.ShouldSkipIntro, this.ShouldAllowMultipleInstances, this.ShouldHideWalls);
+            Debug.WriteLine("ClientExecutablePath = {0}, ClientVersion = {1}, ServerHostname = {2}, ServerPort = {3}, ShouldRedirectClient = {4}, ShouldSkipIntro = {5}, ShouldAllowMultipleInstances = {6}, ShouldHideWalls = {7}",
+                this.ClientExecutablePath, this.ClientVersion, this.ServerHostname, this.ServerPort, this.ShouldRedirectClient, this.ShouldSkipIntro, this.ShouldAllowMultipleInstances, this.ShouldHideWalls);
         }
         #endregion
     }

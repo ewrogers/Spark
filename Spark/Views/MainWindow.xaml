@@ -25,10 +25,12 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
+                <!-- Client Path Text Box -->
                 <TextBox Style="{StaticResource SparkTextBoxStyle}" 
                          Text="{Binding ClientExecutablePath}"
                          Margin="0,0,4,0"/>
                 
+                <!-- Locate Client Path Button -->
                 <Button Grid.Column="1" 
                         Style="{StaticResource SparkButtonStyle}"
                         Command="{Binding LocateClientPathCommand}"
@@ -76,20 +78,43 @@
             
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
 
-            <!-- Skip Intro Checkbox -->
-            <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- First Column of Options-->
+                <StackPanel>
+                    
+                    <!-- Redirect Client -->
+                    <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
+                      Content="Redirect Client"
+                      IsChecked="{Binding ShouldRedirectClient}"/>
+
+                    <!-- Skip Intro Checkbox -->
+                    <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
                       Content="Skip Intro _Video"
                       IsChecked="{Binding ShouldSkipIntro}"/>
-            
-            <!-- Allow Multiple Instances Checkbox -->
-            <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
-                      Content="Allow _Multiple Instances"
+
+                    <!-- Allow Multiple Instances Checkbox -->
+                    <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
+                      Content="Allow Multiple Instances"
                       IsChecked="{Binding ShouldAllowMultipleInstances}"/>
-            
-            <!-- No Walls Checkbox -->
-            <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
+
+                </StackPanel>
+
+                <!-- Second Column of Options -->
+                <StackPanel Grid.Column="1">
+
+                    <!-- No Walls Checkbox -->
+                    <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
                       Content="Hide _Walls"
                       IsChecked="{Binding ShouldHideWalls}"/>
+                    
+                </StackPanel>
+            </Grid>
+            
 
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
         </StackPanel>
