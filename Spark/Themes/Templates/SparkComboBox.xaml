@@ -1,0 +1,79 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Combo Box Template -->
+    <ControlTemplate x:Key="SparkComboBoxTemplate" TargetType="{x:Type ComboBox}">
+        <Grid>
+            <ToggleButton Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          ClickMode="Press"
+                          Focusable="False"
+                          IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"/>
+            <ContentPresenter Name="ContentSite"
+                              Content="{TemplateBinding SelectionBoxItem}"
+                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                              IsHitTestVisible="False"
+                              Margin="10,3,33,3"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+            <TextBox Name="PART_EditableTextBox"
+                     Style="{x:Null}"
+                     Margin="3,3,23,3"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Focusable="False"
+                     Visibility="Hidden"
+                     IsReadOnly="{TemplateBinding IsReadOnly}"/>
+            <Popup Name="Popup"
+                   Placement="Bottom"
+                   PopupAnimation="Slide"
+                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                   AllowsTransparency="True"
+                   Focusable="False">
+                <Grid Name="DropDown"
+                      SnapsToDevicePixels="True"
+                      MinWidth="{TemplateBinding ActualWidth}"
+                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                    <Border Name="DropDownBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ScrollViewer SnapsToDevicePixels="True">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </Popup>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <!-- Minimum Height with No Items -->
+            <Trigger Property="HasItems" Value="false">
+                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+            </Trigger>
+            <!-- Editable Toggle -->
+            <Trigger Property="IsEditable" Value="true">
+                <Setter Property="IsTabStop" Value="false"/>
+                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!-- Combo Box Style -->
+    <Style x:Key="SparkComboBoxStyle" TargetType="{x:Type ComboBox}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template" Value="{StaticResource SparkComboBoxTemplate}"/>
+        <Setter Property="FontFamily" Value="Segoe WP"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Background" Value="{DynamicResource SparkTextBoxBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SparkTextBoxForeground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SparkTextBoxBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Margin" Value="8,4"/>
+        <Setter Property="Padding" Value="2"/>
+    </Style>
+    
+</ResourceDictionary>

@@ -18,7 +18,16 @@
             
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
             
-            <!-- TODO: Client Version -->
+            <!-- Client Version -->
+            <TextBlock Style="{StaticResource SparkTextBlockStyle}"
+                       Text="Client Version:"/>
+            
+            <ComboBox Style="{StaticResource SparkComboBoxStyle}">
+                <ComboBoxItem>Auto-Detect</ComboBoxItem>
+                <ComboBoxItem>7.39</ComboBoxItem>
+                <ComboBoxItem>7.38</ComboBoxItem>
+                <ComboBoxItem>7.37</ComboBoxItem>
+            </ComboBox>
             
             <!-- TODO: Server Hostname -->
             

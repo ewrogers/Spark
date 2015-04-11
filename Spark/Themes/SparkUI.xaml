@@ -13,9 +13,13 @@
     <SolidColorBrush x:Key="SparkTextBoxForeground" Color="{DynamicResource SparkTextBoxForegroundColor}"/>
     <SolidColorBrush x:Key="SparkTextBoxBorderBrush" Color="{DynamicResource SparkTextBoxBorderColor}"/>
     <SolidColorBrush x:Key="SparkTextBoxSelectionBrush" Color="{DynamicResource SparkTextBoxSelectionColor}"/>
+    <SolidColorBrush x:Key="SparkComboBoxBackground" Color="{DynamicResource SparkComboBoxBackgroundColor}"/>
+    <SolidColorBrush x:Key="SparkComboBoxForeground" Color="{DynamicResource SparkComboBoxForegroundColor}"/>
+    <SolidColorBrush x:Key="SparkComboBoxBorderBrush" Color="{DynamicResource SparkComboBoxBorderColor}"/>
     
     <!-- This is the main UI resource dictionary, it includes all UI control templates. -->
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Templates\SparkComboBox.xaml"/>
         <ResourceDictionary Source="Templates\SparkControlBox.xaml"/>
         <ResourceDictionary Source="Templates\SparkSeparator.xaml"/>
         <ResourceDictionary Source="Templates\SparkText.xaml"/>
