@@ -18,6 +18,10 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Opacity" Value="1.0"/>
             </Trigger>
+            <!-- Focused State -->
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource SparkAccentBackground}"/>
+            </Trigger>
             <!-- Pressed State -->
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Opacity" Value="1.0"/>

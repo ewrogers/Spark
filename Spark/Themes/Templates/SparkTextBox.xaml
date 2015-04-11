@@ -16,6 +16,10 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderBrush" Value="{DynamicResource SparkControlHoverBorderBrush}"/>
             </Trigger>
+            <!-- Focused State -->
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource SparkAccentBackground}"/>
+            </Trigger>
             <!-- Disabled State -->
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="{DynamicResource SparkControlDisabledBackground}"/>
