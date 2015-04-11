@@ -84,11 +84,13 @@
 
             <!-- Test Connection Button -->
             <Button Style="{StaticResource SparkButtonStyle}"
+                    FontSize="20"
                     Content="_Test Connection"
                     Height="60"/>
             
             <!-- Launch Client Button -->
             <Button Style="{StaticResource SparkButtonStyle}"
+                    FontSize="20"
                     Content="_Launch Client"
                     IsEnabled="False"
                     Height="60"/>

@@ -16,6 +16,9 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Opacity" Value="1.0"/>
             </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1.0"/>
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -25,7 +28,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template" Value="{StaticResource SparkControlBoxTemplate}"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource SparkControlBoxForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SparkAccentForeground}"/>
         <Setter Property="Width" Value="24"/>
         <Setter Property="Height" Value="24"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>

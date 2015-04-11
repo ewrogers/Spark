@@ -19,16 +19,16 @@
                     <Condition Property="IsMouseOver" Value="True"/>
                     <Condition Property="IsPressed" Value="False"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="BorderBrush" Value="{DynamicResource SparkButtonHoverBorderBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource SparkControlHoverBorderBrush}"/>
             </MultiTrigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="{DynamicResource SparkButtonPressedBackground}"/>
-                <Setter Property="Foreground" Value="{DynamicResource SparkButtonPressedForeground}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource SparkButtonPressedBackground}"/>
+                <Setter Property="Background" Value="{DynamicResource SparkControlPressedBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource SparkControlPressedForeground}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource SparkControlPressedBackground}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="{DynamicResource SparkButtonDisabledBackground}"/>
-                <Setter Property="Foreground" Value="{DynamicResource SparkButtonDisabledForeground}"/>
+                <Setter Property="Background" Value="{DynamicResource SparkControlDisabledBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource SparkControlDisabledForeground}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -38,12 +38,9 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template" Value="{StaticResource SparkButtonTemplate}"/>
-        <Setter Property="Background" Value="{DynamicResource SparkButtonBackground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource SparkButtonForeground}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SparkButtonBorderBrush}"/>
-        <Setter Property="FontFamily" Value="Segoe WP"/>
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Background" Value="{DynamicResource SparkControlBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SparkControlForeground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SparkControlBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>

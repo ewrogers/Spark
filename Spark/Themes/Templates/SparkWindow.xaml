@@ -24,7 +24,7 @@
 
             <!-- Title Bar Background -->
             <Border Grid.ColumnSpan="2"
-                    Background="{DynamicResource SparkWindowTitleBackground}"/>
+                    Background="{DynamicResource SparkAccentBackground}"/>
 
             <!-- Title Text -->
             <TextBlock Text="{TemplateBinding Title}"
@@ -42,7 +42,7 @@
                 <Button Name="minimizeButton"
                         Click="minimizeButtonClicked"
                         Style="{StaticResource SparkMinimizeButtonStyle}">
-                    <Path Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
+                    <Path Stroke="{Binding Path=Foreground, ElementName=minimizeButton}"
                           StrokeThickness="2"
                           Data="M 0,12 h 12"/>
                 </Button>
@@ -51,7 +51,7 @@
                 <Button Name="maximizeButton"
                         Click="maximizeButtonClicked"
                         Style="{StaticResource SparkMaximizeButtonStyle}">
-                    <Path Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
+                    <Path Stroke="{Binding Path=Foreground, ElementName=maximizeButton}"
                           StrokeThickness="2"
                           Data="M 0,2 h 12 v 12 h -12 z m 0,2 h 12"/>
                 </Button>
@@ -60,7 +60,7 @@
                 <Button Name="closeButton"
                         Click="closeButtonClicked"
                         Style="{StaticResource SparkCloseButtonStyle}">
-                    <Path Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
+                    <Path Stroke="{Binding Path=Foreground, ElementName=closeButton}"
                           StrokeThickness="2"
                           Data="M 0,2 l 12,12 m 0,-12 l -12,12"/>
                 </Button>
@@ -102,6 +102,9 @@
         <Setter Property="Template" Value="{StaticResource SparkWindowTemplate}"/>
         <Setter Property="Background" Value="{DynamicResource SparkWindowBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource SparkWindowForeground}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource SparkFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource SparkControlFontSize}"/>
+        <Setter Property="FontWeight" Value="{DynamicResource SparkFontWeight}"/>
     </Style>
 
 </ResourceDictionary>

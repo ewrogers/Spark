@@ -70,7 +70,7 @@
                 <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource SparkComboBoxHoverBorderBrush}"/>
+                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource SparkControlHoverBorderBrush}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -81,12 +81,9 @@
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template" Value="{StaticResource SparkComboBoxTemplate}"/>
         <Setter Property="ItemContainerStyle" Value="{StaticResource SparkComboBoxItemStyle}"/>
-        <Setter Property="FontFamily" Value="Segoe WP"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="Background" Value="{DynamicResource SparkTextBoxBackground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource SparkTextBoxForeground}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SparkTextBoxBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SparkControlBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SparkControlForeground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SparkControlBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="MinWidth" Value="120"/>
         <Setter Property="MinHeight" Value="32"/>

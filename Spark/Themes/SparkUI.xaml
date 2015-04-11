@@ -1,63 +1,39 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <!-- Spark Theme Brushes -->
+    <!-- Fonts -->
+    <FontFamily x:Key="SparkFontFamily">Segoe WP</FontFamily>
+    <FontWeight x:Key="SparkFontWeight">Light</FontWeight>
+    <sys:Double x:Key="SparkWindowTitleFontSize">32.0</sys:Double>
+    <sys:Double x:Key="SparkControlFontSize">14.0</sys:Double>
+    <sys:Double x:Key="SparkTextFontSize">16.0</sys:Double>
     
-    <!-- Window Title -->
-    <SolidColorBrush x:Key="SparkWindowTitleBackground" Color="{DynamicResource SparkWindowTitleBackgroundColor}"/>
-    <SolidColorBrush x:Key="SparkWindowTitleForeground" Color="{DynamicResource SparkWindowTitleForegroundColor}"/>
-    
-    <!-- Window Background -->
+    <!-- Accent Colors -->
+    <SolidColorBrush x:Key="SparkAccentBackground" Color="{DynamicResource SparkAccentBackgroundColor}"/>
+    <SolidColorBrush x:Key="SparkAccentForeground" Color="{DynamicResource SparkAccentForegroundColor}"/>
+
+    <!-- Window Colors -->
     <SolidColorBrush x:Key="SparkWindowBackground" Color="{DynamicResource SparkWindowBackgroundColor}"/>
-    <SolidColorBrush x:Key="SparkWindowForeground" Color="{DynamicResource SparkWindowForegroundColor}"/>
+    <SolidColorBrush x:Key="SparkwindowForeground" Color="{DynamicResource SparkWindowForegroundColor}"/>
+
+    <!-- Control Colors -->
+    <SolidColorBrush x:Key="SparkControlBackground" Color="{DynamicResource SparkControlBackgroundColor}"/>
+    <SolidColorBrush x:Key="SparkControlForeground" Color="{DynamicResource SparkControlForegroundColor}"/>
+    <SolidColorBrush x:Key="SparkControlBorderBrush" Color="{DynamicResource SparkControlBorderColor}"/>
+    <SolidColorBrush x:Key="SparkControlHoverBorderBrush" Color="{DynamicResource SparkControlHoverBorderColor}"/>
+    <SolidColorBrush x:Key="SparkControlDisabledBackground" Color="{DynamicResource SparkControlDisabledBackgroundColor}"/>
+    <SolidColorBrush x:Key="SparkControlDisabledForeground" Color="{DynamicResource SparkControlDisabledForegroundColor}"/>
+    <SolidColorBrush x:Key="SparkControlPressedBackground" Color="{DynamicResource SparkControlPressedBackgroundColor}"/>
+    <SolidColorBrush x:Key="SparkControlPressedForeground" Color="{DynamicResource SparkControlPressedForegroundColor}"/>
     
-    <!-- Separator -->
-    <SolidColorBrush x:Key="SparkSeparatorBackground" Color="{DynamicResource SparkSeparatorBackgroundColor}"/>
-    
-    <!-- Control Box -->
-    <SolidColorBrush x:Key="SparkControlBoxForeground" Color="{DynamicResource SparkControlBoxForegroundColor}"/>
-    
-    <!-- TextBlocks -->
+    <!-- Separator Colors -->
+    <SolidColorBrush x:Key="SparkSeperatorBackground" Color="{DynamicResource SparkSeparatorColor}"/>
+
+    <!-- Text Colors -->
     <SolidColorBrush x:Key="SparkTextForeground" Color="{DynamicResource SparkTextForegroundColor}"/>
+    <SolidColorBrush x:Key="SparkSelectionBrush" Color="{DynamicResource SparkSelectionColor}"/>
     
-    <!-- Text Box -->
-    <SolidColorBrush x:Key="SparkTextBoxBackground" Color="{DynamicResource SparkTextBoxBackgroundColor}"/>
-    <SolidColorBrush x:Key="SparkTextBoxForeground" Color="{DynamicResource SparkTextBoxForegroundColor}"/>
-    <SolidColorBrush x:Key="SparkTextBoxBorderBrush" Color="{DynamicResource SparkTextBoxBorderColor}"/>
-    <SolidColorBrush x:Key="SparkTextBoxHoverBorderBrush" Color="{DynamicResource SparkTextBoxHoverBorderColor}"/>
-    <SolidColorBrush x:Key="SparkTextBoxSelectionBrush" Color="{DynamicResource SparkTextBoxSelectionColor}"/>
-    
-    <!-- Combo Box -->
-    <SolidColorBrush x:Key="SparkComboBoxBackground" Color="{DynamicResource SparkComboBoxBackgroundColor}"/>
-    <SolidColorBrush x:Key="SparkComboBoxForeground" Color="{DynamicResource SparkComboBoxForegroundColor}"/>
-    <SolidColorBrush x:Key="SparkComboBoxBorderBrush" Color="{DynamicResource SparkComboBoxBorderColor}"/>
-    <SolidColorBrush x:Key="SparkComboBoxHoverBorderBrush" Color="{DynamicResource SparkComboBoxHoverBorderColor}"/>
-    
-    <!-- Combo Box Item -->
-    <SolidColorBrush x:Key="SparkComboBoxToggleBackground" Color="{DynamicResource SparkComboBoxToggleBackgroundColor}"/>
-    <SolidColorBrush x:Key="SparkComboBoxToggleForeground" Color="{DynamicResource SparkComboBoxToggleForegroundColor}"/>
-    <SolidColorBrush x:Key="SparkComboBoxItemForeground" Color="{DynamicResource SparkComboBoxItemForegroundColor}"/>
-    <SolidColorBrush x:Key="SparkComboBoxItemHoverBackground" Color="{DynamicResource SparkComboBoxItemHoverBackgroundColor}"/>
-    <SolidColorBrush x:Key="SparkComboBoxItemHoverForeground" Color="{DynamicResource SparkComboBoxItemHoverForegroundColor}"/>
-    
-    <!-- Check Box -->
-    <SolidColorBrush x:Key="SparkCheckBoxBackground" Color="{DynamicResource SparkCheckBoxBackgroundColor}"/>
-    <SolidColorBrush x:Key="SparkCheckBoxForeground" Color="{DynamicResource SparkCheckBoxForegroundColor}"/>
-    <SolidColorBrush x:Key="SparkCheckBoxBorderBrush" Color="{DynamicResource SparkCheckBoxBorderColor}"/>
-    <SolidColorBrush x:Key="SparkCheckBoxHoverBorderBrush" Color="{DynamicResource SparkCheckBoxHoverBorderColor}"/>
-    <SolidColorBrush x:Key="SparkCheckBoxCheckedBackground" Color="{DynamicResource SparkCheckBoxCheckedBackgroundColor}"/>
-    <SolidColorBrush x:Key="SparkCheckBoxCheckBrush" Color="{DynamicResource SparkCheckBoxCheckColor}"/>
-
-    <!-- Button -->
-    <SolidColorBrush x:Key="SparkButtonBackground" Color="{DynamicResource SparkButtonBackgroundColor}"/>
-    <SolidColorBrush x:Key="SparkButtonForeground" Color="{DynamicResource SparkButtonForegroundColor}"/>
-    <SolidColorBrush x:Key="SparkButtonBorderBrush" Color="{DynamicResource SparkButtonBorderColor}"/>
-    <SolidColorBrush x:Key="SparkButtonHoverBorderBrush" Color="{DynamicResource SparkButtonHoverBorderColor}"/>
-    <SolidColorBrush x:Key="SparkButtonPressedBackground" Color="{DynamicResource SparkButtonPressedBackgroundColor}"/>
-    <SolidColorBrush x:Key="SparkButtonPressedForeground" Color="{DynamicResource SparkButtonPressedForegroundColor}"/>
-    <SolidColorBrush x:Key="SparkButtonDisabledBackground" Color="{DynamicResource SparkButtonDisabledBackgroundColor}"/>
-    <SolidColorBrush x:Key="SparkButtonDisabledForeground" Color="{DynamicResource SparkButtonDisabledForegroundColor}"/>
-
     <!-- This is the main UI resource dictionary, it includes all UI control templates. -->
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Templates\SparkButton.xaml"/>

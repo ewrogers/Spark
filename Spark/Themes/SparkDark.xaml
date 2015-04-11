@@ -1,57 +1,31 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ 
+    <!-- Accent Colors -->
+    <Color x:Key="SparkAccentBackgroundColor">#1060B0</Color>
+    <Color x:Key="SparkAccentForegroundColor">#FFFFFF</Color>
     
     <!-- Window Colors -->
-    <Color x:Key="SparkWindowTitleBackgroundColor">#1060B0</Color>
-    <Color x:Key="SparkWindowTitleForegroundColor">#FFFFFF</Color>
     <Color x:Key="SparkWindowBackgroundColor">#181818</Color>
     <Color x:Key="SparkWindowForegroundColor">#FFFFFF</Color>
     <Color x:Key="SparkWindowShadowColor">#000000</Color>
-    <Color x:Key="SparkControlBoxForegroundColor">#FFFFFF</Color>
+    
+    <!-- Control Colors -->
+    <Color x:Key="SparkControlBackgroundColor">#202020</Color>
+    <Color x:Key="SparkControlForegroundColor">#FFFFFF</Color>
+    <Color x:Key="SparkControlBorderColor">#404040</Color>
+    <Color x:Key="SparkControlHoverBorderColor">#606060</Color>
+    <Color x:Key="SparkControlDisabledBackgroundColor">#303030</Color>
+    <Color x:Key="SparkControlDisabledForegroundColor">#808080</Color>
+    <Color x:Key="SparkControlPressedBackgroundColor">#1060B0</Color>
+    <Color x:Key="SparkControlPressedForegroundColor">#FFFFFF</Color>
     
     <!-- Separator Colors -->
-    <Color x:Key="SparkSeparatorBackgroundColor">#282828</Color>
+    <Color x:Key="SparkSeparatorColor">#282828</Color>
     
     <!-- Text Colors -->
     <Color x:Key="SparkTextForegroundColor">#FFFFFF</Color>
+    <Color x:Key="SparkSelectionColor">#1060B0</Color>
     
-    <!-- Text Box Colors  =-->
-    <Color x:Key="SparkTextBoxBackgroundColor">#202020</Color>
-    <Color x:Key="SparkTextBoxForegroundColor">#FFFFFF</Color>
-    <Color x:Key="SparkTextBoxBorderColor">#404040</Color>
-    <Color x:Key="SparkTextBoxHoverBorderColor">#606060</Color>
-    <Color x:Key="SparkTextBoxSelectionColor">#1060B0</Color>
-    
-    <!-- Combo Box Colors -->
-    <Color x:Key="SparkComboBoxBackgroundColor">#202020</Color>
-    <Color x:Key="SparkComboBoxForegroundColor">#FFFFFF</Color>
-    <Color x:Key="SparkComboBoxBorderColor">#404040</Color>
-    <Color x:Key="SparkComboBoxHoverBorderColor">#606060</Color>
-    <Color x:Key="SparkComboBoxToggleBackgroundColor">#1060B0</Color>
-    <Color x:Key="SparkComboBoxToggleForegroundColor">#FFFFFF</Color>
-    
-    <!-- Combo Box Item Colors -->
-    <Color x:Key="SparkComboBoxItemForegroundColor">#FFFFFF</Color>
-    <Color x:Key="SparkComboBoxItemHoverBackgroundColor">#1060B0</Color>
-    <Color x:Key="SparkComboBoxItemHoverForegroundColor">#FFFFFF</Color>
-    
-    <!-- Check Box Colors -->
-    <Color x:Key="SparkCheckBoxBackgroundColor">#202020</Color>
-    <Color x:Key="SparkCheckBoxForegroundColor">#FFFFFF</Color>
-    <Color x:Key="SparkCheckBoxBorderColor">#404040</Color>
-    <Color x:Key="SparkCheckBoxHoverBorderColor">#606060</Color>
-    <Color x:Key="SparkCheckBoxCheckedBackgroundColor">#1060B0</Color>
-    <Color x:Key="SparkCheckBoxCheckColor">#FFFFFF</Color>
-
-    <!-- Button Colors -->
-    <Color x:Key="SparkButtonBackgroundColor">#202020</Color>
-    <Color x:Key="SparkButtonForegroundColor">#FFFFFF</Color>
-    <Color x:Key="SparkButtonBorderColor">#404040</Color>
-    <Color x:Key="SparkButtonHoverBorderColor">#606060</Color>
-    <Color x:Key="SparkButtonPressedBackgroundColor">#1060B0</Color>
-    <Color x:Key="SparkButtonPressedForegroundColor">#FFFFFF</Color>
-    <Color x:Key="SparkButtonDisabledBackgroundColor">#303030</Color>
-    <Color x:Key="SparkButtonDisabledForegroundColor">#808080</Color>
-
 </ResourceDictionary>
     

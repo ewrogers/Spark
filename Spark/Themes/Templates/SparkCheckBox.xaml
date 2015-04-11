@@ -15,9 +15,9 @@
                         <Grid>
                             <Path Name="CheckMark"
                                   SnapsToDevicePixels="False"
-                                  Stroke="{DynamicResource SparkCheckBoxCheckBrush}"
+                                  Stroke="{DynamicResource SparkControlPressedForeground}"
                                   StrokeThickness="3"
-                                  Data="M 2,6 l 4,6 l 10,-12"
+                                  Data="M 0,6 l 4,6 l 10,-12"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"
                                   Visibility="Collapsed"/>
@@ -37,7 +37,7 @@
                     <Condition Property="IsMouseOver" Value="True"/>
                     <Condition Property="IsChecked" Value="False"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="BorderBrush" Value="{DynamicResource SparkCheckBoxHoverBorderBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource SparkControlHoverBorderBrush}"/>
             </MultiTrigger>
             <Trigger Property="IsMouseOver" Value="False">
                 <Setter TargetName="CheckMark" Property="Opacity" Value="0.5"/>
@@ -47,8 +47,8 @@
             </Trigger>
             <Trigger Property="IsChecked" Value="True">
                 <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
-                <Setter Property="Background" Value="{DynamicResource SparkCheckBoxCheckedBackground}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource SparkCheckBoxCheckedBackground}"/>
+                <Setter Property="Background" Value="{DynamicResource SparkControlPressedBackground}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource SparkControlPressedBackground}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -59,12 +59,9 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template" Value="{StaticResource SparkCheckBoxTemplate}"/>
-        <Setter Property="Background" Value="{DynamicResource SparkCheckBoxBackground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource SparkCheckBoxForeground}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SparkCheckBoxBorderBrush}"/>
-        <Setter Property="FontFamily" Value="Segoe WP"/>
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Background" Value="{DynamicResource SparkControlBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SparkControlForeground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SparkControlBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Margin" Value="8,4"/>
         <Setter Property="Padding" Value="2"/>

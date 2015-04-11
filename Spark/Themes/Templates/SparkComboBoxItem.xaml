@@ -15,8 +15,8 @@
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="Border" Property="Background" Value="{DynamicResource SparkComboBoxItemHoverBackground}"/>
-                <Setter Property="Foreground" Value="{DynamicResource SparkComboBoxItemHoverForeground}"/>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource SparkControlHoverBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource SparkControlHoverForeground}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -26,13 +26,10 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template" Value="{StaticResource SparkComboBoxItemTemplate}"/>
-        <Setter Property="Foreground" Value="{DynamicResource SparkComboBoxItemForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SparkControlForeground}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="FontFamily" Value="Segoe WP"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="Margin" Value="0"/>
