@@ -28,7 +28,7 @@
     <SolidColorBrush x:Key="SparkControlPressedForeground" Color="{DynamicResource SparkControlPressedForegroundColor}"/>
     
     <!-- Separator Colors -->
-    <SolidColorBrush x:Key="SparkSeperatorBackground" Color="{DynamicResource SparkSeparatorColor}"/>
+    <SolidColorBrush x:Key="SparkSeparatorBackground" Color="{DynamicResource SparkSeparatorColor}"/>
 
     <!-- Text Colors -->
     <SolidColorBrush x:Key="SparkTextForeground" Color="{DynamicResource SparkTextForegroundColor}"/>

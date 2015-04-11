@@ -7,7 +7,7 @@
         <Setter Property="FontSize" Value="{DynamicResource SparkTextFontSize}"/>
         <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="Foreground" Value="{DynamicResource SparkTextForeground}"/>
-        <Setter Property="Margin" Value="8,4"/>
+        <Setter Property="Margin" Value="8,2"/>
     </Style>
 
     <!-- Window Title Text Style -->

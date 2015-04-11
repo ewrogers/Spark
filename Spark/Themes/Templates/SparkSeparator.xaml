@@ -6,7 +6,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Background" Value="{DynamicResource SparkSeparatorBackground}"/>
         <Setter Property="Height" Value="1"/>
-        <Setter Property="Margin" Value="0,4"/>
+        <Setter Property="Margin" Value="0,6"/>
     </Style>
     
 </ResourceDictionary>
