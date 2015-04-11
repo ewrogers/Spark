@@ -114,7 +114,6 @@
                     
                 </StackPanel>
             </Grid>
-            
 
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
         </StackPanel>

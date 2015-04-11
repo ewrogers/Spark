@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Deployment.Application;
+using System.Reflection;
 using System.Windows;
 
 using Spark.ViewModels;
@@ -32,6 +32,14 @@ namespace Spark
             // Assign the view model to the data context and display the main window
             window.DataContext = viewModel;
             window.Show();
+        }
+
+        public static Version GetRunningVersion()
+        {
+            if (ApplicationDeployment.IsNetworkDeployed)
+                return ApplicationDeployment.CurrentDeployment.CurrentVersion;
+
+            return Assembly.GetExecutingAssembly().GetName().Version;
         }
     }
 }
