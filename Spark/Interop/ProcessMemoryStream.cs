@@ -10,13 +10,13 @@ namespace Spark.Interop
 {
     public class ProcessMemoryStream : Stream
     {
-        static readonly int BufferSize = 4 * 1024;              // 4 KB
-        static readonly long ModuleBaseAddress = 0x400000;      // Most processes will map to this base address
+        protected static readonly long ModuleBaseAddress = 0x400000;      // Most processes will map to this base address
 
         bool isDisposed;
+        bool leaveOpen;
         Win32ProcessSafeHandle processHandle;
-        byte[] readBuffer = new byte[BufferSize];
-        byte[] writeBuffer = new byte[BufferSize];
+        byte[] readBuffer;
+        byte[] writeBuffer;
 
         protected long position = ModuleBaseAddress;
         protected ProcessAccess processAccess;
@@ -73,10 +73,13 @@ namespace Spark.Interop
         }
         #endregion
 
-        public ProcessMemoryStream(int processId, ProcessAccess desiredAccess = ProcessAccess.ReadWrite)
+        public ProcessMemoryStream(int processId, ProcessAccess desiredAccess = ProcessAccess.ReadWrite, int bufferSize = 4096, bool leaveOpen = false)
         {
             if (processId < 0)
                 throw new ArgumentOutOfRangeException("Process ID must be a positive value");
+
+            if (bufferSize < 1)
+                throw new ArgumentOutOfRangeException("Buffer size must be at least 1 byte");
 
             var win32Flags = Win32ProcessAccess.VmOperation;
 
@@ -89,11 +92,17 @@ namespace Spark.Interop
                 win32Flags |= Win32ProcessAccess.VmWrite;
 
             // Open the process and check if the handle is valid
-            processAccess = desiredAccess;
-            processHandle = NativeMethods.OpenProcess(processId, false, win32Flags);
+            this.processAccess = desiredAccess;
+            this.processHandle = NativeMethods.OpenProcess(processId, false, win32Flags);
+            this.leaveOpen = leaveOpen;
 
-            if (processHandle.IsInvalid)
+            // Check if handle is valid
+            if (this.processHandle.IsInvalid)
                 throw new IOException("Unable to open process");
+
+            // Allocate read and write buffers
+            this.readBuffer = new byte[bufferSize];
+            this.writeBuffer = new byte[bufferSize];
         }
 
         ~ProcessMemoryStream()
@@ -256,7 +265,8 @@ namespace Spark.Interop
             }
 
             // Dispose of unmanaged resources here
-            processHandle.Dispose();
+            if (!leaveOpen)
+                processHandle.Dispose();
 
             base.Dispose(isDisposing);
             isDisposed = true;
