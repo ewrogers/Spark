@@ -8,22 +8,33 @@
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
                     Padding="{TemplateBinding Padding}">
-                <ContentPresenter RecognizesAccessKey="True"
+                <ContentPresenter Name="Content" 
+                                  RecognizesAccessKey="True"
                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
             </Border>
         </Grid>
         <ControlTemplate.Triggers>
+            <!-- Normal State (Enabled) -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="False"/>
+                    <Condition Property="IsEnabled" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Content" Property="Opacity" Value="0.75"/>
+            </MultiTrigger>
             <!-- Hover State (Not Pressed) -->
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsMouseOver" Value="True"/>
                     <Condition Property="IsPressed" Value="False"/>
                 </MultiTrigger.Conditions>
+                <Setter TargetName="Content" Property="Opacity" Value="1.0"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource SparkControlHoverBorderBrush}"/>
             </MultiTrigger>
             <!-- Pressed State -->
             <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="Content" Property="Opacity" Value="1.0"/>
                 <Setter Property="Background" Value="{DynamicResource SparkControlPressedBackground}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SparkControlPressedForeground}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource SparkControlPressedBackground}"/>
@@ -48,7 +59,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Margin" Value="8,4"/>
-        <Setter Property="Padding" Value="4"/>
+        <Setter Property="Padding" Value="8,2"/>
     </Style>
     
 </ResourceDictionary>

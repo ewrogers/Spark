@@ -19,8 +19,25 @@
             <TextBlock Style="{StaticResource SparkTextBlockStyle}"
                        Text="Client Executable Path:"/>
             
-            <TextBox Style="{StaticResource SparkTextBoxStyle}" 
-                     Text="C:\Program Files (x86)\KRU\Dark Ages\Darkages.exe"/>
+            <Grid Margin="8,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Style="{StaticResource SparkTextBoxStyle}" 
+                         Text="C:\Program Files (x86)\KRU\Dark Ages\Darkages.exe"
+                         Margin="0,0,4,0"/>
+                
+                <Button Grid.Column="1" 
+                        Style="{StaticResource SparkButtonStyle}"
+                        Command="{Binding LocateClientPathCommand}"
+                        Content="..."
+                        FontSize="16"
+                        FontWeight="Black"
+                        Margin="0"/>
+
+            </Grid>
             
             <!-- Client Version -->
             <TextBlock Style="{StaticResource SparkTextBlockStyle}"
@@ -84,15 +101,16 @@
 
             <!-- Test Connection Button -->
             <Button Style="{StaticResource SparkButtonStyle}"
+                    Command="{Binding TestConnectionCommand}"
                     FontSize="20"
                     Content="_Test Connection"
                     Height="60"/>
             
             <!-- Launch Client Button -->
             <Button Style="{StaticResource SparkButtonStyle}"
+                    Command="{Binding LaunchClientCommand}"
                     FontSize="20"
                     Content="_Launch Client"
-                    IsEnabled="False"
                     Height="60"/>
             
         </StackPanel>
