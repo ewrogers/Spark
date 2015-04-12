@@ -63,6 +63,7 @@
     </ApplicationDefinition>
     <Compile Include="Input\AsyncDelegateCommand.cs" />
     <Compile Include="Input\DelegateCommand.cs" />
+    <Compile Include="Input\InputMasking.cs" />
     <Compile Include="Interop\ProcessAccess.cs" />
     <Compile Include="Interop\ProcessMemoryStream.cs" />
     <Compile Include="Interop\SuspendedProcess.cs" />
@@ -173,6 +174,7 @@
   <ItemGroup>
     <Resource Include="Spark.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
