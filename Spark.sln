@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark", "Spark\Spark.csproj", "{F98D2D42-C135-46CC-9A15-94F051EF030B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A895611D-35F1-404D-A5CE-514F62C612FD} = {A895611D-35F1-404D-A5CE-514F62C612FD}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.Interop", "Spark.Interop\Spark.Interop.csproj", "{A895611D-35F1-404D-A5CE-514F62C612FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{F98D2D42-C135-46CC-9A15-94F051EF030B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F98D2D42-C135-46CC-9A15-94F051EF030B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F98D2D42-C135-46CC-9A15-94F051EF030B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A895611D-35F1-404D-A5CE-514F62C612FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A895611D-35F1-404D-A5CE-514F62C612FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A895611D-35F1-404D-A5CE-514F62C612FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A895611D-35F1-404D-A5CE-514F62C612FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -64,9 +64,6 @@
     <Compile Include="Input\AsyncDelegateCommand.cs" />
     <Compile Include="Input\DelegateCommand.cs" />
     <Compile Include="Input\InputMasking.cs" />
-    <Compile Include="Interop\ProcessAccess.cs" />
-    <Compile Include="Interop\ProcessMemoryStream.cs" />
-    <Compile Include="Interop\SuspendedProcess.cs" />
     <Compile Include="Models\UserSettings.cs" />
     <Compile Include="Themes\Templates\SparkWindow.xaml.cs">
       <DependentUpon>SparkWindow.xaml</DependentUpon>
@@ -75,13 +72,6 @@
     <Compile Include="ViewModels\UserSettingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
-    <Compile Include="Win32\NativeMethods.cs" />
-    <Compile Include="Win32\Win32ProcessAccess.cs" />
-    <Compile Include="Win32\Win32ProcessCreationFlags.cs" />
-    <Compile Include="Win32\Win32ProcessInformation.cs" />
-    <Compile Include="Win32\Win32ProcessSafeHandle.cs" />
-    <Compile Include="Win32\Win32StartupInfo.cs" />
-    <Compile Include="Win32\Win32ThreadSafeHandle.cs" />
     <Page Include="Themes\SparkDark.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -174,7 +164,12 @@
   <ItemGroup>
     <Resource Include="Spark.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Spark.Interop\Spark.Interop.csproj">
+      <Project>{a895611d-35f1-404d-a5ce-514f62c612fd}</Project>
+      <Name>Spark.Interop</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
