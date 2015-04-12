@@ -25,6 +25,7 @@ namespace Spark.Input
 
         public static readonly DependencyProperty MaskExpressionProperty = maskExpressionPropertyKey.DependencyProperty;
 
+        #region Get/Set Mask Property
         public static string GetMask(TextBox textBox)
         {
             if (textBox == null)
@@ -40,8 +41,9 @@ namespace Spark.Input
 
             textBox.SetValue(MaskProperty, mask);
         }
+        #endregion
 
-
+        #region Get/Set MaskExpression Property
         public static Regex GetMaskExpression(TextBox textBox)
         {
             if (textBox == null)
@@ -54,13 +56,14 @@ namespace Spark.Input
         {
             textBox.SetValue(maskExpressionPropertyKey, regex);
         }
+        #endregion
 
         private static void OnMaskChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
             var textBox = dependencyObject as TextBox;
             var mask = e.NewValue as string;
-            textBox.PreviewTextInput -= textBox_PreviewTextInput;
-            textBox.PreviewKeyDown -= textBox_PreviewKeyDown;
+            textBox.PreviewTextInput -= textBoxPreviewTextInput;
+            textBox.PreviewKeyDown -= textBoxPreviewKeyDown;
             DataObject.RemovePastingHandler(textBox, Pasting);
 
             if (mask == null)
@@ -72,13 +75,13 @@ namespace Spark.Input
             {
                 textBox.SetValue(MaskProperty, mask);
                 SetMaskExpression(textBox, new Regex(mask, RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace));
-                textBox.PreviewTextInput += textBox_PreviewTextInput;
-                textBox.PreviewKeyDown += textBox_PreviewKeyDown;
+                textBox.PreviewTextInput += textBoxPreviewTextInput;
+                textBox.PreviewKeyDown += textBoxPreviewKeyDown;
                 DataObject.AddPastingHandler(textBox, Pasting);
             }
         }
 
-        private static void textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private static void textBoxPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             var textBox = sender as TextBox;
             var maskExpression = GetMaskExpression(textBox);
@@ -90,7 +93,7 @@ namespace Spark.Input
             e.Handled = !maskExpression.IsMatch(proposedText);
         }
 
-        private static void textBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        private static void textBoxPreviewKeyDown(object sender, KeyEventArgs e)
         {
             var textBox = sender as TextBox;
             var maskExpression = GetMaskExpression(textBox);
