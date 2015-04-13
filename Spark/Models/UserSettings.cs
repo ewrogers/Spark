@@ -8,6 +8,7 @@ using System.Xml.Linq;
 
 namespace Spark.Models
 {
+    [Serializable]
     public sealed class UserSettings
     {
         public static readonly string DefaultHostname = "da0.kru.com";
@@ -49,5 +50,48 @@ namespace Spark.Models
 
             return settings;
         }
+
+        #region XML Serialization
+        public void SaveToFile(string filename)
+        {
+            var xml = new XDocument(
+                new XDeclaration("1.0", "utf-8", "true"),
+                new XComment("Spark User Settings"),
+                new XElement("UserSettings",
+                    new XElement("ClientExecutablePath", this.ClientExecutablePath),
+                    new XElement("ClientVersion", this.ClientVersion),
+                    new XElement("ServerHostname", this.ServerHostname),
+                    new XElement("ServerPort", this.ServerPort),
+                    new XElement("RedirectClient", this.ShouldRedirectClient),
+                    new XElement("SkipIntro", this.ShouldSkipIntro),
+                    new XElement("AllowMultipleInstances", this.ShouldAllowMultipleInstances),
+                    new XElement("HideWalls", this.ShouldHideWalls)
+                    )
+                );
+
+
+            xml.Save(filename);
+        }
+
+        public static UserSettings LoadFromFile(string filename)
+        {
+            var xml = XDocument.Load(filename);
+
+            var settings = from x in xml.Descendants("UserSettings")
+                           select new UserSettings()
+                           {
+                               ClientExecutablePath = (string)x.Element("ClientExecutablePath"),
+                               ClientVersion = (string)x.Element("ClientVersion"),
+                               ServerHostname = (string)x.Element("ServerHostname"),
+                               ServerPort = (int)x.Element("ServerPort"),
+                               ShouldRedirectClient = (bool)x.Element("RedirectClient"),
+                               ShouldSkipIntro = (bool)x.Element("SkipIntro"),
+                               ShouldAllowMultipleInstances = (bool)x.Element("AllowMultipleInstances"),
+                               ShouldHideWalls = (bool)x.Element("HideWalls")
+                           };
+
+            return settings.FirstOrDefault();
+        }
+        #endregion
     }
 }
