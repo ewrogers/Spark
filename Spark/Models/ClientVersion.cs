@@ -20,9 +20,9 @@ namespace Spark.Models
             Hash = "ca31b8165ea7409d285d81616d8ca4f2",      // MD5
             ServerAddressPatchAddress = 0x4341FA,
             ServerPortPatchAddress = 0x43421D,
-            IntroVideoPatchAddress = 0x42F495,
-            MultipleInstancePatchAddress = 0x5911A9,
-            HideWallsPatchAddress = 0x624BD5
+            IntroVideoPatchAddress = 0x42F48F,
+            MultipleInstancePatchAddress = 0x5911AE,
+            HideWallsPatchAddress = 0x6B10F8
         };
         #endregion
 
