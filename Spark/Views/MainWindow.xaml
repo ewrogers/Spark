@@ -46,12 +46,27 @@
             <TextBlock Style="{StaticResource SparkTextBlockStyle}"
                        Text="Client Version:"/>
             
-            <ComboBox Style="{StaticResource SparkComboBoxStyle}"
-                      ItemsSource="{Binding ClientVersions}"
-                      SelectedValue="{Binding UserSettings.ClientVersion}"
-                      DisplayMemberPath="Name"
-                      SelectedValuePath="Name"
-                      MaxDropDownHeight="160" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Auto-Detect Check Box -->
+                <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
+                          Content="_Auto-Detect"
+                          IsChecked="{Binding ShouldAutoDetectClientVersion}"/>
+
+                <!-- Client Version Combo Box -->
+                <ComboBox Grid.Column="1"
+                          Style="{StaticResource SparkComboBoxStyle}"
+                          ItemsSource="{Binding ClientVersions}"
+                          SelectedValue="{Binding UserSettings.ClientVersion}"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="Name"
+                          MaxDropDownHeight="160" />
+            </Grid>
+            
 
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
 

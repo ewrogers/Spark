@@ -16,6 +16,7 @@ namespace Spark.Models
         #region Properties
         public string ClientExecutablePath { get; set; }
         public string ClientVersion { get; set; }
+        public bool ShouldAutoDetectClientVersion { get; set; }
         public string ServerHostname { get; set; }
         public int ServerPort { get; set; }
         public bool ShouldRedirectClient { get; set; }
@@ -31,7 +32,9 @@ namespace Spark.Models
             // Get "Program Files (x86)" on 64bit OS, else "Program Files" on 32bit OS
             var programFilesPath = Environment.GetFolderPath(Environment.Is64BitOperatingSystem ? Environment.SpecialFolder.ProgramFilesX86 : Environment.SpecialFolder.ProgramFiles);
             this.ClientExecutablePath = Path.Combine(programFilesPath, "KRU", "Dark Ages", "Darkages.exe");
-            this.ClientVersion = "Auto-Detect";
+
+            this.ClientVersion = null;
+            this.ShouldAutoDetectClientVersion = true;
 
             this.ServerHostname = DefaultHostname;
             this.ServerPort = DefaultPort;
@@ -61,7 +64,8 @@ namespace Spark.Models
                 new XComment("Spark User Settings"),
                 new XElement("UserSettings",
                     new XElement("ClientExecutablePath", this.ClientExecutablePath),
-                    new XElement("ClientVersion", this.ClientVersion),
+                    new XElement("ClientVersion", this.ClientVersion,
+                        new XAttribute("Auto-Detect", this.ShouldAutoDetectClientVersion)),
                     new XElement("ServerHostname", this.ServerHostname),
                     new XElement("ServerPort", this.ServerPort),
                     new XElement("RedirectClient", this.ShouldRedirectClient),
@@ -70,7 +74,6 @@ namespace Spark.Models
                     new XElement("HideWalls", this.ShouldHideWalls)
                     )
                 );
-
 
             xml.Save(filename);
         }
@@ -87,6 +90,7 @@ namespace Spark.Models
                            {
                                ClientExecutablePath = (string)x.Element("ClientExecutablePath"),
                                ClientVersion = (string)x.Element("ClientVersion"),
+                               ShouldAutoDetectClientVersion = (bool)x.Element("ClientVersion").Attribute("Auto-Detect"),
                                ServerHostname = (string)x.Element("ServerHostname"),
                                ServerPort = (int)x.Element("ServerPort"),
                                ShouldRedirectClient = (bool)x.Element("RedirectClient"),

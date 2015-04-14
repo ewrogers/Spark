@@ -37,10 +37,7 @@ namespace Spark.Models
         public long HideWallsPatchAddress { get; set; }
         #endregion
 
-        public ClientVersion()
-        {
-
-        }
+        public ClientVersion() { }
 
         #region XML Serialization
         public static void SaveToFile(string filename, IEnumerable<ClientVersion> versions)

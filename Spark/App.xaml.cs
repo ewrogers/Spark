@@ -20,8 +20,10 @@ namespace Spark
         public static readonly string SettingsFileName = "Settings.xml";
         public static readonly string ClientVersionsFileName = "Versions.xml";
 
-        public static UserSettings CurrentSettings { get; protected set; }
-        public static IEnumerable<ClientVersion> ClientVersions { get; protected set; }
+        #region Properties
+        public UserSettings CurrentSettings { get; protected set; }
+        public IEnumerable<ClientVersion> ClientVersions { get; protected set; }
+        #endregion
 
         #region Application Lifecycle
         protected override void OnStartup(StartupEventArgs e)
@@ -29,12 +31,12 @@ namespace Spark
             base.OnStartup(e);
 
             // Load settings and client versions from file (or defaults)
-            App.CurrentSettings = LoadSettingsOrDefaults(App.SettingsFileName);
-            App.ClientVersions = LoadClientVersionsOrDefaults(App.ClientVersionsFileName);
+            this.CurrentSettings = LoadSettingsOrDefaults(App.SettingsFileName);
+            this.ClientVersions = LoadClientVersionsOrDefaults(App.ClientVersionsFileName);
 
             // Initialize the main window and view model
             var window = new MainWindow();
-            var viewModel = new MainViewModel(App.CurrentSettings, App.ClientVersions);
+            var viewModel = new MainViewModel(this.CurrentSettings, this.ClientVersions);
 
             // Bind the request close event to closing the window
             viewModel.RequestClose += delegate
@@ -49,8 +51,8 @@ namespace Spark
 
         protected override void OnExit(ExitEventArgs e)
         {
-            SaveUserSettings(App.SettingsFileName, App.CurrentSettings);
-            SaveClientVersions(App.ClientVersionsFileName, App.ClientVersions);
+            SaveUserSettings(App.SettingsFileName, this.CurrentSettings);
+            SaveClientVersions(App.ClientVersionsFileName, this.ClientVersions);
 
             base.OnExit(e);
         }
