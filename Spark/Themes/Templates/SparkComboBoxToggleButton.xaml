@@ -32,6 +32,8 @@
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="{DynamicResource SparkControlDisabledBackground}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SparkControlDisabledForeground}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource SparkControlBorderBrush}"/>
+                <Setter Property="BorderThickness" Value="1"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
