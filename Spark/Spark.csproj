@@ -64,10 +64,12 @@
     <Compile Include="Input\AsyncDelegateCommand.cs" />
     <Compile Include="Input\DelegateCommand.cs" />
     <Compile Include="Input\InputMasking.cs" />
+    <Compile Include="Models\ClientVersion.cs" />
     <Compile Include="Models\UserSettings.cs" />
     <Compile Include="Themes\Templates\SparkWindow.xaml.cs">
       <DependentUpon>SparkWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ClientVersionViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\UserSettingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
