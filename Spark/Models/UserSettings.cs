@@ -53,6 +53,9 @@ namespace Spark.Models
         #region XML Serialization
         public void SaveToFile(string filename)
         {
+            if (filename == null)
+                throw new ArgumentNullException("filename");
+
             var xml = new XDocument(
                 new XDeclaration("1.0", "utf-8", "true"),
                 new XComment("Spark User Settings"),
@@ -74,6 +77,9 @@ namespace Spark.Models
 
         public static UserSettings LoadFromFile(string filename)
         {
+            if (filename == null)
+                throw new ArgumentNullException("filename");
+
             var xml = XDocument.Load(filename);
 
             var settings = from x in xml.Descendants("UserSettings")

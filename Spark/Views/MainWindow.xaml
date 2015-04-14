@@ -47,7 +47,10 @@
                        Text="Client Version:"/>
             
             <ComboBox Style="{StaticResource SparkComboBoxStyle}"
+                      ItemsSource="{Binding ClientVersions}"
                       SelectedValue="{Binding UserSettings.ClientVersion}"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Name"
                       MaxDropDownHeight="160" />
 
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>

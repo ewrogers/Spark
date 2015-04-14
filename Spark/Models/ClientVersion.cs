@@ -21,7 +21,7 @@ namespace Spark.Models
             ServerAddressPatchAddress = 0x4341FA,
             ServerPortPatchAddress = 0x43421D,
             IntroVideoPatchAddress = 0x42F495,
-            MultipleInstancePatchAddress = 0x05911A9,
+            MultipleInstancePatchAddress = 0x5911A9,
             HideWallsPatchAddress = 0x624BD5
         };
         #endregion
@@ -43,24 +43,42 @@ namespace Spark.Models
         }
 
         #region XML Serialization
-        public XElement ToXElement()
+        public static void SaveToFile(string filename, IEnumerable<ClientVersion> versions)
         {
-            var xml = new XElement("ClientVersion",
-                        new XElement("Name", this.Name),
-                        new XElement("VersionCode", this.VersionCode),
-                        new XElement("Hash", this.Hash),
-                        new XElement("ServerAddressPatchAddress", this.ServerAddressPatchAddress.ToString("X")),
-                        new XElement("ServerPortPatchAddress", this.ServerPortPatchAddress.ToString("X")),
-                        new XElement("IntroVideoPatchAddress", this.IntroVideoPatchAddress.ToString("X")),
-                        new XElement("MultipleInstancePatchAddress", this.MultipleInstancePatchAddress.ToString("X")),
-                        new XElement("HideWallsPatchAddress", this.HideWallsPatchAddress.ToString("X"))
-                    );
+            if (filename == null)
+                throw new ArgumentNullException("filename");
 
-            return xml;
+            if (versions == null)
+                throw new ArgumentNullException("versions");
+
+            var xml = new XDocument(
+                new XDeclaration("1.0", "utf-8", "true"),
+                new XComment("Dark Ages Client Versions"),
+                new XElement("ClientVersions",
+                    from version in versions
+                    select new XElement("ClientVersion",
+                        new XElement("Name", version.Name),
+                        new XElement("VersionCode", version.VersionCode),
+                        new XElement("Hash", version.Hash),
+                        new XElement("ServerAddressPatchAddress", version.ServerAddressPatchAddress.ToString("X")),
+                        new XElement("ServerPortPatchAddress", version.ServerPortPatchAddress.ToString("X")),
+                        new XElement("IntroVideoPatchAddress", version.IntroVideoPatchAddress.ToString("X")),
+                        new XElement("MultipleInstancePatchAddress", version.MultipleInstancePatchAddress.ToString("X")),
+                        new XElement("HideWallsPatchAddress", version.HideWallsPatchAddress.ToString("X"))
+                        )
+                    )
+                );
+
+            xml.Save(filename);
         }
 
-        public static IEnumerable<ClientVersion> FromXElement(XElement xml)
+        public static IEnumerable<ClientVersion> LoadFromFile(string filename)
         {
+            if (filename == null)
+                throw new ArgumentNullException("filename");
+
+            var xml = XDocument.Load(filename);
+
             var versions = from x in xml.Descendants("ClientVersion")
                            select new ClientVersion()
                            {

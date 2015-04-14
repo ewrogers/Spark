@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -18,6 +20,7 @@ namespace Spark.ViewModels
         ICommand launchClientCommand;
 
         UserSettingsViewModel userSettingsViewModel;
+        ObservableCollection<ClientVersionViewModel> clientVersionViewModels;
 
         #region Properties
         public ICommand LocateClientPathCommand
@@ -62,20 +65,31 @@ namespace Spark.ViewModels
         public UserSettingsViewModel UserSettings
         {
             get { return userSettingsViewModel; }
-            set
-            {
-                SetProperty(ref userSettingsViewModel, value);
-            }
+            set { SetProperty(ref userSettingsViewModel, value); }
+        }
+
+        public ObservableCollection<ClientVersionViewModel> ClientVersions
+        {
+            get { return clientVersionViewModels; }
+            set { SetProperty(ref clientVersionViewModels, value); }
         }
         #endregion
 
-        public MainViewModel(UserSettings userSettings)
+        public MainViewModel(UserSettings userSettings, IEnumerable<ClientVersion> clientVersions)
             : base(App.ApplicationName)
         {
             if (userSettings == null)
                 throw new ArgumentNullException("userSettings");
 
+            if (clientVersions == null)
+                throw new ArgumentNullException("clientVersions");
+
+            // Create user settings view model
             this.userSettingsViewModel = new UserSettingsViewModel(userSettings);
+
+            // Create client version view model for each client settings object (via LINQ projection)
+            var clientVersionViewModels = clientVersions.Select(x => new ClientVersionViewModel(x));
+            this.clientVersionViewModels = new ObservableCollection<ClientVersionViewModel>(clientVersionViewModels);
         }
 
         #region Execute Methods

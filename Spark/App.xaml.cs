@@ -18,20 +18,23 @@ namespace Spark
     {
         public static readonly string ApplicationName = "Spark";
         public static readonly string SettingsFileName = "Settings.xml";
+        public static readonly string ClientVersionsFileName = "Versions.xml";
 
         public static UserSettings CurrentSettings { get; protected set; }
+        public static IEnumerable<ClientVersion> ClientVersions { get; protected set; }
 
         #region Application Lifecycle
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            // Create default settings
-            App.CurrentSettings = LoadSettingsOrDefaults(SettingsFileName);
+            // Load settings and client versions from file (or defaults)
+            App.CurrentSettings = LoadSettingsOrDefaults(App.SettingsFileName);
+            App.ClientVersions = LoadClientVersionsOrDefaults(App.ClientVersionsFileName);
 
             // Initialize the main window and view model
             var window = new MainWindow();
-            var viewModel = new MainViewModel(App.CurrentSettings);
+            var viewModel = new MainViewModel(App.CurrentSettings, App.ClientVersions);
 
             // Bind the request close event to closing the window
             viewModel.RequestClose += delegate
@@ -46,18 +49,26 @@ namespace Spark
 
         protected override void OnExit(ExitEventArgs e)
         {
-            SaveUserSettings(App.CurrentSettings, App.SettingsFileName);
+            SaveUserSettings(App.SettingsFileName, App.CurrentSettings);
+            SaveClientVersions(App.ClientVersionsFileName, App.ClientVersions);
+
             base.OnExit(e);
         }
         #endregion
 
         #region Save/Load User Settings
-        static void SaveUserSettings(UserSettings settings, string filename)
+        static void SaveUserSettings(string filename, UserSettings settings)
         {
+            if (filename == null)
+                throw new ArgumentNullException("filename");
+
+            if (settings == null)
+                throw new ArgumentNullException("settings");
+
             try
             {
-                // Persist user settings to file
-                App.CurrentSettings.SaveToFile(SettingsFileName);
+                // Save user settings to file
+                settings.SaveToFile(SettingsFileName);
             }
             catch (Exception ex)
             {
@@ -72,7 +83,7 @@ namespace Spark
             try
             {
                 // Load user settings from file
-                if (File.Exists(SettingsFileName))
+                if (File.Exists(filename))
                     return UserSettings.LoadFromFile(filename);
             }
             catch (Exception ex)
@@ -81,6 +92,43 @@ namespace Spark
             }
 
             return UserSettings.CreateDefaults();
+        }
+        #endregion
+
+        #region Save/Load Client Versions
+        static void SaveClientVersions(string filename, IEnumerable<ClientVersion> versions)
+        {
+            if (filename == null)
+                throw new ArgumentNullException("filename");
+
+            if (versions == null)
+                throw new ArgumentNullException("versions");
+
+            try
+            {
+                // Save client versions to file
+                ClientVersion.SaveToFile(filename, versions);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Unable to save client versions: {0}", ex.Message);
+            }
+        }
+
+        static IEnumerable<ClientVersion> LoadClientVersionsOrDefaults(string filename)
+        {
+            try
+            {
+                // Load client versions from file
+                if (File.Exists(filename))
+                    return ClientVersion.LoadFromFile(filename);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Unable to load client versions: {0}", ex.Message);
+            }
+
+            return new[] { ClientVersion.Version739 };
         }
         #endregion
 
