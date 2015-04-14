@@ -55,7 +55,7 @@ namespace Spark.ViewModels
                 if (launchClientCommand == null)
                 {
                     launchClientCommand = new DelegateCommand(x => OnLaunchClient(), 
-                        onCanExecute: x => File.Exists(this.UserSettings.ClientExecutablePath) && !string.IsNullOrWhiteSpace(this.UserSettings.ClientVersion));
+                        onCanExecute: x => File.Exists(this.UserSettings.ClientExecutablePath) && (!string.IsNullOrWhiteSpace(this.UserSettings.ClientVersion) || this.UserSettings.ShouldAutoDetectClientVersion));
                 }
 
                 return launchClientCommand;
