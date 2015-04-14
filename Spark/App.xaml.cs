@@ -22,7 +22,6 @@ namespace Spark
         public static UserSettings CurrentSettings { get; protected set; }
 
         #region Application Lifecycle
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -50,9 +49,9 @@ namespace Spark
             SaveUserSettings(App.CurrentSettings, App.SettingsFileName);
             base.OnExit(e);
         }
-
         #endregion
 
+        #region Save/Load User Settings
         static void SaveUserSettings(UserSettings settings, string filename)
         {
             try
@@ -83,6 +82,7 @@ namespace Spark
 
             return UserSettings.CreateDefaults();
         }
+        #endregion
 
         public static Version GetRunningVersion()
         {
