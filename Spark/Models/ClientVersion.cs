@@ -15,7 +15,7 @@ namespace Spark.Models
         #region Standard Client Versions
         public static readonly ClientVersion Version739 = new ClientVersion()
         {
-            Name = "7.39",
+            Name = "US Dark Ages 7.39",
             VersionCode = 739,
             Hash = "ca31b8165ea7409d285d81616d8ca4f2",      // MD5
             ServerAddressPatchAddress = 0x4341FA,

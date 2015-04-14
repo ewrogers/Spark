@@ -5,6 +5,7 @@ using System.Data;
 using System.Deployment.Application;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 
@@ -123,7 +124,7 @@ namespace Spark
             {
                 // Load client versions from file
                 if (File.Exists(filename))
-                    return ClientVersion.LoadFromFile(filename);
+                    return ClientVersion.LoadFromFile(filename).OrderBy(x => x.Name);
             }
             catch (Exception ex)
             {

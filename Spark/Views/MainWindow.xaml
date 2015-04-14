@@ -55,7 +55,7 @@
                 <!-- Auto-Detect Check Box -->
                 <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
                           Content="_Auto-Detect"
-                          IsChecked="{Binding ShouldAutoDetectClientVersion}"/>
+                          IsChecked="{Binding UserSettings.ShouldAutoDetectClientVersion}"/>
 
                 <!-- Client Version Combo Box -->
                 <ComboBox Grid.Column="1"

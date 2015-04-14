@@ -33,6 +33,17 @@ namespace Spark.ViewModels
             }
         }
 
+        public bool ShouldAutoDetectClientVersion
+        {
+            get { return userSettings.ShouldAutoDetectClientVersion; }
+            set
+            {
+                OnPropertyChanging();
+                userSettings.ShouldAutoDetectClientVersion = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string ServerHostname
         {
             get { return userSettings.ServerHostname; }
