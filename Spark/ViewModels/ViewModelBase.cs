@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 
 using Spark.Common;
+using Spark.Dialogs;
 
 namespace Spark.ViewModels
 {
@@ -14,6 +15,7 @@ namespace Spark.ViewModels
         bool isDisposed;
         string displayName;
         bool throwOnInvalidPropertyName;
+        IDialogService dialogService;
 
         #region Properties
         public virtual string DisplayName
@@ -27,11 +29,24 @@ namespace Spark.ViewModels
             get { return throwOnInvalidPropertyName; }
             set { SetProperty(ref throwOnInvalidPropertyName, value); }
         }
+
+        public virtual IDialogService DialogService
+        {
+            get { return dialogService; }
+            set { SetProperty(ref dialogService, value); }
+        }
         #endregion
 
+        protected ViewModelBase()
+            : this(null, null) { }
+
         protected ViewModelBase(string displayName)
+            : this(displayName, null) { }
+
+        protected ViewModelBase(string displayName, IDialogService dialogService)
         {
             this.DisplayName = displayName;
+            this.DialogService = dialogService;
         }
 
         #region IDisposable Methods

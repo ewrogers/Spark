@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 
+using Spark.Dialogs;
 using Spark.Models;
 using Spark.ViewModels;
 using Spark.Views;
@@ -37,7 +38,8 @@ namespace Spark
 
             // Initialize the main window and view model
             var window = new MainWindow();
-            var viewModel = new MainViewModel(this.CurrentSettings, this.ClientVersions);
+            var dialogService = new DialogService(window);
+            var viewModel = new MainViewModel(this.CurrentSettings, this.ClientVersions, dialogService);
 
             // Bind the request close event to closing the window
             viewModel.RequestClose += delegate

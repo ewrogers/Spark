@@ -10,6 +10,7 @@ using System.Windows.Input;
 
 using Microsoft.Win32;
 
+using Spark.Dialogs;
 using Spark.Input;
 using Spark.Models;
 
@@ -77,7 +78,7 @@ namespace Spark.ViewModels
         }
         #endregion
 
-        public MainViewModel(UserSettings userSettings, IEnumerable<ClientVersion> clientVersions)
+        public MainViewModel(UserSettings userSettings, IEnumerable<ClientVersion> clientVersions, IDialogService dialogService)
             : base(App.ApplicationName)
         {
             if (userSettings == null)
@@ -85,6 +86,9 @@ namespace Spark.ViewModels
 
             if (clientVersions == null)
                 throw new ArgumentNullException("clientVersions");
+
+            if (dialogService == null)
+                throw new ArgumentNullException("dialogService");
 
             // Create user settings view model
             this.userSettingsViewModel = new UserSettingsViewModel(userSettings);

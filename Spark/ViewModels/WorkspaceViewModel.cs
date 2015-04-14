@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 
+using Spark.Dialogs;
 using Spark.Input;
 
 namespace Spark.ViewModels
@@ -27,8 +28,14 @@ namespace Spark.ViewModels
         }
         #endregion
 
+        protected WorkspaceViewModel()
+            : this(null, null) { }
+
         protected WorkspaceViewModel(string displayName)
-            : base(displayName) { }
+            : this(displayName, null) { }
+
+        protected WorkspaceViewModel(string displayName, IDialogService dialogService)
+            : base(displayName, dialogService) { }
 
         protected virtual void OnRequestClose()
         {

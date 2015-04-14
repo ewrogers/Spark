@@ -112,7 +112,7 @@ namespace Spark.ViewModels
         #endregion
 
         public UserSettingsViewModel(UserSettings userSettings)
-            : base(null)
+            : base(null, null)
         {
             if (userSettings == null)
                 throw new ArgumentNullException("userSettings");

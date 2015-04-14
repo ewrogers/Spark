@@ -101,7 +101,7 @@ namespace Spark.ViewModels
         #endregion
 
         public ClientVersionViewModel(ClientVersion clientVersion)
-            : base(null)
+            : base(null, null)
         {
             if (clientVersion == null)
                 throw new ArgumentNullException("clientVersion");
