@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+using Microsoft.Win32;
+
 using Spark.Input;
 using Spark.Models;
 
@@ -96,20 +98,38 @@ namespace Spark.ViewModels
         void OnLocateClientPath()
         {
             Debug.WriteLine("OnLocateClientPath");
+
+            // Create open file dialog to show user
+            var dialog = new OpenFileDialog()
+            {
+                FileName = "Darkages.exe",
+                DefaultExt = ".exe",
+                Filter = "Dark Ages Game Clients|Darkages.exe|All Executables (*.exe)|*.exe"
+            };
+
+            // Show dialog to user
+            if (dialog.ShowDialog() == true)
+            {
+                // Set selected filename
+                this.UserSettings.ClientExecutablePath = dialog.FileName;
+            }
         }
 
         void OnTestConnection()
         {
             Debug.WriteLine("OnTestConnection");
+
+            Debug.WriteLine("ServerHostname = {0},  ServerPort = {1}", this.UserSettings.ServerHostname, this.UserSettings.ServerPort);
         }
 
         void OnLaunchClient()
         {
             Debug.WriteLine("OnLaunchClient");
 
-            Debug.WriteLine("ClientExecutablePath = {0}, ClientVersion = {1}, ServerHostname = {2}, ServerPort = {3}, ShouldRedirectClient = {4}, ShouldSkipIntro = {5}, ShouldAllowMultipleInstances = {6}, ShouldHideWalls = {7}",
+            Debug.WriteLine("ClientExecutablePath = {0}, ClientVersion = {1}, Auto-Detect = {2}, ServerHostname = {3}, ServerPort = {4}, ShouldRedirectClient = {5}, ShouldSkipIntro = {6}, ShouldAllowMultipleInstances = {7}, ShouldHideWalls = {8}",
                 this.UserSettings.ClientExecutablePath, 
                 this.UserSettings.ClientVersion, 
+                this.UserSettings.ShouldAutoDetectClientVersion,
                 this.UserSettings.ServerHostname,
                 this.UserSettings.ServerPort,
                 this.UserSettings.ShouldRedirectClient, 
