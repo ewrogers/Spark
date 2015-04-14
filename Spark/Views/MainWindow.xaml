@@ -83,7 +83,8 @@
                        Text="Server Hostname:"/>
 
             <TextBox Style="{StaticResource SparkTextBoxStyle}" 
-                     Text="{Binding UserSettings.ServerHostname}"/>
+                     Text="{Binding UserSettings.ServerHostname}"
+                     IsEnabled="{Binding UserSettings.ShouldRedirectClient}"/>
 
             <!-- Server Port -->
             <TextBlock Style="{StaticResource SparkTextBlockStyle}"
@@ -91,7 +92,8 @@
 
             <TextBox Style="{StaticResource SparkTextBoxStyle}" 
                      Text="{Binding UserSettings.ServerPort}"
-                     spark:InputMasking.Mask="^\d{1,5}$"/>
+                     spark:InputMasking.Mask="^\d{1,5}$"
+                     IsEnabled="{Binding UserSettings.ShouldRedirectClient}"/>
             
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
 
