@@ -52,7 +52,7 @@ namespace Spark.Models
                 throw new ArgumentNullException("versions");
 
             var xml = new XDocument(
-                new XDeclaration("1.0", "utf-8", "true"),
+                new XDeclaration("1.0", "utf-8", "yes"),
                 new XComment("Dark Ages Client Versions"),
                 new XElement("ClientVersions",
                     from version in versions

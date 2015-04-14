@@ -57,7 +57,7 @@ namespace Spark.Models
                 throw new ArgumentNullException("filename");
 
             var xml = new XDocument(
-                new XDeclaration("1.0", "utf-8", "true"),
+                new XDeclaration("1.0", "utf-8", "yes"),
                 new XComment("Spark User Settings"),
                 new XElement("UserSettings",
                     new XElement("ClientExecutablePath", this.ClientExecutablePath),
