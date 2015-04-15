@@ -7,16 +7,16 @@ using Spark.Views;
 
 namespace Spark.Dialogs
 {
-    public class DialogService : IDialogService
+    public abstract class DialogServiceBase : IDialogService
     {
         #region Properties
         public Window Owner { get; protected set; }
         #endregion
 
-        public DialogService()
+        public DialogServiceBase()
             : this(null) { }
 
-        public DialogService(Window owner)
+        protected DialogServiceBase(Window owner)
         {
             this.Owner = owner;
         }

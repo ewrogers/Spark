@@ -62,7 +62,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\InvertedBooleanConverter.cs" />
-    <Compile Include="Dialogs\DialogService.cs" />
+    <Compile Include="Dialogs\DialogServiceBase.cs" />
     <Compile Include="Dialogs\IDialogService.cs" />
     <Compile Include="Input\AsyncDelegateCommand.cs" />
     <Compile Include="Input\DelegateCommand.cs" />
