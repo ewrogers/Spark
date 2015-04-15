@@ -4,7 +4,7 @@
         xmlns:common="clr-namespace:Spark.Common"
         Title="{Binding DisplayName}" 
         Style="{StaticResource SparkWindowStyle}"
-        Width="480" Height="320"
+        Width="420" Height="280"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize">
     
@@ -24,11 +24,11 @@
             
             <!-- Message -->
             <TextBlock Style="{StaticResource SparkDialogTextStyle}" 
-                       Text="The quick brown jump over the lazy dog. Do you wish to continue?"/>
+                       Text="{Binding Message}"/>
             
             <!-- Message Hint -->
             <TextBlock Style="{StaticResource SparkDialogHintTextStyle}" 
-                       Text="This action cannot be undone."/>
+                       Text="{Binding MessageHint}"/>
             
         </StackPanel>
 
@@ -44,14 +44,14 @@
                     Command="{Binding YesCommand}"
                     Content="{Binding YesButtonTitle}"
                     Visibility="{Binding Path=IsYesButtonVisible, Converter={StaticResource BooleanVisibilityConverter}}"
-                    Width="200"/>
+                    Width="160"/>
             
             <!-- No Button-->
             <Button Style="{StaticResource SparkDialogButtonStyle}"
                     Command="{Binding NoCommand}"
                     Content="{Binding NoButtonTitle}"
                     Visibility="{Binding Path=IsNoButtonVisible, Converter={StaticResource BooleanVisibilityConverter}}"
-                    Width="200"/>
+                    Width="160"/>
             
         </UniformGrid>
                

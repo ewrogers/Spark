@@ -64,8 +64,8 @@
 
     <!-- Dialog Button Style -->
     <Style x:Key="SparkDialogButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource SparkButtonStyle}">
-        <Setter Property="Height" Value="48"/>
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="FontSize" Value="18"/>
     </Style>
     
 </ResourceDictionary>
