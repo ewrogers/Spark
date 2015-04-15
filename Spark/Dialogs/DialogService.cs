@@ -46,9 +46,5 @@ namespace Spark.Dialogs
             return dialog.ShowDialog();
         }
         #endregion
-
-        #region Helper Methods
-
-        #endregion
     }
 }

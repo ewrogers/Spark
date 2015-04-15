@@ -125,9 +125,7 @@ namespace Spark.ViewModels
 
             Debug.WriteLine("ServerHostname = {0},  ServerPort = {1}", this.UserSettings.ServerHostname, this.UserSettings.ServerPort);
 
-            var dataContext = new DialogViewModel("Not Implemented", "Sorry, this feature has not been implemented yet.", "We promise we're working on it as soon as possible!");
-            var result = this.DialogService.ShowDialog(dataContext);
-
+            var result = this.DialogService.ShowOKDialog("Not Implemented", "Sorry, this feature is not currently implemented.", "It will be implemented in a future update.");
             Debug.WriteLine("Result = {0}", result);        
         }
 
@@ -145,6 +143,9 @@ namespace Spark.ViewModels
                 this.UserSettings.ShouldSkipIntro, 
                 this.UserSettings.ShouldAllowMultipleInstances, 
                 this.UserSettings.ShouldHideWalls);
+
+            var result = this.DialogService.ShowOKDialog("Not Implemented", "Sorry, this feature is not currently implemented.", "It will be implemented in a future update.");
+            Debug.WriteLine("Result = {0}", result);
         }
         #endregion
     }
