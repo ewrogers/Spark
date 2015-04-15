@@ -75,8 +75,7 @@
                           IsEnabled="{Binding Path=UserSettings.ShouldAutoDetectClientVersion, Converter={StaticResource InvertedBooleanConverter}}"
                           MaxDropDownHeight="160" />
             </Grid>
-            
-
+           
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
 
             <!-- Server Hostname -->
@@ -104,17 +103,16 @@
                 <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
                           Content="Redirect Client"
                           IsChecked="{Binding UserSettings.ShouldRedirectClient}"/>
+                
+                <!-- Skip Intro Checkbox -->
+                <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
+                          Content="Skip Intro _Video"
+                          IsChecked="{Binding UserSettings.ShouldSkipIntro}"/>
 
                 <!-- Allow Multiple Instances Checkbox -->
                 <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
                           Content="Allow Multiple Instances"
                           IsChecked="{Binding UserSettings.ShouldAllowMultipleInstances}"/>
-
-
-                <!-- Skip Intro Checkbox -->
-                <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
-                          Content="Skip Intro _Video"
-                          IsChecked="{Binding UserSettings.ShouldSkipIntro}"/>
 
                 <!-- No Walls Checkbox -->
                 <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
