@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 
+using Spark.ViewModels;
 using Spark.Views;
 
 namespace Spark.Dialogs
@@ -22,10 +23,24 @@ namespace Spark.Dialogs
         }
 
         #region IDialogService Methods
-        public virtual bool? ShowDialog(object dataContext)
+        public virtual bool? ShowDialog<T>(T dataContext) where T : DialogViewModel
         {
             var dialog = new DialogWindow();
             dialog.Owner = this.Owner;
+
+            dataContext.RequestClose += delegate { dialog.Close(); };
+
+            dataContext.NoClicked += delegate
+            {
+                dialog.DialogResult = false;
+                dialog.Close();
+            };
+
+            dataContext.YesClicked += delegate
+            {
+                dialog.DialogResult = true;
+                dialog.Close();
+            };
 
             dialog.DataContext = dataContext;
             return dialog.ShowDialog();
@@ -33,6 +48,7 @@ namespace Spark.Dialogs
         #endregion
 
         #region Helper Methods
+
         #endregion
     }
 }
