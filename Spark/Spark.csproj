@@ -70,6 +70,9 @@
     <Compile Include="Input\InputMasking.cs" />
     <Compile Include="Models\ClientVersion.cs" />
     <Compile Include="Models\UserSettings.cs" />
+    <Compile Include="Themes\Templates\SparkDialog.xaml.cs">
+      <DependentUpon>SparkDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Themes\Templates\SparkWindow.xaml.cs">
       <DependentUpon>SparkWindow.xaml</DependentUpon>
     </Compile>
@@ -108,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Templates\SparkControlBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Templates\SparkDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

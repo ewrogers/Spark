@@ -125,7 +125,7 @@ namespace Spark.ViewModels
 
             Debug.WriteLine("ServerHostname = {0},  ServerPort = {1}", this.UserSettings.ServerHostname, this.UserSettings.ServerPort);
 
-            var dataContext = new DialogViewModel("Not Implemented", "Sorry, this feature has not been implemented yet.", "We promise we're working on it as soon as possible!", DialogButtons.YesNo);
+            var dataContext = new DialogViewModel("Not Implemented", "Sorry, this feature has not been implemented yet.", "We promise we're working on it as soon as possible!");
             var result = this.DialogService.ShowDialog(dataContext);
 
             Debug.WriteLine("Result = {0}", result);        

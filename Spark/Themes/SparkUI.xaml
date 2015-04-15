@@ -6,6 +6,7 @@
     <FontFamily x:Key="SparkFontFamily">Segoe WP</FontFamily>
     <FontWeight x:Key="SparkFontWeight">Light</FontWeight>
     <sys:Double x:Key="SparkWindowTitleFontSize">32.0</sys:Double>
+    <sys:Double x:Key="SparkDialogTitleFontSize">24.0</sys:Double>
     <sys:Double x:Key="SparkControlFontSize">14.0</sys:Double>
     <sys:Double x:Key="SparkTextFontSize">16.0</sys:Double>
     
@@ -41,6 +42,7 @@
         <ResourceDictionary Source="Templates\SparkComboBox.xaml"/>
         <ResourceDictionary Source="Templates\SparkComboBoxItem.xaml"/>
         <ResourceDictionary Source="Templates\SparkControlBox.xaml"/>
+        <ResourceDictionary Source="Templates\SparkDialog.xaml"/>
         <ResourceDictionary Source="Templates\SparkSeparator.xaml"/>
         <ResourceDictionary Source="Templates\SparkText.xaml"/>
         <ResourceDictionary Source="Templates\SparkTextBox.xaml"/>

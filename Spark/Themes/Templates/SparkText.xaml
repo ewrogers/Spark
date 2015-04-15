@@ -16,7 +16,14 @@
         <Setter Property="Foreground" Value="{DynamicResource SparkWindowTitleForeground}"/>
         <Setter Property="Margin" Value="12,0,8,4"/>
     </Style>
-    
+
+    <!-- Dialog Title Text Style -->
+    <Style x:Key="SparkDialogTitleStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource SparkTextBlockStyle}">
+        <Setter Property="FontSize" Value="{DynamicResource SparkDialogTitleFontSize}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SparkWindowTitleForeground}"/>
+        <Setter Property="Margin" Value="12,0,8,4"/>
+    </Style>
+
     <!-- Dialog Text Style -->
     <Style x:Key="SparkDialogTextStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource SparkTextBlockStyle}">
         <Setter Property="FontSize" Value="18"/>
