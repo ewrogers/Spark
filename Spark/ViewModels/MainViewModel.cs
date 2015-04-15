@@ -79,7 +79,7 @@ namespace Spark.ViewModels
         #endregion
 
         public MainViewModel(UserSettings userSettings, IEnumerable<ClientVersion> clientVersions, IDialogService dialogService)
-            : base(App.ApplicationName)
+            : base(App.ApplicationName, dialogService)
         {
             if (userSettings == null)
                 throw new ArgumentNullException("userSettings");
@@ -124,6 +124,11 @@ namespace Spark.ViewModels
             Debug.WriteLine("OnTestConnection");
 
             Debug.WriteLine("ServerHostname = {0},  ServerPort = {1}", this.UserSettings.ServerHostname, this.UserSettings.ServerPort);
+
+            var dataContext = new DialogViewModel("Error Message", "Something bad has occured!", "Sorry, this really should not happen.");
+            var result = this.DialogService.ShowDialog(dataContext);
+
+            Debug.WriteLine("Result = {0}", result);        
         }
 
         void OnLaunchClient()

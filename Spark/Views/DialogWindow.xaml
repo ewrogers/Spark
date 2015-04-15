@@ -1,12 +1,59 @@
 ﻿<Window x:Class="Spark.Views.DialogWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:common="clr-namespace:Spark.Common"
         Title="{Binding DisplayName}" 
         Style="{StaticResource SparkWindowStyle}"
         Width="480" Height="320"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize">
+    
+    <Window.Resources>
+        <common:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
+    </Window.Resources>
+    
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         
+        <StackPanel Margin="8">
+            
+            <!-- Message -->
+            <TextBlock Style="{StaticResource SparkDialogTextStyle}" 
+                       Text="The quick brown jump over the lazy dog. Do you wish to continue?"/>
+            
+            <!-- Message Hint -->
+            <TextBlock Style="{StaticResource SparkDialogHintTextStyle}" 
+                       Text="This action cannot be undone."/>
+            
+        </StackPanel>
+
+        <Separator Grid.Row="1" Style="{StaticResource SparkSeparatorStyle}"/>
+
+        <!-- Button Grid -->
+        <UniformGrid Grid.Row="2"
+                     Rows="1"
+                     Margin="0,0,0,4">
+            
+            <!-- Yes Button -->
+            <Button Style="{StaticResource SparkDialogButtonStyle}"
+                    Command="{Binding YesCommand}"
+                    Content="{Binding YesButtonTitle}"
+                    Visibility="{Binding Path=IsYesButtonVisible, Converter={StaticResource BooleanVisibilityConverter}}"
+                    Width="200"/>
+            
+            <!-- No Button-->
+            <Button Style="{StaticResource SparkDialogButtonStyle}"
+                    Command="{Binding NoCommand}"
+                    Content="{Binding NoButtonTitle}"
+                    Visibility="{Binding Path=IsNoButtonVisible, Converter={StaticResource BooleanVisibilityConverter}}"
+                    Width="200"/>
+            
+        </UniformGrid>
+               
     </Grid>
 </Window>

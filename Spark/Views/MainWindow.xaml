@@ -17,8 +17,9 @@
     <Grid>
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
         <StackPanel Margin="0,4,0,0">
@@ -97,51 +98,40 @@
             
             <Separator Style="{StaticResource SparkSeparatorStyle}"/>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                
-                <!-- First Column of Options-->
-                <StackPanel>
-                    
-                    <!-- Redirect Client -->
-                    <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
-                      Content="Redirect Client"
-                      IsChecked="{Binding UserSettings.ShouldRedirectClient}"/>
+            <UniformGrid Rows="3" Columns="2">
 
-                    <!-- Skip Intro Checkbox -->
-                    <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
-                      Content="Skip Intro _Video"
-                      IsChecked="{Binding UserSettings.ShouldSkipIntro}"/>
+                <!-- Redirect Client -->
+                <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
+                          Content="Redirect Client"
+                          IsChecked="{Binding UserSettings.ShouldRedirectClient}"/>
 
-                    <!-- Allow Multiple Instances Checkbox -->
-                    <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
-                      Content="Allow Multiple Instances"
-                      IsChecked="{Binding UserSettings.ShouldAllowMultipleInstances}"/>
+                <!-- Allow Multiple Instances Checkbox -->
+                <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
+                          Content="Allow Multiple Instances"
+                          IsChecked="{Binding UserSettings.ShouldAllowMultipleInstances}"/>
 
-                </StackPanel>
 
-                <!-- Second Column of Options -->
-                <StackPanel Grid.Column="1">
+                <!-- Skip Intro Checkbox -->
+                <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
+                          Content="Skip Intro _Video"
+                          IsChecked="{Binding UserSettings.ShouldSkipIntro}"/>
 
-                    <!-- No Walls Checkbox -->
-                    <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
-                      Content="Hide _Walls"
-                      IsChecked="{Binding UserSettings.ShouldHideWalls}"/>
-                    
-                </StackPanel>
-            </Grid>
+                <!-- No Walls Checkbox -->
+                <CheckBox Style="{StaticResource SparkCheckBoxStyle}"
+                          Content="Hide _Walls"
+                          IsChecked="{Binding UserSettings.ShouldHideWalls}"/>
 
-            <Separator Style="{StaticResource SparkSeparatorStyle}"/>
+            </UniformGrid>
+
         </StackPanel>
 
+        <Separator Grid.Row="1" Style="{StaticResource SparkSeparatorStyle}"/>
+        
         <!-- Buttons -->
-        <StackPanel Grid.Row="1"
+        <StackPanel Grid.Row="2"
                     VerticalAlignment="Bottom"
                     Margin="0,0,0,4">
-
+            
             <!-- Test Connection Button -->
             <Button Style="{StaticResource SparkButtonStyle}"
                     Command="{Binding TestConnectionCommand}"
