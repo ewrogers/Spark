@@ -6,11 +6,14 @@ using Spark.ViewModels;
 
 namespace Spark.Dialogs
 {
-    public static class DialogServiceHelpers
+    public static class DialogServiceExtensions
     {
         #region Helper Methods
         public static bool? ShowOKDialog(this IDialogService dialogService, string title, string message, string messageHint = null, string okButtonTitle = null)
         {
+            if (dialogService == null)
+                throw new ArgumentNullException("dialogService");
+
             var context = new DialogViewModel(title, message, messageHint, DialogButtons.OK, dialogService);
             context.YesButtonTitle = okButtonTitle ?? "_OK";
 
@@ -19,6 +22,9 @@ namespace Spark.Dialogs
 
         public static bool? ShowOKCancelDialog(this IDialogService dialogService, string title, string message, string messageHint = null, string okButtonTitle = null, string cancelButtonTitle = null)
         {
+            if (dialogService == null)
+                throw new ArgumentNullException("dialogService");
+
             var context = new DialogViewModel(title, message, messageHint, DialogButtons.OKCancel, dialogService);
             context.YesButtonTitle = okButtonTitle ?? "_OK";
             context.NoButtonTitle = cancelButtonTitle ?? "_Cancel";
@@ -28,7 +34,10 @@ namespace Spark.Dialogs
 
         public static bool? ShowYesNoDialog(this IDialogService dialogService, string title, string message, string messageHint = null, string yesButtonTitle = null, string noButtonTitle = null)
         {
-            var context = new DialogViewModel(title, message, messageHint, DialogButtons.OKCancel, dialogService);
+            if (dialogService == null)
+                throw new ArgumentNullException("dialogService");
+
+            var context = new DialogViewModel(title, message, messageHint, DialogButtons.YesNo, dialogService);
             context.YesButtonTitle = yesButtonTitle ?? "_Yes";
             context.NoButtonTitle = noButtonTitle ?? "_No";
 

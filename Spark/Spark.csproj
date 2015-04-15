@@ -64,7 +64,7 @@
     <Compile Include="Common\BooleanVisibilityConverter.cs" />
     <Compile Include="Common\InvertedBooleanConverter.cs" />
     <Compile Include="Dialogs\DialogService.cs" />
-    <Compile Include="Dialogs\DialogServiceHelpers.cs" />
+    <Compile Include="Dialogs\DialogServiceExtensions.cs" />
     <Compile Include="Dialogs\IDialogService.cs" />
     <Compile Include="Input\AsyncDelegateCommand.cs" />
     <Compile Include="Input\DelegateCommand.cs" />
