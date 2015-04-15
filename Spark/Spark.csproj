@@ -73,6 +73,7 @@
       <DependentUpon>SparkWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ClientVersionViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\UserSettingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />

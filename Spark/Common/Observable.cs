@@ -16,9 +16,7 @@ namespace Spark.Common
             var handler = this.PropertyChanged;
 
             if (handler != null)
-            {
                 handler(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
         #endregion
 
@@ -30,9 +28,7 @@ namespace Spark.Common
             var handler = this.PropertyChanging;
 
             if (handler!=null)
-            {
                 handler(this, new PropertyChangingEventArgs(propertyName));
-            }
         }
         #endregion
 

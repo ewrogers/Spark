@@ -37,13 +37,7 @@ namespace Spark.ViewModels
         }
         #endregion
 
-        protected ViewModelBase()
-            : this(null, null) { }
-
-        protected ViewModelBase(string displayName)
-            : this(displayName, null) { }
-
-        protected ViewModelBase(string displayName, IDialogService dialogService)
+        protected ViewModelBase(string displayName = null, IDialogService dialogService = null)
         {
             this.DisplayName = displayName;
             this.DialogService = dialogService;

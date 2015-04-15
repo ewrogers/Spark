@@ -28,13 +28,7 @@ namespace Spark.ViewModels
         }
         #endregion
 
-        protected WorkspaceViewModel()
-            : this(null, null) { }
-
-        protected WorkspaceViewModel(string displayName)
-            : this(displayName, null) { }
-
-        protected WorkspaceViewModel(string displayName, IDialogService dialogService)
+        protected WorkspaceViewModel(string displayName = null, IDialogService dialogService = null)
             : base(displayName, dialogService) { }
 
         protected virtual void OnRequestClose()
@@ -42,9 +36,7 @@ namespace Spark.ViewModels
             var handler = this.RequestClose;
 
             if (handler != null)
-            {
                 handler(this, EventArgs.Empty);
-            }
         }
     }
 }
