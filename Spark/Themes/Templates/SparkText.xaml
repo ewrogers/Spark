@@ -16,6 +16,20 @@
         <Setter Property="Foreground" Value="{DynamicResource SparkWindowTitleForeground}"/>
         <Setter Property="Margin" Value="12,0,8,4"/>
     </Style>
+    
+    <!-- Dialog Text Style -->
+    <Style x:Key="SparkDialogTextStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource SparkTextBlockStyle}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="16,8"/>
+    </Style>
+    
+    <!-- Dialog Hint Text Style -->
+    <Style x:Key="SparkDialogHintTextStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource SparkDialogTextStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource SparkControlDisabledForeground}"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
 
 </ResourceDictionary>
     

@@ -61,5 +61,11 @@
         <Setter Property="Margin" Value="8,4"/>
         <Setter Property="Padding" Value="8,2"/>
     </Style>
+
+    <!-- Dialog Button Style -->
+    <Style x:Key="SparkDialogButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource SparkButtonStyle}">
+        <Setter Property="Height" Value="48"/>
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
     
 </ResourceDictionary>
