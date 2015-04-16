@@ -30,13 +30,13 @@ namespace Spark.Dialogs
 
             dataContext.RequestClose += delegate { dialog.Close(); };
 
-            dataContext.NoClicked += delegate
+            dataContext.NegativeButtonClicked += delegate
             {
                 dialog.DialogResult = false;
                 dialog.Close();
             };
 
-            dataContext.YesClicked += delegate
+            dataContext.PositiveButtonClicked += delegate
             {
                 dialog.DialogResult = true;
                 dialog.Close();

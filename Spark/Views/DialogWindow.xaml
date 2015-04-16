@@ -41,16 +41,16 @@
             
             <!-- Yes Button -->
             <Button Style="{StaticResource SparkDialogButtonStyle}"
-                    Command="{Binding YesCommand}"
-                    Content="{Binding YesButtonTitle}"
-                    Visibility="{Binding Path=IsYesButtonVisible, Converter={StaticResource BooleanVisibilityConverter}}"
+                    Command="{Binding PositiveButtonCommand}"
+                    Content="{Binding PositiveButtonTitle}"
+                    Visibility="{Binding Path=IsPositiveButtonVisible, Converter={StaticResource BooleanVisibilityConverter}}"
                     Width="160"/>
             
             <!-- No Button-->
             <Button Style="{StaticResource SparkDialogButtonStyle}"
-                    Command="{Binding NoCommand}"
-                    Content="{Binding NoButtonTitle}"
-                    Visibility="{Binding Path=IsNoButtonVisible, Converter={StaticResource BooleanVisibilityConverter}}"
+                    Command="{Binding NegativeCommand}"
+                    Content="{Binding NegativeButtonTitle}"
+                    Visibility="{Binding Path=IsNegativeButtonVisible, Converter={StaticResource BooleanVisibilityConverter}}"
                     Width="160"/>
             
         </UniformGrid>

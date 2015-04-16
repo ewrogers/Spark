@@ -15,7 +15,7 @@ namespace Spark.Dialogs
                 throw new ArgumentNullException("dialogService");
 
             var context = new DialogViewModel(title, message, messageHint, DialogButtons.OK, dialogService);
-            context.YesButtonTitle = okButtonTitle ?? "_OK";
+            context.PositiveButtonTitle = okButtonTitle ?? "_OK";
 
             return dialogService.ShowDialog(context);
         }
@@ -26,8 +26,8 @@ namespace Spark.Dialogs
                 throw new ArgumentNullException("dialogService");
 
             var context = new DialogViewModel(title, message, messageHint, DialogButtons.OKCancel, dialogService);
-            context.YesButtonTitle = okButtonTitle ?? "_OK";
-            context.NoButtonTitle = cancelButtonTitle ?? "_Cancel";
+            context.PositiveButtonTitle = okButtonTitle ?? "_OK";
+            context.NegativeButtonTitle = cancelButtonTitle ?? "_Cancel";
 
             return dialogService.ShowDialog(context);
         }
@@ -38,8 +38,8 @@ namespace Spark.Dialogs
                 throw new ArgumentNullException("dialogService");
 
             var context = new DialogViewModel(title, message, messageHint, DialogButtons.YesNo, dialogService);
-            context.YesButtonTitle = yesButtonTitle ?? "_Yes";
-            context.NoButtonTitle = noButtonTitle ?? "_No";
+            context.PositiveButtonTitle = yesButtonTitle ?? "_Yes";
+            context.NegativeButtonTitle = noButtonTitle ?? "_No";
 
             return dialogService.ShowDialog(context);
         }
