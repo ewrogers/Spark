@@ -25,8 +25,8 @@ namespace Spark.ViewModels
         bool isPositiveButtonVisible;
         bool isNegativeButtonVisible;
 
-        ICommand yesCommand;
-        ICommand noCommand;
+        ICommand positiveButtonCommand;
+        ICommand negativeButtonCommand;
 
         public event EventHandler PositiveButtonClicked;
         public event EventHandler NegativeButtonClicked;
@@ -79,10 +79,10 @@ namespace Spark.ViewModels
             get
             {
                 // Lazy-initialized
-                if (yesCommand == null)
-                    yesCommand = new DelegateCommand(x => OnYesClicked());
+                if (positiveButtonCommand == null)
+                    positiveButtonCommand = new DelegateCommand(x => OnYesClicked());
 
-                return yesCommand;
+                return positiveButtonCommand;
             }
         }
 
@@ -91,10 +91,10 @@ namespace Spark.ViewModels
             get
             {
                 // Lazy-initialized
-                if (noCommand == null)
-                    noCommand = new DelegateCommand(x => OnNoClicked());
+                if (negativeButtonCommand == null)
+                    negativeButtonCommand = new DelegateCommand(x => OnNoClicked());
 
-                return noCommand;
+                return negativeButtonCommand;
             }
         }
         #endregion
