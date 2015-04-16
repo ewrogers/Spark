@@ -62,13 +62,13 @@ namespace Spark.ViewModels
             set { SetProperty(ref negativeButtonTitle, value); }
         }
 
-        public virtual bool IsYesButtonVisible
+        public virtual bool IsPositiveButtonVisible
         {
             get { return isPositiveButtonVisible; }
             set { SetProperty(ref isPositiveButtonVisible, value); }
         }
 
-        public virtual bool IsNoButtonVisible
+        public virtual bool IsNegativeButtonVisible
         {
             get { return isNegativeButtonVisible; }
             set { SetProperty(ref isNegativeButtonVisible, value); }
@@ -110,15 +110,15 @@ namespace Spark.ViewModels
             {
                 this.PositiveButtonTitle = "_OK";
                 this.NegativeButtonTitle = "_Cancel";
-                this.IsYesButtonVisible = true;
-                this.IsNoButtonVisible = (buttons == DialogButtons.OKCancel);
+                this.IsPositiveButtonVisible = true;
+                this.IsNegativeButtonVisible = (buttons == DialogButtons.OKCancel);
             }
             else if (buttons == DialogButtons.YesNo)
             {
                 this.PositiveButtonTitle = "_Yes";
                 this.NegativeButtonTitle = "_No";
-                this.IsYesButtonVisible = true;
-                this.IsNoButtonVisible = true;
+                this.IsPositiveButtonVisible = true;
+                this.IsNegativeButtonVisible = true;
             }
         }
 
