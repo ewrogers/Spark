@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,6 +15,7 @@ using Spark.Dialogs;
 using Spark.Input;
 using Spark.Interop;
 using Spark.Models;
+using Spark.Security;
 
 namespace Spark.ViewModels
 {
@@ -130,17 +132,17 @@ namespace Spark.ViewModels
         {
             Debug.WriteLine("OnTestConnection");
 
-            Debug.WriteLine("ServerHostname = {0},  ServerPort = {1}", this.UserSettings.ServerHostname, this.UserSettings.ServerPort);
+            Debug.WriteLine(string.Format("ServerHostname = {0},  ServerPort = {1}", this.UserSettings.ServerHostname, this.UserSettings.ServerPort));
 
             var result = this.DialogService.ShowOKDialog("Not Implemented", "Sorry, this feature is not currently implemented.", "It will be implemented in a future update.");
-            Debug.WriteLine("Result = {0}", result);
+            Debug.WriteLine(string.Format("Result = {0}", result));
         }
 
         void OnLaunchClient()
         {
             Debug.WriteLine("OnLaunchClient");
 
-            Debug.WriteLine("ClientExecutablePath = {0}, ClientVersion = {1}, Auto-Detect = {2}, ServerHostname = {3}, ServerPort = {4}, ShouldRedirectClient = {5}, ShouldSkipIntro = {6}, ShouldAllowMultipleInstances = {7}, ShouldHideWalls = {8}",
+            Debug.WriteLine(string.Format("ClientExecutablePath = {0}, ClientVersion = {1}, Auto-Detect = {2}, ServerHostname = {3}, ServerPort = {4}, ShouldRedirectClient = {5}, ShouldSkipIntro = {6}, ShouldAllowMultipleInstances = {7}, ShouldHideWalls = {8}",
                 this.UserSettings.ClientExecutablePath,
                 this.UserSettings.ClientVersion,
                 this.UserSettings.ShouldAutoDetectClientVersion,
@@ -149,7 +151,7 @@ namespace Spark.ViewModels
                 this.UserSettings.ShouldRedirectClient,
                 this.UserSettings.ShouldSkipIntro,
                 this.UserSettings.ShouldAllowMultipleInstances,
-                this.UserSettings.ShouldHideWalls);
+                this.UserSettings.ShouldHideWalls));
 
             LaunchClientWithSettings(userSettings, clientVersions);
         }
@@ -182,9 +184,25 @@ namespace Spark.ViewModels
             #region Determine Client Version
             if (settings.ShouldAutoDetectClientVersion)
             {
-                // Auto-detect using the MD5
-                var md5HashString = "ca31b8165ea7409d285d81616d8ca4f2"; // 7.39
-                clientVersion = clientVersions.FirstOrDefault(x => x.Hash.Equals(md5HashString, StringComparison.OrdinalIgnoreCase));
+                try
+                {
+                    // Auto-detect using the computed MD5 hash
+                    using (var md5 = MD5.Create())
+                    {
+                        var hashString = md5.ComputeHashString(settings.ClientExecutablePath);
+
+                        Debug.WriteLine(string.Format("ClientHash = {0}", hashString));
+                        clientVersion = clientVersions.FirstOrDefault(x => x.Hash.Equals(hashString, StringComparison.OrdinalIgnoreCase));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(string.Format("UnableToDetectClient: {0}", ex.Message));
+
+                    this.DialogService.ShowOKDialog("Unable to Detect Version",
+                        "Unable to detect the client version.",
+                        ex.Message);
+                }
             }
             else
             {
@@ -208,6 +226,8 @@ namespace Spark.ViewModels
             #region Launch and Patch Client
             try
             {
+                Debug.WriteLine(string.Format("ClientVersion = {0}", clientVersion.Name));
+
                 // Try to launch the client
                 using (var process = SuspendedProcess.Start(settings.ClientExecutablePath))
                 {
@@ -217,7 +237,7 @@ namespace Spark.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine(string.Format("UnableToPachClient: {0}", ex.Message));
+                        Debug.WriteLine(string.Format("UnableToPatchClient: {0}", ex.Message));
 
                         this.DialogService.ShowOKDialog("Failed to Patch",
                             "Unable to patch the client executable.",

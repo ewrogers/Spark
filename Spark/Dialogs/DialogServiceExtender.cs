@@ -6,7 +6,7 @@ using Spark.ViewModels;
 
 namespace Spark.Dialogs
 {
-    public static class DialogServiceExtensions
+    public static class DialogServiceExtender
     {
         #region Helper Methods
         public static bool? ShowOKDialog(this IDialogService dialogService, string title, string message, string messageHint = null, string okButtonTitle = null)

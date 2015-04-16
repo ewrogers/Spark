@@ -64,13 +64,14 @@
     <Compile Include="Common\BooleanVisibilityConverter.cs" />
     <Compile Include="Common\InvertedBooleanConverter.cs" />
     <Compile Include="Dialogs\DialogService.cs" />
-    <Compile Include="Dialogs\DialogServiceExtensions.cs" />
+    <Compile Include="Dialogs\DialogServiceExtender.cs" />
     <Compile Include="Dialogs\IDialogService.cs" />
     <Compile Include="Input\AsyncDelegateCommand.cs" />
     <Compile Include="Input\DelegateCommand.cs" />
     <Compile Include="Input\InputMasking.cs" />
     <Compile Include="Models\ClientVersion.cs" />
     <Compile Include="Models\UserSettings.cs" />
+    <Compile Include="Security\HashAlgorithmExtender.cs" />
     <Compile Include="Themes\Templates\SparkDialog.xaml.cs">
       <DependentUpon>SparkDialog.xaml</DependentUpon>
     </Compile>
