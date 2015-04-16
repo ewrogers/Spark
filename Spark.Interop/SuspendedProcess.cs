@@ -42,7 +42,7 @@ namespace Spark.Interop
             Dispose(false);
         }
 
-        public static SuspendedProcess Create(string applicationPath, string commandLine = null, bool resumeOnDispose = true)
+        public static SuspendedProcess Start(string applicationPath, string commandLine = null, bool resumeOnDispose = true)
         {
             // Create the startup info and set the Size parameter to the size of the structure
             Win32StartupInfo startupInfo = new Win32StartupInfo();
