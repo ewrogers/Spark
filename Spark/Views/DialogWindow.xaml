@@ -48,7 +48,7 @@
             
             <!-- No Button-->
             <Button Style="{StaticResource SparkDialogButtonStyle}"
-                    Command="{Binding NegativeCommand}"
+                    Command="{Binding NegativeButtonCommand}"
                     Content="{Binding NegativeButtonTitle}"
                     Visibility="{Binding Path=IsNegativeButtonVisible, Converter={StaticResource BooleanVisibilityConverter}}"
                     Width="160"/>
