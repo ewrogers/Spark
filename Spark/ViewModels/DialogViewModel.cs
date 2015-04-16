@@ -74,25 +74,25 @@ namespace Spark.ViewModels
             set { SetProperty(ref isNegativeButtonVisible, value); }
         }
 
-        public ICommand YesCommand
+        public ICommand PositiveButtonCommand
         {
             get
             {
                 // Lazy-initialized
                 if (positiveButtonCommand == null)
-                    positiveButtonCommand = new DelegateCommand(x => OnYesClicked());
+                    positiveButtonCommand = new DelegateCommand(x => OnPositiveButtonClicked());
 
                 return positiveButtonCommand;
             }
         }
 
-        public ICommand NoCommand
+        public ICommand NegativeButtonCommand
         {
             get
             {
                 // Lazy-initialized
                 if (negativeButtonCommand == null)
-                    negativeButtonCommand = new DelegateCommand(x => OnNoClicked());
+                    negativeButtonCommand = new DelegateCommand(x => OnNegativeButtonClicked());
 
                 return negativeButtonCommand;
             }
@@ -122,7 +122,7 @@ namespace Spark.ViewModels
             }
         }
 
-        protected virtual void OnYesClicked()
+        protected virtual void OnPositiveButtonClicked()
         {
             var handler = this.PositiveButtonClicked;
 
@@ -130,7 +130,7 @@ namespace Spark.ViewModels
                 handler(this, EventArgs.Empty);
         }
 
-        protected virtual void OnNoClicked()
+        protected virtual void OnNegativeButtonClicked()
         {
             var handler = this.NegativeButtonClicked;
 
