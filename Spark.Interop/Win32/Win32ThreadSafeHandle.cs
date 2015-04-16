@@ -11,6 +11,12 @@ namespace Spark.Win32
         public Win32ThreadSafeHandle()
             : base(true) { }
 
+        public Win32ThreadSafeHandle(IntPtr handle)
+            : this()
+        {
+            this.SetHandle(handle);
+        }
+
         #region SafeHandle Methods
         protected override bool ReleaseHandle()
         {

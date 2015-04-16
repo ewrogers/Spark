@@ -8,6 +8,12 @@ namespace Spark.Win32
 {
     internal sealed class Win32ProcessSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
+        public Win32ProcessSafeHandle(IntPtr handle)
+            :this()
+        {
+            this.SetHandle(handle);
+        }
+        
         public Win32ProcessSafeHandle()
             : base(true) { }
 
