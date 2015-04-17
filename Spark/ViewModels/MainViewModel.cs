@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -166,6 +168,8 @@ namespace Spark.ViewModels
             if (clientVersions == null)
                 throw new ArgumentNullException("clientVersions");
 
+            IPAddress serverIPAddress = null;
+            int serverPort = settings.ServerPort;
             ClientVersion clientVersion = null;
 
             #region Verify Client Executable
@@ -191,6 +195,7 @@ namespace Spark.ViewModels
                     {
                         var hashString = md5.ComputeHashString(settings.ClientExecutablePath);
 
+                        // Find the client version by hash
                         Debug.WriteLine(string.Format("ClientHash = {0}", hashString));
                         clientVersion = clientVersions.FirstOrDefault(x => x.Hash.Equals(hashString, StringComparison.OrdinalIgnoreCase));
                     }
@@ -206,7 +211,7 @@ namespace Spark.ViewModels
             }
             else
             {
-                // Manually select client by name
+                // Manually select client version by name
                 clientVersion = clientVersions.FirstOrDefault(x => x.Name.Equals(settings.ClientVersion, StringComparison.OrdinalIgnoreCase));
             }
 
@@ -223,6 +228,51 @@ namespace Spark.ViewModels
             }
             #endregion
 
+            #region Lookup Hostname for Redirect
+            if (settings.ShouldRedirectClient)
+            {
+                try
+                {
+                    // Lookup the server hostname (via DNS)
+                    var hostEntry = Dns.GetHostEntry(settings.ServerHostname);
+
+                    // Find the IPv4 address
+                    foreach (var ipAddress in hostEntry.AddressList)
+                    {
+                        if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            serverIPAddress = ipAddress;
+                            break;
+                        }
+                    }
+
+                    // An error occured when trying to resolve the hostname to an IPv4 address
+                    if (serverIPAddress == null)
+                    {
+                        Debug.WriteLine(string.Format("NoIPv4AddressFoundForHost: {0}", settings.ServerHostname));
+
+                        this.DialogService.ShowOKDialog("Unable to Resolve Hostname",
+                            "Unable to resolve the server hostname to an IPv4 address.",
+                            "Check your network connection and try again.");
+
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // An error occured when trying to resolve the hostname
+
+                    Debug.WriteLine(string.Format("UnableToResolveHostname: {0}", ex.Message));
+
+                    this.DialogService.ShowOKDialog("Unable to Resolve Hostname",
+                        "Unable to resolve the server hostname.",
+                        "Check your network connection and try again.");
+
+                    return;
+                }
+            }
+            #endregion
+
             #region Launch and Patch Client
             try
             {
@@ -233,10 +283,11 @@ namespace Spark.ViewModels
                 {
                     try
                     {
-                        PatchClient(settings, process, clientVersion);
+                        PatchClient(settings, process, clientVersion, serverIPAddress, serverPort);
                     }
                     catch (Exception ex)
                     {
+                        // An error occured trying to patch the client
                         Debug.WriteLine(string.Format("UnableToPatchClient: {0}", ex.Message));
 
                         this.DialogService.ShowOKDialog("Failed to Patch",
@@ -247,6 +298,7 @@ namespace Spark.ViewModels
             }
             catch (Exception ex)
             {
+                // An error occured trying to launch the client
                 Debug.WriteLine(string.Format("UnableToLaunchClient: {0}", ex.Message));
 
                 this.DialogService.ShowOKDialog("Failed to Launch",
@@ -256,7 +308,7 @@ namespace Spark.ViewModels
             #endregion
         }
 
-        void PatchClient(UserSettings settings, SuspendedProcess process, ClientVersion clientVersion)
+        void PatchClient(UserSettings settings, SuspendedProcess process, ClientVersion clientVersion, IPAddress serverIPAddress, int serverPort)
         {
             if (settings == null)
                 throw new ArgumentNullException("settings");
@@ -267,7 +319,68 @@ namespace Spark.ViewModels
             if (clientVersion == null)
                 throw new ArgumentNullException("clientVersion");
 
-            // TODO: patch client here
+            if (settings.ShouldRedirectClient && serverIPAddress == null)
+                throw new ArgumentNullException("serverIPAddress", "Server IP address must be specified when redirecting the client");
+
+            if (settings.ShouldRedirectClient && serverPort <= 0)
+                throw new ArgumentOutOfRangeException("Server port number must be greater than zero when redirecting the client");
+
+            using (var stream = new ProcessMemoryStream(process.ProcessId))
+            using (var writer = new BinaryWriter(stream, Encoding.ASCII))
+            {
+                // Apply server hostname/port patch
+                if (settings.ShouldRedirectClient && clientVersion.ServerAddressPatchAddress > 0 && clientVersion.ServerPortPatchAddress > 0)
+                {
+                    // Write server IP address (bytes are reversed)
+                    stream.Position = clientVersion.ServerAddressPatchAddress;
+
+                    foreach (byte ipByte in serverIPAddress.GetAddressBytes().Reverse())
+                    {
+                        writer.Write(0x6A); // PUSH
+                        writer.Write(ipByte);
+                    }
+
+                    // Write server port (hi and lo bytes)
+                    stream.Position = clientVersion.ServerPortPatchAddress;
+
+                    writer.Write((byte)((serverPort >> 16) & 0xFF));
+                    writer.Write((byte)(serverPort & 0xFF));
+                }
+
+                // Apply intro video patch
+                if (settings.ShouldSkipIntro && clientVersion.IntroVideoPatchAddress > 0)
+                {
+                    stream.Position = clientVersion.IntroVideoPatchAddress;
+
+                    writer.Write((byte)0x83);   // CMP
+                    writer.Write((byte)0xFA);   // EDX
+                    writer.Write((byte)0x00);   // 0
+                    writer.Write((byte)0x90);   // NOP
+                    writer.Write((byte)0x90);   // NOP
+                    writer.Write((byte)0x90);   // NOP
+                }
+
+                // Apply multiple instances patch
+                if (settings.ShouldAllowMultipleInstances && clientVersion.MultipleInstancePatchAddress > 0)
+                {
+                    stream.Position = clientVersion.MultipleInstancePatchAddress;
+
+                    writer.Write((byte)0x31); // XOR
+                    writer.Write((byte)0xC0); // EAX, EAX
+                    writer.Write((byte)0x90); // NOPs
+                    writer.Write((byte)0x90); // NOP
+                    writer.Write((byte)0x90); // NOP
+                    writer.Write((byte)0x90); // NOP
+                }
+
+                // Apply hide walls patch
+                if (settings.ShouldHideWalls && clientVersion.HideWallsPatchAddress > 0)
+                {
+                    stream.Position = clientVersion.HideWallsPatchAddress;
+
+                    writer.Write("stc00000.hpf".ToCharArray());
+                }
+            }
         }
         #endregion
     }
