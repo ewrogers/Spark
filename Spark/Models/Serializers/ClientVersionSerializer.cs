@@ -11,12 +11,12 @@ namespace Spark.Models.Serializers
     public static class ClientVersionSerializer
     {
         #region Serialize Methods
-        public static IEnumerable<XElement> SerializeAll(IEnumerable<ClientVersion> clientVersions)
+        public static IEnumerable<XElement> SerializeMany(IEnumerable<ClientVersion> clientVersions)
         {
             if (clientVersions == null)
                 throw new ArgumentNullException("clientVersions");
 
-            return from v in clientVersions select Serialize(v);
+            return from x in clientVersions select Serialize(x);
         }
 
         public static XElement Serialize(ClientVersion clientVersion)
@@ -38,7 +38,7 @@ namespace Spark.Models.Serializers
         #endregion
 
         #region Deserialize Methods
-        public static IEnumerable<ClientVersion> DeserializeAll(XContainer container)
+        public static IEnumerable<ClientVersion> DeserializeMany(XContainer container)
         {
             if (container == null)
                 throw new ArgumentNullException("container");

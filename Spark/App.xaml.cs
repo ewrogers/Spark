@@ -99,7 +99,7 @@ namespace Spark
                 if (File.Exists(fileName))
                 {
                     var xml = XDocument.Load(fileName);
-                    return UserSettingsSerializer.DeserializeAll(xml).FirstOrDefault() ?? UserSettings.CreateDefaults();
+                    return UserSettingsSerializer.DeserializeMany(xml).FirstOrDefault() ?? UserSettings.CreateDefaults();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace Spark
                 // Save client versions to file
                 var xml = new XDocument(
                     new XDeclaration("1.0", "utf-8", "yes"),
-                    ClientVersionSerializer.SerializeAll(versions)
+                    ClientVersionSerializer.SerializeMany(versions)
                     );
 
                 xml.Save(fileName);
@@ -147,7 +147,7 @@ namespace Spark
                 if (File.Exists(fileName))
                 {
                     var xml = XDocument.Load(fileName);
-                    return ClientVersionSerializer.DeserializeAll(xml);
+                    return ClientVersionSerializer.DeserializeMany(xml);
                 }
             }
             catch (Exception ex)
