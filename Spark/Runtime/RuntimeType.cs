@@ -8,7 +8,7 @@ namespace Spark.Runtime
     {
         Char,
         Byte,
-        Bool,
+        Boolean,
         Int16,
         Int32,
         Int64,
