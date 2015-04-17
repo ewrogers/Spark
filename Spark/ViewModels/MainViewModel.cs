@@ -388,7 +388,9 @@ namespace Spark.ViewModels
 
                     stream.Position = clientVersion.HideWallsPatchAddress;
 
-                    writer.Write("stc00000.hpf".ToCharArray());
+                    writer.Write((byte)0xEB);   // JMP SHORT
+                    writer.Write((byte)0x17);   // +17
+                    writer.Write((byte)0x90);   // NOP
                 }
             }
         }

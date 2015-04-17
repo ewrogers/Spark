@@ -22,7 +22,7 @@ namespace Spark.Models
             ServerPortPatchAddress = 0x434224,
             IntroVideoPatchAddress = 0x42F48F,
             MultipleInstancePatchAddress = 0x5911AE,
-            HideWallsPatchAddress = 0x6B10F8
+            HideWallsPatchAddress = 0x624BC4
         };
         #endregion
 

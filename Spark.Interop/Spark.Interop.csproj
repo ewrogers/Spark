@@ -43,10 +43,6 @@
     <Compile Include="ProcessAccess.cs" />
     <Compile Include="ProcessMemoryStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Runtime\RuntimeInstruction.cs" />
-    <Compile Include="Runtime\RuntimePatch.cs" />
-    <Compile Include="Runtime\RuntimeType.cs" />
-    <Compile Include="Runtime\WriteInstruction.cs" />
     <Compile Include="SuspendedProcess.cs" />
     <Compile Include="Win32\NativeMethods.cs" />
     <Compile Include="Win32\Win32ProcessAccess.cs" />
