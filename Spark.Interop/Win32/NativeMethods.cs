@@ -20,9 +20,9 @@ namespace Spark.Win32
             out Win32ProcessInformation processInformation);
 
         [DllImport("kernel32", SetLastError = true)]
-        public static extern Win32ProcessSafeHandle OpenProcess(int processId, 
+        public static extern Win32ProcessSafeHandle OpenProcess(Win32ProcessAccess desiredAccess, 
             bool inheritHandle, 
-            Win32ProcessAccess desiredAccess);
+            int processId);
         
         [DllImport("kernel32", SetLastError = true)]
         public static extern bool ReadProcessMemory(Win32ProcessSafeHandle processHandle, 
@@ -46,5 +46,8 @@ namespace Spark.Win32
 
         [DllImport("kernel32", SetLastError = true)]
         public static extern bool CloseHandle(IntPtr handle);
+
+        [DllImport("kernel32")]
+        public static extern int GetLastError();
     }
 }

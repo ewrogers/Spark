@@ -93,12 +93,15 @@ namespace Spark.Interop
 
             // Open the process and check if the handle is valid
             this.processAccess = desiredAccess;
-            this.processHandle = NativeMethods.OpenProcess(processId, false, win32Flags);
+            this.processHandle = NativeMethods.OpenProcess(win32Flags, false, processId);
             this.leaveOpen = leaveOpen;
 
             // Check if handle is valid
             if (this.processHandle.IsInvalid)
-                throw new IOException("Unable to open process");
+            {
+                var errorCode = NativeMethods.GetLastError();
+                throw new IOException("Unable to open process", errorCode);
+            }
 
             // Allocate read and write buffers
             this.readBuffer = new byte[bufferSize];

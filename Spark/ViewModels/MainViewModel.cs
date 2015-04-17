@@ -326,30 +326,36 @@ namespace Spark.ViewModels
                 throw new ArgumentOutOfRangeException("Server port number must be greater than zero when redirecting the client");
 
             using (var stream = new ProcessMemoryStream(process.ProcessId))
-            using (var writer = new BinaryWriter(stream, Encoding.ASCII))
+            using (var writer = new BinaryWriter(stream, Encoding.ASCII, leaveOpen: true))
             {
                 // Apply server hostname/port patch
                 if (settings.ShouldRedirectClient && clientVersion.ServerAddressPatchAddress > 0 && clientVersion.ServerPortPatchAddress > 0)
                 {
+                    Debug.WriteLine("Applying server redirect patch...");
+
                     // Write server IP address (bytes are reversed)
                     stream.Position = clientVersion.ServerAddressPatchAddress;
-
+                    
                     foreach (byte ipByte in serverIPAddress.GetAddressBytes().Reverse())
                     {
-                        writer.Write(0x6A); // PUSH
-                        writer.Write(ipByte);
+                        writer.Write((byte)0x6A); // PUSH
+                        writer.Write((byte)ipByte);
                     }
 
-                    // Write server port (hi and lo bytes)
+                    // Write server port (lo and hi bytes)
                     stream.Position = clientVersion.ServerPortPatchAddress;
+                    var portHiByte = (serverPort >> 8) & 0xFF;
+                    var portLoByte = serverPort & 0xFF;
 
-                    writer.Write((byte)((serverPort >> 16) & 0xFF));
-                    writer.Write((byte)(serverPort & 0xFF));
+                    writer.Write((byte)portLoByte);
+                    writer.Write((byte)portHiByte);
                 }
 
                 // Apply intro video patch
                 if (settings.ShouldSkipIntro && clientVersion.IntroVideoPatchAddress > 0)
                 {
+                    Debug.WriteLine("Applying intro video patch...");
+
                     stream.Position = clientVersion.IntroVideoPatchAddress;
 
                     writer.Write((byte)0x83);   // CMP
@@ -363,6 +369,8 @@ namespace Spark.ViewModels
                 // Apply multiple instances patch
                 if (settings.ShouldAllowMultipleInstances && clientVersion.MultipleInstancePatchAddress > 0)
                 {
+                    Debug.WriteLine("Applying multiple instance patch...");
+
                     stream.Position = clientVersion.MultipleInstancePatchAddress;
 
                     writer.Write((byte)0x31); // XOR
@@ -376,6 +384,8 @@ namespace Spark.ViewModels
                 // Apply hide walls patch
                 if (settings.ShouldHideWalls && clientVersion.HideWallsPatchAddress > 0)
                 {
+                    Debug.WriteLine("Applying hide walls patch...");
+
                     stream.Position = clientVersion.HideWallsPatchAddress;
 
                     writer.Write("stc00000.hpf".ToCharArray());
