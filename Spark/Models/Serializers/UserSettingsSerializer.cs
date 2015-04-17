@@ -10,7 +10,7 @@ namespace Spark.Models.Serializers
     public static class UserSettingsSerializer
     {
         #region Serialize Methods
-        public static IEnumerable<XElement> SerializeMany(IEnumerable<UserSettings> userSettings)
+        public static IEnumerable<XElement> SerializeAll(this IEnumerable<UserSettings> userSettings)
         {
             if (userSettings == null)
                 throw new ArgumentNullException("userSettings");
@@ -18,7 +18,7 @@ namespace Spark.Models.Serializers
             return from x in userSettings select Serialize(x);
         }
 
-        public static XElement Serialize(UserSettings userSettings)
+        public static XElement Serialize(this UserSettings userSettings)
         {
             if (userSettings == null)
                 throw new ArgumentNullException("userSettings");
@@ -38,7 +38,7 @@ namespace Spark.Models.Serializers
         #endregion
 
         #region Deserialize Methods
-        public static IEnumerable<UserSettings> DeserializeMany(XContainer container)
+        public static IEnumerable<UserSettings> DeserializeAll(XContainer container)
         {
             if (container == null)
                 throw new ArgumentNullException("xml");
