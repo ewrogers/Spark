@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Spark.Runtime
+namespace Spark.Interop.Runtime
 {
     public abstract class RuntimeInstruction
     {

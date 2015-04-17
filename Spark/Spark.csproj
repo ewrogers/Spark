@@ -71,10 +71,6 @@
     <Compile Include="Input\InputMasking.cs" />
     <Compile Include="Models\ClientVersion.cs" />
     <Compile Include="Models\UserSettings.cs" />
-    <Compile Include="Runtime\RuntimeInstruction.cs" />
-    <Compile Include="Runtime\RuntimePatch.cs" />
-    <Compile Include="Runtime\RuntimeType.cs" />
-    <Compile Include="Runtime\WriteInstruction.cs" />
     <Compile Include="Security\HashAlgorithmExtender.cs" />
     <Compile Include="Themes\Templates\SparkDialog.xaml.cs">
       <DependentUpon>SparkDialog.xaml</DependentUpon>

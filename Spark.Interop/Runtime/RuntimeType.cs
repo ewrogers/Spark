@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Spark.Runtime
+namespace Spark.Interop.Runtime
 {
     public enum RuntimeType
     {
