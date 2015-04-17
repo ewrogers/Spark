@@ -7,10 +7,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Xml.Linq;
 using System.Windows;
 
 using Spark.Dialogs;
 using Spark.Models;
+using Spark.Models.Serializers;
 using Spark.ViewModels;
 using Spark.Views;
 
@@ -62,18 +64,23 @@ namespace Spark
         #endregion
 
         #region Save/Load User Settings
-        static void SaveUserSettings(string filename, UserSettings settings)
+        static void SaveUserSettings(string fileName, UserSettings settings)
         {
-            if (filename == null)
-                throw new ArgumentNullException("filename");
+            if (fileName == null)
+                throw new ArgumentNullException("fileName");
 
             if (settings == null)
                 throw new ArgumentNullException("settings");
 
             try
             {
+                var xml = new XDocument(
+                    new XDeclaration("1.0", "utf-8", "yes"),
+                    UserSettingsSerializer.Serialize(settings)
+                    );
+
                 // Save user settings to file
-                settings.SaveToFile(SettingsFileName);
+                xml.Save(fileName);
             }
             catch (Exception ex)
             {
@@ -81,15 +88,19 @@ namespace Spark
             }
         }
 
-        static UserSettings LoadSettingsOrDefaults(string filename)
+        static UserSettings LoadSettingsOrDefaults(string fileName)
         {
-            var workingDirectory = Environment.CurrentDirectory;
+            if (fileName == null)
+                throw new ArgumentNullException("fileName");
 
             try
             {
                 // Load user settings from file
-                if (File.Exists(filename))
-                    return UserSettings.LoadFromFile(filename);
+                if (File.Exists(fileName))
+                {
+                    var xml = XDocument.Load(fileName);
+                    return UserSettingsSerializer.DeserializeAll(xml).FirstOrDefault() ?? UserSettings.CreateDefaults();
+                }
             }
             catch (Exception ex)
             {
@@ -101,10 +112,10 @@ namespace Spark
         #endregion
 
         #region Save/Load Client Versions
-        static void SaveClientVersions(string filename, IEnumerable<ClientVersion> versions)
+        static void SaveClientVersions(string fileName, IEnumerable<ClientVersion> versions)
         {
-            if (filename == null)
-                throw new ArgumentNullException("filename");
+            if (fileName == null)
+                throw new ArgumentNullException("fileName");
 
             if (versions == null)
                 throw new ArgumentNullException("versions");
@@ -112,7 +123,12 @@ namespace Spark
             try
             {
                 // Save client versions to file
-                ClientVersion.SaveToFile(filename, versions);
+                var xml = new XDocument(
+                    new XDeclaration("1.0", "utf-8", "yes"),
+                    ClientVersionSerializer.SerializeAll(versions)
+                    );
+
+                xml.Save(fileName);
             }
             catch (Exception ex)
             {
@@ -120,13 +136,19 @@ namespace Spark
             }
         }
 
-        static IEnumerable<ClientVersion> LoadClientVersionsOrDefaults(string filename)
+        static IEnumerable<ClientVersion> LoadClientVersionsOrDefaults(string fileName)
         {
+            if (fileName == null)
+                throw new ArgumentNullException("fileName");
+
             try
             {
                 // Load client versions from file
-                if (File.Exists(filename))
-                    return ClientVersion.LoadFromFile(filename).OrderBy(x => x.Name);
+                if (File.Exists(fileName))
+                {
+                    var xml = XDocument.Load(fileName);
+                    return ClientVersionSerializer.DeserializeAll(xml);
+                }
             }
             catch (Exception ex)
             {

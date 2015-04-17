@@ -44,13 +44,13 @@ namespace Spark.ViewModels
             }
         }
 
-        public long ServerAddressPatchAddress
+        public long ServerHostnamePatchAddress
         {
-            get { return clientVersion.ServerAddressPatchAddress; }
+            get { return clientVersion.ServerHostnamePatchAddress; }
             set
             {
                 OnPropertyChanged();
-                clientVersion.ServerAddressPatchAddress = value;
+                clientVersion.ServerHostnamePatchAddress = value;
                 OnPropertyChanging();
             }
         }

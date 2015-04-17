@@ -329,12 +329,12 @@ namespace Spark.ViewModels
             using (var writer = new BinaryWriter(stream, Encoding.ASCII, leaveOpen: true))
             {
                 // Apply server hostname/port patch
-                if (settings.ShouldRedirectClient && clientVersion.ServerAddressPatchAddress > 0 && clientVersion.ServerPortPatchAddress > 0)
+                if (settings.ShouldRedirectClient && clientVersion.ServerHostnamePatchAddress > 0 && clientVersion.ServerPortPatchAddress > 0)
                 {
                     Debug.WriteLine("Applying server redirect patch...");
 
                     // Write server IP address (bytes are reversed)
-                    stream.Position = clientVersion.ServerAddressPatchAddress;
+                    stream.Position = clientVersion.ServerHostnamePatchAddress;
                     
                     foreach (byte ipByte in serverIPAddress.GetAddressBytes().Reverse())
                     {

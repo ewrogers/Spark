@@ -70,6 +70,8 @@
     <Compile Include="Input\DelegateCommand.cs" />
     <Compile Include="Input\InputMasking.cs" />
     <Compile Include="Models\ClientVersion.cs" />
+    <Compile Include="Models\Serializers\ClientVersionSerializer.cs" />
+    <Compile Include="Models\Serializers\UserSettingsSerializer.cs" />
     <Compile Include="Models\UserSettings.cs" />
     <Compile Include="Security\HashAlgorithmExtender.cs" />
     <Compile Include="Themes\Templates\SparkDialog.xaml.cs">
