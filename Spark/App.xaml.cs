@@ -84,7 +84,7 @@ namespace Spark
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Unable to save user settings: {0}", ex.Message);
+                Debug.WriteLine(string.Format("Unable to save user settings: {0}", ex.Message));
             }
         }
 
@@ -104,7 +104,7 @@ namespace Spark
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Unable to load user settings: {0}", ex.Message);
+                Debug.WriteLine(string.Format("Unable to load user settings: {0}", ex.Message));
             }
 
             return UserSettings.CreateDefaults();
@@ -132,7 +132,7 @@ namespace Spark
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Unable to save client versions: {0}", ex.Message);
+                Debug.WriteLine(string.Format("Unable to save client versions: {0}", ex.Message));
             }
         }
 
@@ -152,7 +152,7 @@ namespace Spark
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Unable to load client versions: {0}", ex.Message);
+                Debug.WriteLine(string.Format("Unable to load client versions: {0}", ex.Message));
             }
 
             return new[] { ClientVersion.Version739 };
