@@ -124,7 +124,7 @@ namespace Spark
                 // Save client versions to file
                 var xml = new XDocument(
                     new XDeclaration("1.0", "utf-8", "yes"),
-                    versions.SerializeAll());
+                    new XElement("versions", versions.SerializeAll()));
 
                 xml.Save(fileName);
             }

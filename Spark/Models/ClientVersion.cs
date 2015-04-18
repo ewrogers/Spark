@@ -50,7 +50,7 @@ namespace Spark.Models
         {
             public bool Equals(ClientVersion a, ClientVersion b)
             {
-                return a.Name.Equals(b);
+                return a.Name.Equals(b.Name);
             }
 
             public int GetHashCode(ClientVersion c)
