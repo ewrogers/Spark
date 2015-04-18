@@ -137,7 +137,39 @@ namespace Spark.ViewModels
             Debug.WriteLine("OnTestConnection");
             Debug.WriteLine(string.Format("ServerHostname = {0},  ServerPort = {1}", this.UserSettings.ServerHostname, this.UserSettings.ServerPort));
 
-            TestConnectionToServer(this.UserSettings.ServerHostname, this.UserSettings.ServerPort, 739);            
+            int version;
+            ClientVersion clientVersion;
+
+            #region Get Version Number
+            try
+            {
+                clientVersion = DetectClientVersion(userSettings, clientVersions);
+                version = clientVersion.VersionCode;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(string.Format("UnableToDetectClient: {0}", ex.Message));
+
+                this.DialogService.ShowOKDialog("Unable to Detect Version",
+                    "Unable to detect the client version.",
+                    ex.Message);
+
+                return;
+            }
+
+            if (clientVersion == null)
+            {
+                Debug.WriteLine("ClientVersionNotFound: Auto-Detect={0}, VersionName={1}", userSettings.ShouldAutoDetectClientVersion, userSettings.ClientVersion);
+                this.DialogService.ShowOKDialog("Unknown Client Version",
+                    "Unable to determine the client version.",
+                    "You may manually select a client version by disabling auto-detection.");
+
+                return;
+            }
+            version = clientVersion.VersionCode;
+            #endregion
+
+            TestConnectionToServer(userSettings.ServerHostname, userSettings.ServerPort, version);
         }
 
         void OnLaunchClient()
@@ -185,26 +217,21 @@ namespace Spark.ViewModels
             #endregion
 
             #region Determine Client Version
-            if (settings.ShouldAutoDetectClientVersion)
-            {
-                try
-                {
-                    // Detect client version via MD5 hash
-                    clientVersion = DetectClientVersion(settings.ClientExecutablePath, clientVersions);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(string.Format("UnableToDetectClient: {0}", ex.Message));
 
-                    this.DialogService.ShowOKDialog("Unable to Detect Version",
-                        "Unable to detect the client version.",
-                        ex.Message);
-                }
-            }
-            else
+            try
             {
-                // Manually select client version by name
-                clientVersion = clientVersions.FirstOrDefault(x => x.Name.Equals(settings.ClientVersion, StringComparison.OrdinalIgnoreCase));
+                // Detect client version
+                clientVersion = DetectClientVersion(settings, clientVersions);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(string.Format("UnableToDetectClient: {0}", ex.Message));
+
+                this.DialogService.ShowOKDialog("Unable to Detect Version",
+                    "Unable to detect the client version.",
+                    ex.Message);
+
+                return;
             }
 
             // Check that a client version was determined
@@ -375,16 +402,23 @@ namespace Spark.ViewModels
         }
 
         #region Helper Methods
-        static ClientVersion DetectClientVersion(string fileName, IEnumerable<ClientVersion> availableVersions)
+        static ClientVersion DetectClientVersion(UserSettings settings, IEnumerable<ClientVersion> availableVersions)
         {
-            // Auto-detect using the computed MD5 hash
-            using (var md5 = MD5.Create())
+            if (settings.ShouldAutoDetectClientVersion)
             {
-                var hashString = md5.ComputeHashString(fileName);
+                // Auto-detect using the computed MD5 hash
+                using (var md5 = MD5.Create())
+                {
+                    var hashString = md5.ComputeHashString(settings.ClientExecutablePath);
 
-                // Find the client version by hash
-                Debug.WriteLine(string.Format("ClientHash = {0}", hashString));
-                return availableVersions.FirstOrDefault(x => x.Hash.Equals(hashString, StringComparison.OrdinalIgnoreCase));
+                    // Find the client version by hash
+                    Debug.WriteLine(string.Format("ClientHash = {0}", hashString));
+                    return availableVersions.FirstOrDefault(x => x.Hash.Equals(hashString, StringComparison.OrdinalIgnoreCase));
+                }
+            }
+            else
+            {
+                return availableVersions.FirstOrDefault(x => x.Name.Equals(settings.ClientVersion, StringComparison.OrdinalIgnoreCase));
             }
         }
 
