@@ -76,7 +76,7 @@ namespace Spark
             {
                 var xml = new XDocument(
                     new XDeclaration("1.0", "utf-8", "yes"),
-                    settings.Serialize());
+                    new XElement("Settings", settings.Serialize()));
 
                 // Save user settings to file
                 xml.Save(fileName);
