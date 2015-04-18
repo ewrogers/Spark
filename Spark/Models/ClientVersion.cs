@@ -52,12 +52,18 @@ namespace Spark.Models
         {
             public bool Equals(ClientVersion a, ClientVersion b)
             {
-                return a.Name.Equals(b.Name);
+                if (Object.ReferenceEquals(a, b))
+                    return true;
+
+                if (a == null || b == null)
+                    return false;
+
+                return a.VersionCode == b.VersionCode && a.Name.Equals(b.Name, StringComparison.Ordinal);
             }
 
-            public int GetHashCode(ClientVersion c)
+            public int GetHashCode(ClientVersion version)
             {
-                return c.Name.GetHashCode();
+                return version.Name.GetHashCode() ^ version.VersionCode.GetHashCode();
             }
         }
     }
