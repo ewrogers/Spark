@@ -12,7 +12,7 @@ Spark currently supports <strong>version 7.39</strong> of the official Dark Ages
 
 #### Developers
 
-Spark is designed to both a useful application as well as an example codebase for numerous .NET topics:
+Spark is designed to be both a useful application as well as an example codebase for numerous .NET topics:
 
 <ul>
 <li>Writing a WPF application.</li>
@@ -22,5 +22,5 @@ Spark is designed to both a useful application as well as an example codebase fo
 <li>Theming an application via custom control templates and styles.</li>
 <li>Using LINQ to simplify business logic within an application.</li>
 <li>Using LINQ to serialize and deserialize XML files.</li>
-<li>Calling native Win32 APIs from Managed (C#) code./li>
+<li>Calling native Win32 APIs from Managed (C#) code.</li>
 </ul>
