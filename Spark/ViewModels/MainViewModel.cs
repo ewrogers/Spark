@@ -135,11 +135,9 @@ namespace Spark.ViewModels
         void OnTestConnection()
         {
             Debug.WriteLine("OnTestConnection");
-
             Debug.WriteLine(string.Format("ServerHostname = {0},  ServerPort = {1}", this.UserSettings.ServerHostname, this.UserSettings.ServerPort));
 
-            var result = this.DialogService.ShowOKDialog("Not Implemented", "Sorry, this feature is not currently implemented.", "It will be implemented in a future update.");
-            Debug.WriteLine(string.Format("Result = {0}", result));
+            TestConnectionToServer(this.UserSettings.ServerHostname, this.UserSettings.ServerPort);            
         }
 
         void OnLaunchClient()
@@ -161,7 +159,6 @@ namespace Spark.ViewModels
         }
         #endregion
 
-        #region Client Launch Methods
         void LaunchClientWithSettings(UserSettings settings, IEnumerable<ClientVersion> clientVersions)
         {
             if (settings == null)
@@ -230,6 +227,7 @@ namespace Spark.ViewModels
                 {
                     // Resolve the hostname via DNS
                     serverIPAddress = ResolveHostname(settings.ServerHostname);
+                    Debug.WriteLine(string.Format("Resolved '{0}' -> {1}", settings.ServerHostname, serverIPAddress));
 
                     // An error occured when trying to resolve the hostname to an IPv4 address
                     if (serverIPAddress == null)
@@ -291,7 +289,65 @@ namespace Spark.ViewModels
             }
             #endregion
         }
-        #endregion
+
+        void TestConnectionToServer(string serverHostname, int serverPort)
+        {
+            IPAddress serverIPAddress = null;
+
+            #region Lookup Hostname
+            try
+            {
+                // Resolve the hostname via DNS
+                serverIPAddress = ResolveHostname(serverHostname);
+                Debug.WriteLine(string.Format("Resolved '{0}' -> {1}", serverHostname, serverIPAddress));
+
+                // An error occured when trying to resolve the hostname to an IPv4 address
+                if (serverIPAddress == null)
+                {
+                    Debug.WriteLine(string.Format("NoIPv4AddressFoundForHost: {0}", serverHostname));
+
+                    this.DialogService.ShowOKDialog("Unable to Resolve Hostname",
+                        "Unable to resolve the server hostname to an IPv4 address.",
+                        "Check your network connection and try again.");
+
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                // An error occured when trying to resolve the hostname
+                Debug.WriteLine(string.Format("UnableToResolveHostname: {0}", ex.Message));
+
+                this.DialogService.ShowOKDialog("Unable to Resolve Hostname",
+                    "Unable to resolve the server hostname.",
+                    "Check your network connection and try again.");
+
+                return;
+            }
+            #endregion
+
+            try
+            {
+                using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                {
+                    socket.Connect(serverIPAddress, serverPort);
+                    Debug.WriteLine(string.Format("Connected to {0}:{1} successfully", serverIPAddress, serverPort));
+                }
+
+                this.DialogService.ShowOKDialog("Connection Successful",
+                    "The server appears to be up and running.",
+                    string.Format("Connected to {0}:{1} successfully.", serverIPAddress, serverPort));
+            }
+            catch (Exception ex)
+            {
+                // An error occured when trying to connect the hostname
+                Debug.WriteLine(string.Format("UnableToConnect: {0}", ex.Message));
+
+                this.DialogService.ShowOKDialog("Unable to Resolve Hostname",
+                    "Unable to resolve the server hostname.",
+                    "Check your network connection and try again.");
+            }
+        }
 
         #region Helper Methods
         static ClientVersion DetectClientVersion(string fileName, IEnumerable<ClientVersion> availableVersions)
