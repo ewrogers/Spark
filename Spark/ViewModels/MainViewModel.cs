@@ -137,7 +137,7 @@ namespace Spark.ViewModels
             Debug.WriteLine("OnTestConnection");
             Debug.WriteLine(string.Format("ServerHostname = {0},  ServerPort = {1}", this.UserSettings.ServerHostname, this.UserSettings.ServerPort));
 
-            TestConnectionToServer(this.UserSettings.ServerHostname, this.UserSettings.ServerPort);            
+            TestConnectionToServer(this.UserSettings.ServerHostname, this.UserSettings.ServerPort, 0);            
         }
 
         void OnLaunchClient()
@@ -290,7 +290,7 @@ namespace Spark.ViewModels
             #endregion
         }
 
-        void TestConnectionToServer(string serverHostname, int serverPort)
+        void TestConnectionToServer(string serverHostname, int serverPort, int versionNumber)
         {
             IPAddress serverIPAddress = null;
 
@@ -328,11 +328,60 @@ namespace Spark.ViewModels
 
             try
             {
-                // Create a TCP socket to connect with
                 using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
                 {
+                    // Create a TCP socket to connect with
                     socket.Connect(serverIPAddress, serverPort);
                     Debug.WriteLine(string.Format("Connected to {0}:{1} successfully", serverIPAddress, serverPort));
+
+                    // Test if the server that responded is likely a DA server
+                    byte[] data = new byte[1024];
+                    socket.ReceiveTimeout = 1000;
+                    int actual = socket.Receive(data, 4, SocketFlags.None);
+                    if (actual != 4)
+                        return;
+                    int len = data[1] * 256 + data[2];
+                    if (len > 1024)
+                        return;
+                    actual = socket.Receive(data, len - 1, SocketFlags.None);
+                    if (actual != len - 1 || actual < 17)
+                        return;
+                    string welcomeMessage = System.Text.Encoding.ASCII.GetString(data, 1, 16);
+                    if (!welcomeMessage.Equals("CONNECTED SERVER"))
+                        return;
+
+                    // First message
+                    byte[] firstData = { 0xAA, 0x00, 0x0A, 0x62, 0x00, 0x34, 0x00, 0x0A, 0x88, 0x6E, 0x59, 0x59, 0x75 };
+                    socket.Send(firstData);
+
+                    // Test our version number
+                    byte[] versionData = { 0xAA, 0x00, 0x06, 0x00, (byte)(versionNumber / 256), (byte)(versionNumber % 256), 0x4C, 0x4B, 0 };
+                    socket.Send(versionData);
+
+                    // Check if server accepts this version number
+                    actual = socket.Receive(data, 4, SocketFlags.None);
+                    if (actual != 4 || data[3] != 0)
+                        return;
+                    len = data[1] * 256 + data[2];
+                    if (len > 1024)
+                        return;
+                    actual = socket.Receive(data, len - 1, SocketFlags.None);
+                    if (actual != len - 1)
+                        return;
+                    if (data[0] == 2)
+                    {
+                        int reqVersion = data[1] * 256 + data[2];
+                        return;
+                    }
+                    else if (data[0] == 0)
+                    {
+                        // Success
+                        return;
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
 
                 // Connection successful!
@@ -353,7 +402,7 @@ namespace Spark.ViewModels
 
                 // Retry the connection
                 if (result.HasValue && result.Value)
-                    TestConnectionToServer(serverHostname, serverPort);
+                    TestConnectionToServer(serverHostname, serverPort, versionNumber);
             }
         }
 
