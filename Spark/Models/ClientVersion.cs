@@ -7,7 +7,24 @@ namespace Spark.Models
     [Serializable]
     public sealed class ClientVersion
     {
-        public static readonly IEnumerable<ClientVersion> DefaultVersions = new[] { Version737, Version739 };
+        public sealed class VersionComparer : IEqualityComparer<ClientVersion>
+        {
+            public bool Equals(ClientVersion a, ClientVersion b)
+            {
+                if (Object.ReferenceEquals(a, b))
+                    return true;
+
+                if (a == null || b == null)
+                    return false;
+
+                return a.VersionCode == b.VersionCode && a.Name.Equals(b.Name, StringComparison.Ordinal);
+            }
+
+            public int GetHashCode(ClientVersion version)
+            {
+                return version.Name.GetHashCode() ^ version.VersionCode.GetHashCode();
+            }
+        }
 
         #region Standard Client Versions
         public static readonly ClientVersion Version739 = new ClientVersion()
@@ -48,23 +65,10 @@ namespace Spark.Models
 
         public ClientVersion() { }
 
-        public sealed class ClientVersionComparer : IEqualityComparer<ClientVersion>
+        public static IEnumerable<ClientVersion> GetDefaultVersions()
         {
-            public bool Equals(ClientVersion a, ClientVersion b)
-            {
-                if (Object.ReferenceEquals(a, b))
-                    return true;
-
-                if (a == null || b == null)
-                    return false;
-
-                return a.VersionCode == b.VersionCode && a.Name.Equals(b.Name, StringComparison.Ordinal);
-            }
-
-            public int GetHashCode(ClientVersion version)
-            {
-                return version.Name.GetHashCode() ^ version.VersionCode.GetHashCode();
-            }
+            yield return Version737;
+            yield return Version739;
         }
     }
 }

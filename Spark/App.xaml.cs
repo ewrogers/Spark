@@ -156,7 +156,7 @@ namespace Spark
             }
 
             // Use the deserialized client versions (or the defaults)
-            return userVersions ?? ClientVersion.DefaultVersions;
+            return userVersions ?? ClientVersion.GetDefaultVersions();
         }
         #endregion
 
