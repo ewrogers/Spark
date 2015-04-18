@@ -17,6 +17,7 @@ using Spark.Dialogs;
 using Spark.Input;
 using Spark.Interop;
 using Spark.Models;
+using Spark.Runtime;
 using Spark.Security;
 
 namespace Spark.ViewModels
@@ -326,71 +327,35 @@ namespace Spark.ViewModels
                 throw new ArgumentOutOfRangeException("Server port number must be greater than zero when redirecting the client");
 
             using (var stream = new ProcessMemoryStream(process.ProcessId))
-            using (var writer = new BinaryWriter(stream, Encoding.ASCII, leaveOpen: true))
+            using (var patcher = new RuntimePatcher(clientVersion, stream, leaveOpen: true))
             {
                 // Apply server hostname/port patch
-                if (settings.ShouldRedirectClient && clientVersion.ServerHostnamePatchAddress > 0 && clientVersion.ServerPortPatchAddress > 0)
+                if (settings.ShouldRedirectClient && clientVersion.ServerHostnamePatchAddress > 0 && clientVersion.ServerPortPatchAddress > 0 && serverIPAddress != null && serverPort > 0)
                 {
                     Debug.WriteLine("Applying server redirect patch...");
-
-                    // Write server IP address (bytes are reversed)
-                    stream.Position = clientVersion.ServerHostnamePatchAddress;
-                    
-                    foreach (byte ipByte in serverIPAddress.GetAddressBytes().Reverse())
-                    {
-                        writer.Write((byte)0x6A); // PUSH
-                        writer.Write((byte)ipByte);
-                    }
-
-                    // Write server port (lo and hi bytes)
-                    stream.Position = clientVersion.ServerPortPatchAddress;
-                    var portHiByte = (serverPort >> 8) & 0xFF;
-                    var portLoByte = serverPort & 0xFF;
-
-                    writer.Write((byte)portLoByte);
-                    writer.Write((byte)portHiByte);
+                    patcher.ApplyServerHostnamePatch(serverIPAddress);
+                    patcher.ApplyServerPortPatch(serverPort);
                 }
 
                 // Apply intro video patch
                 if (settings.ShouldSkipIntro && clientVersion.IntroVideoPatchAddress > 0)
                 {
                     Debug.WriteLine("Applying intro video patch...");
-
-                    stream.Position = clientVersion.IntroVideoPatchAddress;
-
-                    writer.Write((byte)0x83);   // CMP
-                    writer.Write((byte)0xFA);   // EDX
-                    writer.Write((byte)0x00);   // 0
-                    writer.Write((byte)0x90);   // NOP
-                    writer.Write((byte)0x90);   // NOP
-                    writer.Write((byte)0x90);   // NOP
+                    patcher.ApplySkipIntroVideoPatch();
                 }
 
                 // Apply multiple instances patch
                 if (settings.ShouldAllowMultipleInstances && clientVersion.MultipleInstancePatchAddress > 0)
                 {
                     Debug.WriteLine("Applying multiple instance patch...");
-
-                    stream.Position = clientVersion.MultipleInstancePatchAddress;
-
-                    writer.Write((byte)0x31); // XOR
-                    writer.Write((byte)0xC0); // EAX, EAX
-                    writer.Write((byte)0x90); // NOPs
-                    writer.Write((byte)0x90); // NOP
-                    writer.Write((byte)0x90); // NOP
-                    writer.Write((byte)0x90); // NOP
+                    patcher.ApplyMultipleInstancesPatch();
                 }
 
                 // Apply hide walls patch
                 if (settings.ShouldHideWalls && clientVersion.HideWallsPatchAddress > 0)
                 {
                     Debug.WriteLine("Applying hide walls patch...");
-
-                    stream.Position = clientVersion.HideWallsPatchAddress;
-
-                    writer.Write((byte)0xEB);   // JMP SHORT
-                    writer.Write((byte)0x17);   // +17
-                    writer.Write((byte)0x90);   // NOP
+                    patcher.ApplyHideWallsPatch();
                 }
             }
         }

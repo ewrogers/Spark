@@ -73,6 +73,7 @@
     <Compile Include="Models\Serializers\ClientVersionSerializer.cs" />
     <Compile Include="Models\Serializers\UserSettingsSerializer.cs" />
     <Compile Include="Models\UserSettings.cs" />
+    <Compile Include="Runtime\RuntimePatcher.cs" />
     <Compile Include="Security\HashAlgorithmExtender.cs" />
     <Compile Include="Themes\Templates\SparkDialog.xaml.cs">
       <DependentUpon>SparkDialog.xaml</DependentUpon>
