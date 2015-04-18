@@ -124,7 +124,7 @@ namespace Spark
                 // Save client versions to file
                 var xml = new XDocument(
                     new XDeclaration("1.0", "utf-8", "yes"),
-                    new XElement("versions", versions.SerializeAll()));
+                    new XElement("Versions", versions.SerializeAll()));
 
                 xml.Save(fileName);
             }
@@ -139,7 +139,6 @@ namespace Spark
             if (fileName == null)
                 throw new ArgumentNullException("fileName");
 
-            IEnumerable<ClientVersion> defaults = new[] { ClientVersion.Version739, ClientVersion.Version737 };
             IEnumerable<ClientVersion> userVersions = null;
 
             try
@@ -156,16 +155,8 @@ namespace Spark
                 Debug.WriteLine(string.Format("Unable to load client versions: {0}", ex.Message));
             }
 
-            if (userVersions != null)
-            {
-                userVersions = userVersions.Union(defaults, new ClientVersion.VersionComparer());
-            }
-            else
-            {
-                userVersions = defaults;
-            }
-
-            return userVersions;
+            // Use the deserialized client versions (or the defaults)
+            return userVersions ?? ClientVersion.DefaultVersions;
         }
         #endregion
 

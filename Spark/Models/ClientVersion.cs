@@ -7,6 +7,8 @@ namespace Spark.Models
     [Serializable]
     public sealed class ClientVersion
     {
+        public static readonly IEnumerable<ClientVersion> DefaultVersions = new[] { Version737, Version739 };
+
         #region Standard Client Versions
         public static readonly ClientVersion Version739 = new ClientVersion()
         {
@@ -46,7 +48,7 @@ namespace Spark.Models
 
         public ClientVersion() { }
 
-        public class VersionComparer : IEqualityComparer<ClientVersion>
+        public sealed class ClientVersionComparer : IEqualityComparer<ClientVersion>
         {
             public bool Equals(ClientVersion a, ClientVersion b)
             {
