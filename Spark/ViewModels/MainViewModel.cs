@@ -328,24 +328,32 @@ namespace Spark.ViewModels
 
             try
             {
+                // Create a TCP socket to connect with
                 using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
                 {
                     socket.Connect(serverIPAddress, serverPort);
                     Debug.WriteLine(string.Format("Connected to {0}:{1} successfully", serverIPAddress, serverPort));
                 }
 
+                // Connection successful!
                 this.DialogService.ShowOKDialog("Connection Successful",
                     "The server appears to be up and running.",
                     string.Format("Connected to {0}:{1} successfully.", serverIPAddress, serverPort));
             }
             catch (Exception ex)
             {
-                // An error occured when trying to connect the hostname
+                // An error occured when trying to connect to the hostname
                 Debug.WriteLine(string.Format("UnableToConnect: {0}", ex.Message));
 
-                this.DialogService.ShowOKDialog("Unable to Resolve Hostname",
-                    "Unable to resolve the server hostname.",
-                    "Check your network connection and try again.");
+                var result = this.DialogService.ShowYesNoDialog("Connection Failed",
+                    "Unable to connect to the server.",
+                    ex.Message,
+                    yesButtonTitle: "Retry",
+                    noButtonTitle: "Okay");
+
+                // Retry the connection
+                if (result.HasValue && result.Value)
+                    TestConnectionToServer(serverHostname, serverPort);
             }
         }
 
