@@ -174,7 +174,7 @@ namespace Spark.ViewModels
             int serverPort = settings.ServerPort;
             ClientVersion clientVersion = null;
 
-            #region Verify Client Executable
+            #region Validate Client Executable Path
             if (!File.Exists(settings.ClientExecutablePath))
             {
                 Debug.WriteLine("ClientExecutableNotFound: {0}", settings.ClientExecutablePath);
@@ -192,15 +192,8 @@ namespace Spark.ViewModels
             {
                 try
                 {
-                    // Auto-detect using the computed MD5 hash
-                    using (var md5 = MD5.Create())
-                    {
-                        var hashString = md5.ComputeHashString(settings.ClientExecutablePath);
-
-                        // Find the client version by hash
-                        Debug.WriteLine(string.Format("ClientHash = {0}", hashString));
-                        clientVersion = clientVersions.FirstOrDefault(x => x.Hash.Equals(hashString, StringComparison.OrdinalIgnoreCase));
-                    }
+                    // Detect client version via MD5 hash
+                    clientVersion = DetectClientVersion(settings.ClientExecutablePath, clientVersions);
                 }
                 catch (Exception ex)
                 {
@@ -235,18 +228,8 @@ namespace Spark.ViewModels
             {
                 try
                 {
-                    // Lookup the server hostname (via DNS)
-                    var hostEntry = Dns.GetHostEntry(settings.ServerHostname);
-
-                    // Find the IPv4 address
-                    foreach (var ipAddress in hostEntry.AddressList)
-                    {
-                        if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
-                        {
-                            serverIPAddress = ipAddress;
-                            break;
-                        }
-                    }
+                    // Resolve the hostname via DNS
+                    serverIPAddress = ResolveHostname(settings.ServerHostname);
 
                     // An error occured when trying to resolve the hostname to an IPv4 address
                     if (serverIPAddress == null)
@@ -263,7 +246,6 @@ namespace Spark.ViewModels
                 catch (Exception ex)
                 {
                     // An error occured when trying to resolve the hostname
-
                     Debug.WriteLine(string.Format("UnableToResolveHostname: {0}", ex.Message));
 
                     this.DialogService.ShowOKDialog("Unable to Resolve Hostname",
@@ -309,18 +291,37 @@ namespace Spark.ViewModels
             }
             #endregion
         }
+        #endregion
 
-        void PatchClient(UserSettings settings, SuspendedProcess process, ClientVersion clientVersion, IPAddress serverIPAddress, int serverPort)
+        #region Helper Methods
+        static ClientVersion DetectClientVersion(string fileName, IEnumerable<ClientVersion> availableVersions)
         {
-            if (settings == null)
-                throw new ArgumentNullException("settings");
+            // Auto-detect using the computed MD5 hash
+            using (var md5 = MD5.Create())
+            {
+                var hashString = md5.ComputeHashString(fileName);
 
-            if (process == null)
-                throw new ArgumentNullException("process");
+                // Find the client version by hash
+                Debug.WriteLine(string.Format("ClientHash = {0}", hashString));
+                return availableVersions.FirstOrDefault(x => x.Hash.Equals(hashString, StringComparison.OrdinalIgnoreCase));
+            }
+        }
 
-            if (clientVersion == null)
-                throw new ArgumentNullException("clientVersion");
+        static IPAddress ResolveHostname(string hostname)
+        {
+            // Lookup the server hostname (via DNS)
+            var hostEntry = Dns.GetHostEntry(hostname);
 
+            // Find the IPv4 addresses
+            var ipAddresses = from ip in hostEntry.AddressList
+                              where ip.AddressFamily == AddressFamily.InterNetwork
+                              select ip;
+
+            return ipAddresses.FirstOrDefault();
+        }
+
+        static void PatchClient(UserSettings settings, SuspendedProcess process, ClientVersion clientVersion, IPAddress serverIPAddress, int serverPort)
+        {
             if (settings.ShouldRedirectClient && serverIPAddress == null)
                 throw new ArgumentNullException("serverIPAddress", "Server IP address must be specified when redirecting the client");
 
