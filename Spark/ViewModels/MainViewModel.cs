@@ -348,8 +348,8 @@ namespace Spark.ViewModels
                 var result = this.DialogService.ShowYesNoDialog("Connection Failed",
                     "Unable to connect to the server.",
                     ex.Message,
-                    yesButtonTitle: "Retry",
-                    noButtonTitle: "Okay");
+                    yesButtonTitle: "T_ry Again",
+                    noButtonTitle: "_OK");
 
                 // Retry the connection
                 if (result.HasValue && result.Value)
