@@ -106,8 +106,11 @@ namespace Spark.ViewModels
             this.userSettingsViewModel = new UserSettingsViewModel(userSettings);
 
             // Create client version view model for each client settings object (via LINQ projection)
-            var clientVersionViewModels = clientVersions.Select(x => new ClientVersionViewModel(x));
-            this.clientVersionViewModels = new ObservableCollection<ClientVersionViewModel>(clientVersionViewModels);
+            var viewModels = from v in clientVersions
+                             orderby v.VersionCode descending
+                             select new ClientVersionViewModel(v);
+
+            this.clientVersionViewModels = new ObservableCollection<ClientVersionViewModel>(viewModels);
         }
 
         #region Execute Methods
