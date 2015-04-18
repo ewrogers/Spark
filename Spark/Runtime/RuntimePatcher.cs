@@ -93,7 +93,7 @@ namespace Spark.Runtime
 
             writer.Write((byte)0x31); // XOR
             writer.Write((byte)0xC0); // EAX, EAX
-            writer.Write((byte)0x90); // NOPs
+            writer.Write((byte)0x90); // NOP
             writer.Write((byte)0x90); // NOP
             writer.Write((byte)0x90); // NOP
             writer.Write((byte)0x90); // NOP

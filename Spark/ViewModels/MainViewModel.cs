@@ -331,7 +331,7 @@ namespace Spark.ViewModels
             using (var patcher = new RuntimePatcher(clientVersion, stream, leaveOpen: true))
             {
                 // Apply server hostname/port patch
-                if (settings.ShouldRedirectClient && clientVersion.ServerHostnamePatchAddress > 0 && clientVersion.ServerPortPatchAddress > 0 && serverIPAddress != null && serverPort > 0)
+                if (settings.ShouldRedirectClient && clientVersion.ServerHostnamePatchAddress > 0 && clientVersion.ServerPortPatchAddress > 0)
                 {
                     Debug.WriteLine("Applying server redirect patch...");
                     patcher.ApplyServerHostnamePatch(serverIPAddress);
