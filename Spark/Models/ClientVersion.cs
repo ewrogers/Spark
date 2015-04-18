@@ -19,6 +19,18 @@ namespace Spark.Models
             MultipleInstancePatchAddress = 0x5911AE,
             HideWallsPatchAddress = 0x624BC4
         };
+
+        public static readonly ClientVersion Version737 = new ClientVersion()
+        {
+            Name = "US Dark Ages 7.37",
+            VersionCode = 737,
+            Hash = "36f4689b09a4a91c74555b3c3603b196",
+            ServerHostnamePatchAddress = 0x4341FA,
+            ServerPortPatchAddress = 0x434224,
+            IntroVideoPatchAddress = 0x42F48F,
+            MultipleInstancePatchAddress = 0x5911AE,
+            HideWallsPatchAddress = 0x624BC4
+        };
         #endregion
 
         #region Properties
@@ -33,5 +45,18 @@ namespace Spark.Models
         #endregion
 
         public ClientVersion() { }
+
+        public class VersionComparer : IEqualityComparer<ClientVersion>
+        {
+            public bool Equals(ClientVersion a, ClientVersion b)
+            {
+                return a.Name.Equals(b);
+            }
+
+            public int GetHashCode(ClientVersion c)
+            {
+                return c.Name.GetHashCode();
+            }
+        }
     }
 }

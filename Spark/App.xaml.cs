@@ -139,13 +139,16 @@ namespace Spark
             if (fileName == null)
                 throw new ArgumentNullException("fileName");
 
+            IEnumerable<ClientVersion> defaults = new[] { ClientVersion.Version739, ClientVersion.Version737 };
+            IEnumerable<ClientVersion> userVersions = null;
+
             try
             {
                 // Load client versions from file
                 if (File.Exists(fileName))
                 {
                     var xml = XDocument.Load(fileName);
-                    return ClientVersionSerializer.DeserializeAll(xml);
+                    userVersions = ClientVersionSerializer.DeserializeAll(xml);
                 }
             }
             catch (Exception ex)
@@ -153,7 +156,16 @@ namespace Spark
                 Debug.WriteLine(string.Format("Unable to load client versions: {0}", ex.Message));
             }
 
-            return new[] { ClientVersion.Version739 };
+            if (userVersions != null)
+            {
+                userVersions = userVersions.Union(defaults, new ClientVersion.VersionComparer());
+            }
+            else
+            {
+                userVersions = defaults;
+            }
+
+            return userVersions;
         }
         #endregion
 
