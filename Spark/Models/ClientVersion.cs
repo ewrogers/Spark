@@ -6,7 +6,8 @@ namespace Spark.Models
     [Serializable]
     public sealed class ClientVersion
     {
-        public sealed class VersionComparer : IEqualityComparer<ClientVersion>
+        #region Client Version Comparaer
+        sealed class ClientVersionComparer : IEqualityComparer<ClientVersion>
         {
             public bool Equals(ClientVersion a, ClientVersion b)
             {
@@ -24,6 +25,9 @@ namespace Spark.Models
                 return version.Name.GetHashCode() ^ version.VersionCode.GetHashCode();
             }
         }
+
+        public static readonly IEqualityComparer<ClientVersion> VersionComparer = new ClientVersionComparer();
+        #endregion
 
         #region Standard Client Versions
         public static readonly ClientVersion Version739 = new ClientVersion()

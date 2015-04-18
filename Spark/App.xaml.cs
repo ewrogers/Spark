@@ -21,8 +21,12 @@ namespace Spark
     public partial class App : Application
     {
         public static readonly string ApplicationName = "Spark";
+
         public static readonly string SettingsFileName = "Settings.xml";
+        public static readonly string SettingsFileVersion = "1.0";
+
         public static readonly string ClientVersionsFileName = "Versions.xml";
+        public static readonly string ClientVersionsFileVersion = "1.0";
 
         #region Properties
         public UserSettings CurrentSettings { get; protected set; }
@@ -76,7 +80,9 @@ namespace Spark
             {
                 var xml = new XDocument(
                     new XDeclaration("1.0", "utf-8", "yes"),
-                    new XElement("Settings", settings.Serialize()));
+                    new XElement("Settings",
+                        new XAttribute("FileVersion", App.SettingsFileVersion),
+                        settings.Serialize()));
 
                 // Save user settings to file
                 xml.Save(fileName);
@@ -124,7 +130,9 @@ namespace Spark
                 // Save client versions to file
                 var xml = new XDocument(
                     new XDeclaration("1.0", "utf-8", "yes"),
-                    new XElement("Versions", versions.SerializeAll()));
+                    new XElement("SupportedClients",
+                        new XAttribute("FileVersion", App.ClientVersionsFileVersion),
+                        versions.SerializeAll()));
 
                 xml.Save(fileName);
             }
@@ -139,24 +147,46 @@ namespace Spark
             if (fileName == null)
                 throw new ArgumentNullException("fileName");
 
-            IEnumerable<ClientVersion> userVersions = null;
-
+            IEnumerable<ClientVersion> clientVersions = null;
+            
             try
             {
                 // Load client versions from file
                 if (File.Exists(fileName))
                 {
                     var xml = XDocument.Load(fileName);
-                    userVersions = ClientVersionSerializer.DeserializeAll(xml);
+                    var root = xml.Descendants("SupportedClients").FirstOrDefault();
+
+                    if (root != null)
+                    {
+                        var fileVersionString = (string)root.Attribute("FileVersion");
+
+                        // Parse the versions for comparison
+                        var fileVersion = Version.Parse(fileVersionString);
+                        var latestVersion = Version.Parse(App.ClientVersionsFileVersion);
+
+                        clientVersions = ClientVersionSerializer.DeserializeAll(xml);
+
+                        // Check if client version file is out of date
+                        if (fileVersion < latestVersion)
+                        {
+                            Debug.WriteLine(string.Format("Migrating supported client versions... ({0} -> {1})", fileVersion, latestVersion));
+
+                            // Perform a migration (union) of the old and new client versions
+                            if (clientVersions != null)
+                                clientVersions = clientVersions.Union(ClientVersion.GetDefaultVersions(), ClientVersion.VersionComparer);
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(string.Format("Unable to load client versions: {0}", ex.Message));
+                clientVersions = null;
             }
 
             // Use the deserialized client versions (or the defaults)
-            return userVersions ?? ClientVersion.GetDefaultVersions();
+            return clientVersions ?? ClientVersion.GetDefaultVersions();
         }
         #endregion
 
