@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Spark.Extensions
+namespace Spark.Net
 {
     // This extension allows Sockets to use the Task asynchronous patterns instead of traditional Begin/End callbacks
     public static class SocketExtender

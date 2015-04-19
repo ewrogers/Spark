@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Spark.Extensions
+namespace Spark.Common
 {
     public static class IntegerExtender
     {
