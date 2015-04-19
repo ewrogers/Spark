@@ -69,7 +69,9 @@
     <Compile Include="Input\AsyncDelegateCommand.cs" />
     <Compile Include="Input\DelegateCommand.cs" />
     <Compile Include="Input\InputMasking.cs" />
+    <Compile Include="Models\BasicVersionTester.cs" />
     <Compile Include="Models\ClientVersion.cs" />
+    <Compile Include="Models\IVersionTester.cs" />
     <Compile Include="Models\Serializers\ClientVersionSerializer.cs" />
     <Compile Include="Models\Serializers\UserSettingsSerializer.cs" />
     <Compile Include="Models\UserSettings.cs" />
