@@ -15,6 +15,7 @@ using Spark.Dialogs;
 using Spark.Input;
 using Spark.Interop;
 using Spark.Models;
+using Spark.Net;
 using Spark.Runtime;
 using Spark.Security;
 
@@ -137,14 +138,12 @@ namespace Spark.ViewModels
             Debug.WriteLine("OnTestConnection");
             Debug.WriteLine(string.Format("ServerHostname = {0},  ServerPort = {1}", this.UserSettings.ServerHostname, this.UserSettings.ServerPort));
 
-            int version;
             ClientVersion clientVersion;
 
-            #region Get Version Number
+            #region Get Client Version
             try
             {
                 clientVersion = DetectClientVersion(userSettings, clientVersions);
-                version = clientVersion.VersionCode;
             }
             catch (Exception ex)
             {
@@ -166,10 +165,11 @@ namespace Spark.ViewModels
 
                 return;
             }
-            version = clientVersion.VersionCode;
             #endregion
 
-            TestConnectionToServer(userSettings.ServerHostname, userSettings.ServerPort, version);
+            Debug.WriteLine(string.Format("ClientVersion = {0} ({1})", clientVersion.Name, clientVersion.VersionCode));
+
+            TestConnectionToServer(userSettings.ServerHostname, userSettings.ServerPort, clientVersion.VersionCode);
         }
 
         void OnLaunchClient()
@@ -317,7 +317,7 @@ namespace Spark.ViewModels
             #endregion
         }
 
-        void TestConnectionToServer(string serverHostname, int serverPort, int versionNumber)
+        async void TestConnectionToServer(string serverHostname, int serverPort, int versionCode)
         {
             IPAddress serverIPAddress = null;
 
@@ -355,11 +355,11 @@ namespace Spark.ViewModels
 
             try
             {
-                using (IVersionTester versionTester = new BasicVersionTester())
+                using (var serverTester = new ServerTester())
                 {
-                    versionTester.ConnectToServer(serverIPAddress, serverPort);
-                    int reqVersionNumber;
-                    if (versionTester.TestVersionNumber(versionNumber, out reqVersionNumber))
+                    await serverTester.ConnectToServerAsync(serverIPAddress, serverPort);
+
+                    if (await serverTester.CheckClientVersionCodeAsync(versionCode))
                     {
                         this.DialogService.ShowOKDialog("Connection Successful",
                             "The server appears to be up and running.",
@@ -367,20 +367,16 @@ namespace Spark.ViewModels
                     }
                     else
                     {
-                        string extraInfo;
-                        // Known required version number?
-                        if (reqVersionNumber >= 0)
-                        {
-                            extraInfo = string.Format("Required Version: {0}. Detected Version: {1}.", reqVersionNumber, versionNumber);
-                        }
-                        else
-                        {
-                            extraInfo = string.Format("Detected Version: {0}. Please check what versions the server you are connecting to supports.", versionNumber);
-                        }
+                        //string extraInfo;
+                        //// Known required version number?
+                        //if (reqVersionNumber >= 0)
+                        //    extraInfo = string.Format("Required Version: {0}. Detected Version: {1}.", reqVersionNumber, versionNumber);
+                        //else
+                        //    extraInfo = string.Format("Detected Version: {0}. Please check what versions the server you are connecting to supports.", versionNumber);
 
                         this.DialogService.ShowOKDialog("Connection Failed",
                             "The server appears to be running, but requires a different version of the client.",
-                            extraInfo);
+                            null);
                     }
                 }
             }
@@ -397,7 +393,7 @@ namespace Spark.ViewModels
 
                 // Retry the connection
                 if (result.HasValue && result.Value)
-                    TestConnectionToServer(serverHostname, serverPort, versionNumber);
+                    TestConnectionToServer(serverHostname, serverPort, versionCode);
             }
         }
 

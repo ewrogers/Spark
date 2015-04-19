@@ -6,6 +6,7 @@ using Spark.Common;
 
 namespace Spark.Net
 {
+    // This class buffers data bytes to create network packets that can be dequeued
     public sealed class NetworkPacketBuffer
     {
         static readonly int BufferSize = 4096;          // 4KB
@@ -55,7 +56,7 @@ namespace Spark.Net
             {
                 // Get the expected size of the packet
                 var size = IntegerExtender.MakeWord(buffer[2], buffer[1]);
-                var packetSize = size + 2;
+                var packetSize = size + 3;
 
                 // If the entire packet has not been buffered, stop processing until more data arrives
                 if (packetSize > buffer.Count)

@@ -21,6 +21,7 @@ namespace Spark.Net
         public virtual IReadOnlyList<byte> Data { get; protected set; }
         #endregion
 
+        #region Constructors
         public NetworkPacket(byte signature, short size, byte command, IEnumerable<byte> data = null)
         {
             this.Signature = signature;
@@ -37,6 +38,13 @@ namespace Spark.Net
             if (data != null)
                 this.Data = new ArraySegment<byte>(data, offset, count).ToList();
         }
+
+        public NetworkPacket(params byte[] packet)
+            : this(packet, 0, packet.Length) { }
+
+        public NetworkPacket(byte[] packet, int offset, int count)
+            : this(packet[offset], IntegerExtender.MakeWord(packet[offset + 2], packet[offset + 1]), packet[offset + 3], packet, HeaderSize, count - HeaderSize) { }
+        #endregion
 
         public override string ToString()
         {
