@@ -134,7 +134,7 @@
             <Button Style="{StaticResource SparkButtonStyle}"
                     Command="{Binding TestConnectionCommand}"
                     FontSize="20"
-                    Content="_Test Connection"
+                    Content="{Binding TestConnectionButtonTitle}"
                     Height="60"/>
             
             <!-- Launch Client Button -->

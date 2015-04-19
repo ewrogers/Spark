@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Microsoft.Win32;
@@ -30,6 +31,9 @@ namespace Spark.ViewModels
         UserSettings userSettings;
         IEnumerable<ClientVersion> clientVersions;
 
+        string testConnectionButtonTitle = "_Test Connection";
+        bool isTestingConnection;
+
         UserSettingsViewModel userSettingsViewModel;
         ObservableCollection<ClientVersionViewModel> clientVersionViewModels;
 
@@ -52,7 +56,7 @@ namespace Spark.ViewModels
                 // Lazy-initialized
                 if (testConnectionCommand == null)
                     testConnectionCommand = new DelegateCommand(x => OnTestConnection(),
-                        onCanExecute: x => !string.IsNullOrWhiteSpace(this.UserSettings.ServerHostname) && this.UserSettings.ServerPort > 0);
+                        onCanExecute: x => !string.IsNullOrWhiteSpace(this.UserSettings.ServerHostname) && this.UserSettings.ServerPort > 0 && !this.IsTestingConnection);
 
                 return testConnectionCommand;
             }
@@ -83,6 +87,18 @@ namespace Spark.ViewModels
         {
             get { return clientVersionViewModels; }
             set { SetProperty(ref clientVersionViewModels, value); }
+        }
+
+        public string TestConnectionButtonTitle
+        {
+            get { return testConnectionButtonTitle; }
+            set { SetProperty(ref testConnectionButtonTitle, value); }
+        }
+
+        public bool IsTestingConnection
+        {
+            get { return isTestingConnection; }
+            set { SetProperty(ref isTestingConnection, value); }
         }
         #endregion
 
@@ -133,8 +149,12 @@ namespace Spark.ViewModels
             }
         }
 
-        void OnTestConnection()
+        async void OnTestConnection()
         {
+            // Begin testing state
+            this.IsTestingConnection = true;
+            this.TestConnectionButtonTitle = "Connecting to Server...";
+
             Debug.WriteLine("OnTestConnection");
             Debug.WriteLine(string.Format("ServerHostname = {0},  ServerPort = {1}", this.UserSettings.ServerHostname, this.UserSettings.ServerPort));
 
@@ -169,7 +189,12 @@ namespace Spark.ViewModels
 
             Debug.WriteLine(string.Format("ClientVersion = {0} ({1})", clientVersion.Name, clientVersion.VersionCode));
 
-            TestConnectionToServer(userSettings.ServerHostname, userSettings.ServerPort, clientVersion.VersionCode);
+            // Test connection asynchronously
+            await TestConnectionToServerAsync(userSettings.ServerHostname, userSettings.ServerPort, clientVersion.VersionCode);
+
+            // Completed testing
+            this.TestConnectionButtonTitle = "_Test Connection";
+            this.IsTestingConnection = false;
         }
 
         void OnLaunchClient()
@@ -317,8 +342,9 @@ namespace Spark.ViewModels
             #endregion
         }
 
-        async void TestConnectionToServer(string serverHostname, int serverPort, int versionCode)
+        async Task TestConnectionToServerAsync(string serverHostname, int serverPort, int versionCode)
         {
+            var shouldRetry = false;
             IPAddress serverIPAddress = null;
 
             #region Lookup Hostname
@@ -391,8 +417,11 @@ namespace Spark.ViewModels
 
                 // Retry the connection
                 if (result.HasValue && result.Value)
-                    TestConnectionToServer(serverHostname, serverPort, versionCode);
+                    shouldRetry = true;
             }
+
+            if (shouldRetry)
+                await TestConnectionToServerAsync(serverHostname, serverPort, versionCode);
         }
 
         #region Helper Methods
