@@ -66,6 +66,8 @@
     <Compile Include="Dialogs\DialogService.cs" />
     <Compile Include="Dialogs\DialogServiceExtender.cs" />
     <Compile Include="Dialogs\IDialogService.cs" />
+    <Compile Include="Extensions\IntegerExtender.cs" />
+    <Compile Include="Extensions\SocketExtender.cs" />
     <Compile Include="Input\AsyncDelegateCommand.cs" />
     <Compile Include="Input\DelegateCommand.cs" />
     <Compile Include="Input\InputMasking.cs" />
