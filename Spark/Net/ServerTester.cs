@@ -86,11 +86,17 @@ namespace Spark.Net
             // Get the status code from the response
             var statusCode = responsePacket.Data[0];
 
-            if (statusCode > 0)
+            if (statusCode == 0x1)  // SERVER MESSAGE
+            {
+                // Get the server message and raise an exception
+                var serverMessage = Encoding.ASCII.GetString(responsePacket.Data.Skip(1).ToArray());
+                throw new Exception(string.Format("The server has rejected client version {0}.", versionCode));
+            }
+            else if (statusCode == 0x2) // PATCH REQUEST
             {
                 // Get the required version and raise an exception
                 var requiredVersion = IntegerExtender.MakeWord(responsePacket.Data[2], responsePacket.Data[1]);
-                throw new Exception(string.Format("The server requires client version {0} or higher.", requiredVersion));
+                throw new Exception(string.Format("The server requires client version {0}.", requiredVersion));
             }
 
             // Version was accepted by the server

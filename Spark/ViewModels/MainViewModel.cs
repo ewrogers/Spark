@@ -359,21 +359,19 @@ namespace Spark.ViewModels
                 {
                     await serverTester.ConnectToServerAsync(serverIPAddress, serverPort);
 
-                    if (await serverTester.CheckClientVersionCodeAsync(versionCode))
+                    var isVersionOK = await serverTester.CheckClientVersionCodeAsync(versionCode);
+                    Debug.WriteLine(string.Format("CheckClientVersionOK: {0}", isVersionOK));
+
+                    if (isVersionOK)
                     {
+                        // The server has accepted this client version
                         this.DialogService.ShowOKDialog("Connection Successful",
                             "The server appears to be up and running.",
                             string.Format("Connected to {0}:{1} successfully.", serverIPAddress, serverPort));
                     }
                     else
                     {
-                        //string extraInfo;
-                        //// Known required version number?
-                        //if (reqVersionNumber >= 0)
-                        //    extraInfo = string.Format("Required Version: {0}. Detected Version: {1}.", reqVersionNumber, versionNumber);
-                        //else
-                        //    extraInfo = string.Format("Detected Version: {0}. Please check what versions the server you are connecting to supports.", versionNumber);
-
+                        // This server has rejected this client version
                         this.DialogService.ShowOKDialog("Connection Failed",
                             "The server appears to be running, but requires a different version of the client.",
                             null);
