@@ -195,13 +195,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Spark.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Spark.Interop\Spark.Interop.csproj">
       <Project>{a895611d-35f1-404d-a5ce-514f62c612fd}</Project>
       <Name>Spark.Interop</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Spark.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
