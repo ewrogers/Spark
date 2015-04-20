@@ -1,4 +1,4 @@
-# <img src=Spark/Spark.ico width=48 height=48/> Spark
+# <img src=Spark/Spark.png width=48 height=48/> Spark
 #### A Launcher for Dark Ages Clients
 
 #### Summary
