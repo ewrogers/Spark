@@ -52,6 +52,16 @@ namespace Spark.Runtime
                 writer.Write((byte)0x6A);   // PUSH
                 writer.Write((byte)ipByte);
             }
+
+            // No hostname lookup
+            if (clientVersion.VersionCode >= 741)
+            {
+                stream.Position = clientVersion.SkipHostnamePatchAddress;
+                for (int i = 0; i < 13; i++)
+                {
+                    writer.Write((byte)0x90); // NOP
+                }
+            }
         }
 
         public void ApplyServerPortPatch(int port)

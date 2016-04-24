@@ -26,7 +26,7 @@ namespace Spark
         public static readonly string SettingsFileVersion = "1.0";
 
         public static readonly string ClientVersionsFileName = "Versions.xml";
-        public static readonly string ClientVersionsFileVersion = "1.0";
+        public static readonly string ClientVersionsFileVersion = "1.1";
 
         #region Properties
         public UserSettings CurrentSettings { get; protected set; }
