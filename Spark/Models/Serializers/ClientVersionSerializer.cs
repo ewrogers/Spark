@@ -30,7 +30,8 @@ namespace Spark.Models.Serializers
                     new XElement("ServerPortPatchAddress", clientVersion.ServerPortPatchAddress.ToString("X")),
                     new XElement("IntroVideoPatchAddress", clientVersion.IntroVideoPatchAddress.ToString("X")),
                     new XElement("MultipleInstancePatchAddress", clientVersion.MultipleInstancePatchAddress.ToString("X")),
-                    new XElement("HideWallsPatchAddress", clientVersion.HideWallsPatchAddress.ToString("X"))
+                    new XElement("HideWallsPatchAddress", clientVersion.HideWallsPatchAddress.ToString("X")),
+                    new XElement("SkipHostnamePatchAddress", clientVersion.SkipHostnamePatchAddress.ToString("X"))
                 );
         }
         #endregion
@@ -58,14 +59,18 @@ namespace Spark.Models.Serializers
                 ServerPortPatchAddress = ParseHexInteger(node.Element("ServerPortPatchAddress")),
                 IntroVideoPatchAddress = ParseHexInteger(node.Element("IntroVideoPatchAddress")),
                 MultipleInstancePatchAddress = ParseHexInteger(node.Element("MultipleInstancePatchAddress")),
-                HideWallsPatchAddress = ParseHexInteger(node.Element("HideWallsPatchAddress"))
+                HideWallsPatchAddress = ParseHexInteger(node.Element("HideWallsPatchAddress")),
+                SkipHostnamePatchAddress = ParseHexInteger(node.Element("SkipHostnamePatchAddress"))
             };
         }
         #endregion
 
         static long ParseHexInteger(XElement element)
         {
-            return long.Parse((string)element, NumberStyles.HexNumber, null);
+            if (element != null)
+                return long.Parse((string)element, NumberStyles.HexNumber, null);
+            else
+                return 0;
         }
     }
 }

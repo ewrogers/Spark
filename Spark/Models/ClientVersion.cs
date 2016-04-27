@@ -53,6 +53,31 @@ namespace Spark.Models
             MultipleInstancePatchAddress = 0x5911AE,
             HideWallsPatchAddress = 0x624BC4
         };
+
+        public static readonly ClientVersion Version740 = new ClientVersion()
+        {
+            Name = "US Dark Ages 7.40",
+            VersionCode = 740,
+            Hash = "9dc6fb13d0470331bf5ba230343fce42",
+            ServerHostnamePatchAddress = 0x4341FA,
+            ServerPortPatchAddress = 0x434224,
+            IntroVideoPatchAddress = 0x42F48F,
+            MultipleInstancePatchAddress = 0x5912AE,
+            HideWallsPatchAddress = 0x624CC4
+        };
+
+        public static readonly ClientVersion Version741 = new ClientVersion()
+        {
+            Name = "US Dark Ages 7.41",
+            VersionCode = 741,
+            Hash = "3244dc0e68cd26f4fb1626da3673fda8",
+            ServerHostnamePatchAddress = 0x4333C2,
+            ServerPortPatchAddress = 0x4333E4,
+            IntroVideoPatchAddress = 0x42E61F,
+            MultipleInstancePatchAddress = 0x57A7CE,
+            HideWallsPatchAddress = 0x5FD874,
+            SkipHostnamePatchAddress = 0x433391
+        };
         #endregion
 
         #region Properties
@@ -64,6 +89,7 @@ namespace Spark.Models
         public long IntroVideoPatchAddress { get; set; }
         public long MultipleInstancePatchAddress { get; set; }
         public long HideWallsPatchAddress { get; set; }
+        public long SkipHostnamePatchAddress { get; set; }
         #endregion
 
         public ClientVersion() { }
@@ -72,6 +98,8 @@ namespace Spark.Models
         {
             yield return Version737;
             yield return Version739;
+            yield return Version740;
+            yield return Version741;
         }
     }
 }
