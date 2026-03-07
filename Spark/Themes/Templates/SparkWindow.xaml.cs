@@ -7,8 +7,13 @@ using System.Windows.Controls.Primitives;
 
 namespace Spark.Themes.Templates
 {
-    internal partial class SparkWindow
+    internal partial class SparkWindow : ResourceDictionary
     {
+        public SparkWindow()
+        {
+            InitializeComponent();
+        }
+
         #region Drag to Move
         void TitleBarDragDelta(object sender, DragDeltaEventArgs e)
         {

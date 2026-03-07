@@ -42,11 +42,11 @@
         <ResourceDictionary Source="Templates\SparkComboBox.xaml"/>
         <ResourceDictionary Source="Templates\SparkComboBoxItem.xaml"/>
         <ResourceDictionary Source="Templates\SparkControlBox.xaml"/>
-        <ResourceDictionary Source="Templates\SparkDialog.xaml"/>
+        <local:SparkDialog xmlns:local="clr-namespace:Spark.Themes.Templates"/>
         <ResourceDictionary Source="Templates\SparkSeparator.xaml"/>
         <ResourceDictionary Source="Templates\SparkText.xaml"/>
         <ResourceDictionary Source="Templates\SparkTextBox.xaml"/>
-        <ResourceDictionary Source="Templates\SparkWindow.xaml"/>
+        <local:SparkWindow xmlns:local="clr-namespace:Spark.Themes.Templates"/>
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>
