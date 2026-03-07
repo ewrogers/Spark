@@ -1,0 +1,61 @@
+﻿name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        arch: [x86, arm64]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore -r win-${{ matrix.arch }} --self-contained true /p:PublishSingleFile=true /p:PublishReadyToRun=true
+
+      - name: Publish
+        run: dotnet publish Spark/Spark.csproj --configuration Release -r win-${{ matrix.arch }} --self-contained true /p:PublishSingleFile=true /p:PublishReadyToRun=true -o ./publish-${{ matrix.arch }}
+
+      - name: Zip Artifacts
+        shell: pwsh
+        run: |
+          Compress-Archive -Path ./publish-${{ matrix.arch }}/* -DestinationPath Spark-win-${{ matrix.arch }}.zip
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Spark-win-${{ matrix.arch }}
+          path: Spark-win-${{ matrix.arch }}.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            artifacts/Spark-win-x86/Spark-win-x86.zip
+            artifacts/Spark-win-arm64/Spark-win-arm64.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
