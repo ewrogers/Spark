@@ -10,7 +10,7 @@ Spark is a graphical application that provides additional options when launching
 
 #### Download (Binaries)
 
-The latest Spark binaries are available for <a href="https://www.dropbox.com/s/sagoqwway2dzlau/Spark.zip?dl=0">download via DropBox</a>. Please keep in mind that they may not reflect the latest code changes here.
+The latest Spark binaries are available on the [GitHub Releases](https://github.com/ewrogers/Spark/releases) page. Please keep in mind that they may not reflect the latest code changes here.
 
 You will need the [.NET 10 Runtime](https://dotnet.microsoft.com/download/dotnet/10.0) to run Spark.
 
